@@ -1,9 +1,12 @@
+import Graphic.GraphicEngine;
+
 
 public class TetraTruc {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		//Création du moteur graphique
+		GraphicEngine graphicEngine = new GraphicEngine();
 	}
 
 }
