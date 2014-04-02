@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 
 public class Window extends JFrame{
 	private JPanel panel = new JPanel();
-	//private JButton soloButton = new JButton("Mode Solo");
 	private final int width = 800;
 	private final int height = 600;
 	

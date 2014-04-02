@@ -7,6 +7,7 @@ public class TetraTruc {
 		
 		//Création du moteur graphique
 		GraphicEngine graphicEngine = new GraphicEngine();
+		graphicEngine.init();
 	}
 
 }

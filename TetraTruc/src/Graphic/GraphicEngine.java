@@ -1,8 +1,16 @@
 package Graphic;
 
 public class GraphicEngine {
+	private Window window;
+	private MainMenu mainMenu;
 	
-	//Création de la fenêtre de jeu
-	Window window = new Window();
-	MainMenu mainMenu = new MainMenu(window.getPanel(), window.getWidth(), window.getHeight());
+	public void GraphicEngine(){
+		
+	}
+	
+	public void init(){
+		//Création de la fenêtre de jeu
+		window = new Window();
+		mainMenu = new MainMenu(window.getPanel(), window.getWidth(), window.getHeight());
+	}
 }
