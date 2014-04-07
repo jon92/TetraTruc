@@ -17,7 +17,7 @@ public class MainMenu {
 		int soloButtonPosX = (int)(width * 0.5) - (int)(this.buttonWidth * 0.5);
 		int soloButtonPosY = (int)(height * 0.5) - (int)(this.buttonHeight * 0.5) - 100;
 		soloButton.setBounds(soloButtonPosX, soloButtonPosY, this.buttonWidth, this.buttonHeight);
-		
+	
 		//Positionnement du bouton de mode multijoueur
 		int multiButtonPosX = soloButtonPosX;
 		int multiButtonPosY = soloButtonPosY + buttonHeight + 10;
