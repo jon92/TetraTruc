@@ -17,5 +17,4 @@ public class Menu2D {
 			mainMenu.create();
 	}
 	
-	
 }
