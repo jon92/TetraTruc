@@ -2,7 +2,7 @@ package Graphic;
 
 public class GraphicEngine {
 	private Window window;
-	private MainMenu mainMenu;
+	private Menu2D menu2D;
 	
 	public void GraphicEngine(){
 		
@@ -11,6 +11,7 @@ public class GraphicEngine {
 	public void init(){
 		//Création de la fenêtre de jeu
 		window = new Window();
-		mainMenu = new MainMenu(window.getPanel(), window.getWidth(), window.getHeight());
+		menu2D = new Menu2D(window.getPanel());
+		menu2D.createMainMenu(window.getWidth(), window.getHeight());
 	}
 }
