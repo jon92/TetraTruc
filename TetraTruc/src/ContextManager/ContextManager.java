@@ -22,12 +22,13 @@ public class ContextManager {
 	}
 	
 	public void setSoloState(){
-		System.out.println("Mode Solo activé");
+		System.out.println("Menu Solo activé");
 		gameEngine.setState("SOLO_MENU");
+		graphicEngine.createSoloMenu();
 	}
 	
 	public void setMultiState(){
-		System.out.println("Mode Multi activé");
+		System.out.println("Menu Multi activé");
 		gameEngine.setState("MULTI_MENU");
 	}
 	

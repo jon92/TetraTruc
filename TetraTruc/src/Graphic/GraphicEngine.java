@@ -11,12 +11,16 @@ public class GraphicEngine {
 	
 	public void init(){
 		//Création de la fenêtre de jeu
-		window = new Window();
-		menu2D = new Menu2D(window.getPanel());
-		menu2D.createMainMenu(window.getWidth(), window.getHeight());
+		this.window = new Window();
+		this.menu2D = new Menu2D(this.window.getPanel());
+		this.menu2D.createMainMenu(this.window.getWidth(), this.window.getHeight());
 	}
 	
 	public static GraphicEngine getSingleton(){
 		return graphicESingleton;
+	}
+	
+	public void createSoloMenu(){
+		this.menu2D.createSoloMenu(this.window.getWidth(), this.window.getHeight());
 	}
 }

@@ -8,14 +8,14 @@ public class TetraTruc {
 	public static void main(String[] args) {
 		
 		//Création du moteur graphique
-		GraphicEngine graphicEngine = new GraphicEngine();
+		GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 		graphicEngine.init();
 		
 		//Création du moteur de jeu
-		GameEngine gameEngine = new GameEngine();
+		GameEngine gameEngine = GameEngine.getSingleton();
 		
 		//Création du contextManager
-		ContextManager contextManager = new ContextManager();
+		ContextManager contextManager = ContextManager.getSingleton();
 	}
 
 }

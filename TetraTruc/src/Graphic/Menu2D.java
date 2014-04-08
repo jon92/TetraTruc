@@ -17,4 +17,10 @@ public class Menu2D {
 			mainMenu.create();
 	}
 	
+	//Creation du menu Solo
+	public void createSoloMenu(int width, int height){
+		this.panel.removeAll();
+		this.panel.repaint();
+		System.out.println("Menu Solo créé");
+	}
 }
