@@ -27,6 +27,10 @@ public class MenuListener implements ActionListener {
 	    		ContextManager.getSingleton().setOptionsState();
 	    		break;
 	    		
+	    	case "Jouer":
+	    		ContextManager.getSingleton().setGameState();
+	    		break;
+	    		
 	    	case "Quitter" :
 	    		ContextManager.getSingleton().setExitState();
 	    		break;

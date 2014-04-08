@@ -22,15 +22,45 @@ public class GraphicEngine implements Observer {
 		return graphicESingleton;
 	}
 	
-	public void createSoloMenu(){
+	public void goToMainMenu(){
+		this.menu2D.createMainMenu(this.window.getWidth(), this.window.getHeight());
+	}
+	public void goToSoloMenu(){
 		this.menu2D.createSoloMenu(this.window.getWidth(), this.window.getHeight());
+	}
+	public void goToMultiMenu(){
+	}
+	public void goToOptionsMenu(){
+	}
+	public void goToGame(){
+		//Temporaire car pas optimal
+		this.menu2D.createGame(this.window.getWidth(), this.window.getHeight());
 	}
 
 	@Override
 	public void update(String param) {
 		switch(param){
+			case "MAIN_MENU" :
+				this.goToMainMenu();
+			break;
+			
 			case "SOLO_MENU" :
-				this.createSoloMenu();
+				this.goToSoloMenu();
+				break;
+				
+			case "MULTI_MENU" :
+				this.goToMultiMenu();
+				break;
+				
+			case "OPTIONS_MENU" :
+				this.goToOptionsMenu();
+				break;
+				
+			case "GAME" :
+				this.goToGame();
+				break;
+				
+			case "Exit" :
 				break;
 				
 			default:

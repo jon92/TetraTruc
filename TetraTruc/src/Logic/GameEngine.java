@@ -8,8 +8,8 @@ public class GameEngine implements Observable {
 		SOLO_MENU,
 		MULTI_MENU,
 		OPTIONS_MENU,
-		EXIT,
-		GAME;
+		GAME,
+		EXIT;
 	}
 	private GameState state;
 	private static GameEngine gameESingleton = new GameEngine();
@@ -45,12 +45,12 @@ public class GameEngine implements Observable {
 				this.state = GameState.OPTIONS_MENU;
 				break;
 				
-			case "EXIT_MENU" :
-				this.state = GameState.EXIT;
-				break;
-				
 			case "GAME" :
 				this.state = GameState.GAME;
+				break;
+				
+			case "EXIT_MENU" :
+				this.state = GameState.EXIT;
 				break;
 				
 			default :

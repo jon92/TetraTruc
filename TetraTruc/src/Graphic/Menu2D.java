@@ -13,6 +13,8 @@ public class Menu2D {
 	
 	//Creation du menu Principal
 	public void createMainMenu(int width, int height){
+			this.panel.removeAll();
+			this.panel.repaint();
 			MainMenu mainMenu = new MainMenu(this.panel, width, height);
 			mainMenu.create();
 	}
@@ -21,6 +23,14 @@ public class Menu2D {
 	public void createSoloMenu(int width, int height){
 		this.panel.removeAll();
 		this.panel.repaint();
-		System.out.println("Menu Solo créé");
+		SoloMenu SoloMenu = new SoloMenu(this.panel, width, height);
+		SoloMenu.create();
+	}
+	
+	//Lancement du jeu
+	//temporaire car pas optimal
+	public void createGame(int width, int height){
+		this.panel.removeAll();
+		this.panel.repaint();
 	}
 }
