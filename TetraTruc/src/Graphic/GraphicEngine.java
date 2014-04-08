@@ -1,6 +1,8 @@
 package Graphic;
 
-public class GraphicEngine {
+import Logic.Observer;
+
+public class GraphicEngine implements Observer {
 	private Window window;
 	private Menu2D menu2D;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
@@ -22,5 +24,16 @@ public class GraphicEngine {
 	
 	public void createSoloMenu(){
 		this.menu2D.createSoloMenu(this.window.getWidth(), this.window.getHeight());
+	}
+
+	@Override
+	public void update(String param) {
+		switch(param){
+			case "SOLO_MENU" :
+				this.createSoloMenu();
+				break;
+				
+			default:
+		}
 	}
 }

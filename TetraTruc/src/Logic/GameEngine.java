@@ -1,8 +1,8 @@
 package Logic;
 
-import Graphic.GraphicEngine;
+import java.util.ArrayList;
 
-public class GameEngine {
+public class GameEngine implements Observable {
 	private enum GameState{
 		MAIN_MENU,
 		SOLO_MENU,
@@ -11,9 +11,9 @@ public class GameEngine {
 		EXIT,
 		GAME;
 	}
-	
 	private GameState state;
 	private static GameEngine gameESingleton = new GameEngine();
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
 	public GameEngine(){
 		this.state = GameState.MAIN_MENU;
@@ -55,5 +55,23 @@ public class GameEngine {
 				
 			default :
 		}
+		
+		this.updateObserver();
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		this.observers.add(obs);
+	}
+
+	@Override
+	public void updateObserver() {
+		for(Observer obs : this.observers )
+		      obs.update(this.state.toString());
+	}
+
+	@Override
+	public void delAllObservers() {
+		this.observers = new ArrayList<Observer>();
 	}
 }

@@ -24,7 +24,7 @@ public class ContextManager {
 	public void setSoloState(){
 		System.out.println("Menu Solo activé");
 		gameEngine.setState("SOLO_MENU");
-		graphicEngine.createSoloMenu();
+		//graphicEngine.createSoloMenu();
 	}
 	
 	public void setMultiState(){

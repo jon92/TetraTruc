@@ -13,6 +13,7 @@ public class TetraTruc {
 		
 		//Création du moteur de jeu
 		GameEngine gameEngine = GameEngine.getSingleton();
+		gameEngine.addObserver(graphicEngine);
 		
 		//Création du contextManager
 		ContextManager contextManager = ContextManager.getSingleton();
