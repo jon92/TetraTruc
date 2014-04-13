@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameEngine implements Observable {
 	public enum GameState{
@@ -14,6 +15,8 @@ public class GameEngine implements Observable {
 	private GameState state;
 	private static GameEngine gameESingleton = new GameEngine();
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
+	//Contient les paramètres de jeu (pseudo, difficulté...)
+	private HashMap<String, String> gameParams;
 	
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
@@ -25,6 +28,13 @@ public class GameEngine implements Observable {
 	
 	public GameState getState(){
 		return this.state;
+	}
+	
+	public void setGameParams(HashMap<String, String> gameParams){
+		this.gameParams = gameParams;
+		System.out.println("--- Paramètres de la partie ---");
+		System.out.println("Pseudo : " + this.gameParams.get("pseudo"));
+		System.out.println("Difficulté : " + this.gameParams.get("difficulte"));
 	}
 	
 	public void setState(String state){

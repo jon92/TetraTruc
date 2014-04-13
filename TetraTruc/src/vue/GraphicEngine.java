@@ -1,11 +1,14 @@
 package vue;
 
+import java.util.HashMap;
+
 import model.Observer;
 
 public class GraphicEngine implements Observer {
 	private Window window;
 	private Menu2D menu2D;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
+	private Menu2D currentMenu;
 	
 	private void GraphicEngine(){
 		
@@ -22,17 +25,19 @@ public class GraphicEngine implements Observer {
 		return graphicESingleton;
 	}
 	
-	public void getGameParams(String previousMenu){
-		
+	public HashMap<String, String> getGameParams(){
+		return(this.currentMenu.getMenuParams());
 	}
 	
 	public void goToMainMenu(){
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
+		this.currentMenu = mainMenu;
 	}
 	public void goToSoloMenu(){
-		SoloMenu SoloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
-		SoloMenu.create();
+		SoloMenu soloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		soloMenu.create();
+		this.currentMenu = soloMenu;
 	}
 	public void goToMultiMenu(){
 	}

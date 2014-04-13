@@ -1,5 +1,7 @@
 package controleur;
 
+import java.util.HashMap;
+
 import vue.GraphicEngine;
 import model.GameEngine;
 
@@ -38,12 +40,10 @@ public class ContextManager {
 	
 	public void setGameState(){
 		System.out.println("Jeu lancé");
-		
-		//On détecte le mode de jeu choisi (solo ou multi)
-		String previousState = gameEngine.getState().toString();
-		graphicEngine.getGameParams(previousState);
-		
-		//Recupérer ici les données de jeu via des méthodes du graphicEngine
+
+		//Passage des paramètres de jeu choisis par le joueur (pseudo, difficulté...)
+		HashMap<String, String> params = graphicEngine.getGameParams();
+		gameEngine.setGameParams(params);
 		gameEngine.setState("GAME");
 	}
 	
