@@ -8,14 +8,17 @@ public class GamePanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
+	private Grid2D grid;
+	private int width, height;
 	
-	public GamePanel(JPanel panel){
+	public GamePanel(JPanel panel, int width, int height){
 		this.panel = panel;
+		this.grid = new Grid2D();
+		this.width = width;	
+		this.height = height;
 	}
 
 	public void paintComponent(Graphics g){
-		System.out.println("test");
-	    g.fillOval(20, 20, 75, 75);  
-
+	    grid.drawGrid(g, this.width, this.height);
 	}               
 }

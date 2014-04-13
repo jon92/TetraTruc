@@ -35,7 +35,7 @@ public class GraphicEngine implements Observer {
 	public void goToGame(){
 		this.window.getPanel().removeAll();
 		this.window.repaint();
-		this.window.setPanel(new GamePanel(this.window.getPanel()));
+		this.window.setPanel(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight()));
 	}
 
 	@Override
