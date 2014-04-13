@@ -31,7 +31,10 @@ public class Button2D extends JButton implements MouseListener{
 	    g2d.setPaint(gp);
 	    g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 	    g2d.setColor(Color.white);
-	    g2d.drawString(this.name, this.getWidth() / 2 - (this.getWidth()/ 2 /4), (this.getHeight() / 2) + 5);
+	    
+	    int stringLen = (int) g2d.getFontMetrics().getStringBounds(this.name, g2d).getWidth();  
+        
+	    g2d.drawString(this.name, (int) (this.getWidth()*0.5 - stringLen*0.5), (this.getHeight() / 2) + 5);
 	}
 	
 	public String getName(){
