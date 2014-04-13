@@ -1,6 +1,6 @@
-import ContextManager.ContextManager;
-import Graphic.GraphicEngine;
-import Logic.GameEngine;
+import model.GameEngine;
+import controleur.ContextManager;
+import vue.GraphicEngine;
 
 
 public class TetraTruc {
