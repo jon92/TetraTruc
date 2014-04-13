@@ -14,19 +14,25 @@ public class GraphicEngine implements Observer {
 	public void init(){
 		//Création de la fenêtre de jeu
 		this.window = new Window();
-		this.menu2D = new Menu2D(this.window.getPanel());
-		this.menu2D.createMainMenu(this.window.getWidth(), this.window.getHeight());
+		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		mainMenu.create();
 	}
 	
 	public static GraphicEngine getSingleton(){
 		return graphicESingleton;
 	}
 	
+	public void getGameParams(String previousMenu){
+		
+	}
+	
 	public void goToMainMenu(){
-		this.menu2D.createMainMenu(this.window.getWidth(), this.window.getHeight());
+		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		mainMenu.create();
 	}
 	public void goToSoloMenu(){
-		this.menu2D.createSoloMenu(this.window.getWidth(), this.window.getHeight());
+		SoloMenu SoloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		SoloMenu.create();
 	}
 	public void goToMultiMenu(){
 	}

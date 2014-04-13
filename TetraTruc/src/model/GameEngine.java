@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class GameEngine implements Observable {
-	private enum GameState{
+	public enum GameState{
 		MAIN_MENU,
 		SOLO_MENU,
 		MULTI_MENU,

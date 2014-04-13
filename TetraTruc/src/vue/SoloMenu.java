@@ -11,15 +11,15 @@ import javax.swing.SwingConstants;
 
 import controleur.ContextManager;
 
-public class SoloMenu {
-	private JPanel panel;
+public class SoloMenu extends Menu2D {
+	
 	private final int width, height;
 	private final int buttonWidth = 200;
 	private final int buttonHeight = 40;
 	private Button2D playButton = new Button2D("Jouer");
 	
 	public SoloMenu(JPanel panel, int width, int height){
-		this.panel = panel;
+		super(panel);
 		this.width = width;
 		this.height = height;
 	}
@@ -58,12 +58,12 @@ public class SoloMenu {
 		
 		
 		//Ajouts au content pane
-		panel.add(playButton);
-		panel.add(pseudoJTF);
-		panel.add(level);
-		panel.add(pseudo);
-		panel.add(easy);
-		panel.add(normal);
-		panel.add(hard);
+		super.panel.add(playButton);
+		super.panel.add(pseudoJTF);
+		super.panel.add(level);
+		super.panel.add(pseudo);
+		super.panel.add(easy);
+		super.panel.add(normal);
+		super.panel.add(hard);
 	}
 }

@@ -1,10 +1,12 @@
 package controleur;
 
+import vue.GraphicEngine;
 import model.GameEngine;
 
 public class ContextManager {
 	private static MenuListener menuListener;
 	private GameEngine gameEngine = GameEngine.getSingleton();
+	private GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 	private static ContextManager managerSingleton = new ContextManager();
 	
 	private ContextManager(){
@@ -36,6 +38,12 @@ public class ContextManager {
 	
 	public void setGameState(){
 		System.out.println("Jeu lancé");
+		
+		//On détecte le mode de jeu choisi (solo ou multi)
+		String previousState = gameEngine.getState().toString();
+		graphicEngine.getGameParams(previousState);
+		
+		//Recupérer ici les données de jeu via des méthodes du graphicEngine
 		gameEngine.setState("GAME");
 	}
 	
