@@ -35,7 +35,7 @@ public class Menu2D {
 			
 			try {
 				while ((ligne=br.readLine())!=null){
-					String[] parts = ligne.split(" ");
+					String[] parts = ligne.split(" @ ");
 					if(parts.length > 1)
 						this.prefs.put(parts[0], parts[1]);
 					else

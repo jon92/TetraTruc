@@ -36,7 +36,7 @@ public class GameEngine implements Observable {
 		//sauvegarde de la dernière config utilisateur
 		this.savePrefs();
 		
-		//Créations d'un joueur
+		//Création d'un joueur
 		Player player = new Player(this.gameParams.get("pseudo"));
 		
 		//Création d'une board 
@@ -55,7 +55,7 @@ public class GameEngine implements Observable {
 			BufferedWriter writer = new BufferedWriter(file);
 			
 			for(Entry<String, String> entry : this.gameParams.entrySet()) {
-				writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+				writer.write(entry.getKey() + " @ " + entry.getValue() + "\n");
 			}
 			
 			writer.close();
