@@ -36,11 +36,11 @@ public class GameEngine implements Observable {
 		//sauvegarde de la dernière config utilisateur
 		this.savePrefs();
 		
-		//Création d'une board 
-		this.board = new Board();
+		//Créations d'un joueur
+		Player player = new Player(this.gameParams.get("pseudo"));
 		
-		//Créations des joueurs
-		Player player = new Player();
+		//Création d'une board 
+		this.board = new Board(player, this.gameParams.get("difficulte"));
 		
 		//Lancement du jeu
 	}
