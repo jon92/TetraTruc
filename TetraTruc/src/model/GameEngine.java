@@ -21,6 +21,7 @@ public class GameEngine implements Observable {
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	//Contient les paramètres de jeu (pseudo, difficulté...)
 	private HashMap<String, String> gameParams;
+	private Board board;
 	
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
@@ -32,7 +33,23 @@ public class GameEngine implements Observable {
 	
 	public void initGame(){
 		
-		//traitement et sauvegarde des préférences
+		//sauvegarde de la dernière config utilisateur
+		this.savePrefs();
+		
+		//Création d'une board 
+		this.board = new Board();
+		
+		//Créations des joueurs
+		Player player = new Player();
+		
+		//Lancement du jeu
+	}
+	
+	public GameState getState(){
+		return this.state;
+	}
+	
+	private void savePrefs(){
 		try {
 			FileWriter file = new FileWriter("media/conf/prefs.tetra");
 			BufferedWriter writer = new BufferedWriter(file);
@@ -45,16 +62,6 @@ public class GameEngine implements Observable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		//Création d'une board 
-		
-		//Créations des joueurs
-		
-		//Lancement du jeu
-	}
-	
-	public GameState getState(){
-		return this.state;
 	}
 	
 	public void setGameParams(HashMap<String, String> gameParams){
