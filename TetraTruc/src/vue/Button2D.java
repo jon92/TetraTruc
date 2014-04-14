@@ -4,16 +4,13 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 public class Button2D extends JButton implements MouseListener{
+	
+	private static final long serialVersionUID = 1L;
 	private final String name;
 	
 	public Button2D(String name){

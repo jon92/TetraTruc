@@ -1,18 +1,17 @@
 package vue;
 
 import java.util.HashMap;
-
 import model.Observer;
 
 public class GraphicEngine implements Observer {
 	private Window window;
-	private Menu2D menu2D;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
 	private Menu2D currentMenu;
 	
+	/*
 	private void GraphicEngine(){
 		
-	}
+	}*/
 	
 	public void init(){
 		//Création de la fenêtre de jeu
@@ -36,6 +35,7 @@ public class GraphicEngine implements Observer {
 	}
 	public void goToSoloMenu(){
 		SoloMenu soloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		soloMenu.loadPrefs("media/conf/prefs.tetra");
 		soloMenu.create();
 		this.currentMenu = soloMenu;
 	}

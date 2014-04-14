@@ -3,7 +3,6 @@ package vue;
 import java.awt.Color;
 import java.util.Enumeration;
 import java.util.HashMap;
-
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -23,6 +22,9 @@ public class SoloMenu extends Menu2D {
 	private JLabel pseudo;
 	private JTextField pseudoJTF;
 	private ButtonGroup bg;
+	private JRadioButton  easy;
+	private JRadioButton  normal;
+	private JRadioButton  hard;
 	
 	public SoloMenu(JPanel panel, int width, int height){
 		super(panel);
@@ -52,30 +54,38 @@ public class SoloMenu extends Menu2D {
 		level.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 80, 200, 30);
 		level.setHorizontalAlignment(SwingConstants.CENTER);
 		this.bg = new ButtonGroup();
-		JRadioButton  easy = new JRadioButton ("Facile");
-		JRadioButton  normal = new JRadioButton ("Normal");
-		JRadioButton  hard = new JRadioButton ("Difficile");
-		easy.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 30, 200, 30);
-		normal.setBounds((int)(width*0.5) - 100, (int)(height*0.5), 200, 30);
-		hard.setBounds((int)(width*0.5) - 100, (int)(height*0.5) + 30, 200, 30);
+		this.easy = new JRadioButton ("Facile");
+		this.normal = new JRadioButton ("Normal");
+		this.hard = new JRadioButton ("Difficile");
+		this.easy.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 30, 200, 30);
+		this.normal.setBounds((int)(width*0.5) - 100, (int)(height*0.5), 200, 30);
+		this.hard.setBounds((int)(width*0.5) - 100, (int)(height*0.5) + 30, 200, 30);
 		this.bg.add(easy);
 		this.bg.add(normal);
 		this.bg.add(hard);
 		
 		
 		//Ajouts au content pane
-		super.panel.add(playButton);
-		super.panel.add(pseudoJTF);
+		super.panel.add(this.playButton);
+		super.panel.add(this.pseudoJTF);
 		super.panel.add(level);
 		super.panel.add(this.pseudo);
-		super.panel.add(easy);
-		super.panel.add(normal);
-		super.panel.add(hard);
+		super.panel.add(this.easy);
+		super.panel.add(this.normal);
+		super.panel.add(this.hard);
+		
+		//appel des préférences utilisateur
+		if(super.prefs != null){
+			if(super.prefs.get("mode").equals("solo")){
+				this.setupPrefs();
+			}
+		}
 	}
 	
 	//Fonction qui renvoie un tableau contenant les choix de paramètres effectués par le joueur sur ce menu
 	public HashMap<String, String> getMenuParams(){
 		super.params = new HashMap<String, String>();
+		super.params.put("mode", "solo");
 		super.params.put("pseudo", this.pseudoJTF.getText());
 		
 		if(this.getSelectedButton(this.bg) != null)
@@ -93,5 +103,18 @@ public class SoloMenu extends Menu2D {
 			if (b.isSelected()) return (JRadioButton) b;
 		}
 		return null;
+	}
+	
+	//Met en place les préférences utilisateur
+	private void setupPrefs(){
+		this.pseudoJTF.setText(super.prefs.get("pseudo"));
+		
+		if(super.prefs.get("difficulte").equals("Facile")){
+			this.easy.setSelected(true);
+		}else if(super.prefs.get("difficulte").equals("Difficile")){
+			this.hard.setSelected(true);
+		}else{
+			this.normal.setSelected(true);
+		}
 	}
 }

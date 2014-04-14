@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 	private JPanel panel = new JPanel();
 	private final int width = 800;
 	private final int height = 600;

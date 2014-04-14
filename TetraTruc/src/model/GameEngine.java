@@ -1,7 +1,11 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class GameEngine implements Observable {
 	public enum GameState{
@@ -26,6 +30,29 @@ public class GameEngine implements Observable {
 		return gameESingleton;
 	}
 	
+	public void initGame(){
+		
+		//traitement et sauvegarde des préférences
+		try {
+			FileWriter file = new FileWriter("media/conf/prefs.tetra");
+			BufferedWriter writer = new BufferedWriter(file);
+			
+			for(Entry<String, String> entry : this.gameParams.entrySet()) {
+				writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+			}
+			
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Création d'une board 
+		
+		//Créations des joueurs
+		
+		//Lancement du jeu
+	}
+	
 	public GameState getState(){
 		return this.state;
 	}
@@ -33,6 +60,7 @@ public class GameEngine implements Observable {
 	public void setGameParams(HashMap<String, String> gameParams){
 		this.gameParams = gameParams;
 		System.out.println("--- Paramètres de la partie ---");
+		System.out.println("Mode : " + this.gameParams.get("mode"));
 		System.out.println("Pseudo : " + this.gameParams.get("pseudo"));
 		System.out.println("Difficulté : " + this.gameParams.get("difficulte"));
 	}
@@ -84,4 +112,5 @@ public class GameEngine implements Observable {
 	public void delAllObservers() {
 		this.observers = new ArrayList<Observer>();
 	}
+	
 }

@@ -45,6 +45,7 @@ public class ContextManager {
 		HashMap<String, String> params = graphicEngine.getGameParams();
 		gameEngine.setGameParams(params);
 		gameEngine.setState("GAME");
+		gameEngine.initGame();
 	}
 	
 	public void setExitState(){
