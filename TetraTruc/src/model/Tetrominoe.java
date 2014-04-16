@@ -1,5 +1,7 @@
 package model;
 
+import javax.naming.directory.InvalidAttributeValueException;
+
 import model.Point;
 
 public enum Tetrominoe {
@@ -20,5 +22,24 @@ public enum Tetrominoe {
 		brick2 = b;
 		brick3 = c;
 		brick4 = d;
+	}
+	
+	// Getters / Setters
+	public Point getBrick(int index){
+		switch(index){
+			case 1: 
+				return brick1;
+			case 2: 
+				return brick2;
+			case 3:
+				return brick3;
+			case 4:
+				return brick4;
+			default:
+				break;
+		}
+		System.err.println("Error : Invalid brick number, must be contained between 1 and 4.");
+		return null;
+		
 	}
 }
