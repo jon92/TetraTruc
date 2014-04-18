@@ -3,6 +3,7 @@ package model;
 public class Board {
 	private final Player player;
 	private final int level;
+	private Grid grid;
 	
 	public Board(Player player, String level){
 		this.player = player;
@@ -13,9 +14,16 @@ public class Board {
 			this.level = 3;
 		else
 			this.level = 2;
+		
+		this.grid = new Grid();
 	}
 	
 	public Player getPlayer(){
 		return this.player;
 	}
+	
+	public Grid getGrid(){
+		return this.grid;
+	}
+	
 }
