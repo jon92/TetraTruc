@@ -5,30 +5,31 @@ import model.Tetrominoe;
 
 public class Shape {
 	private Tetrominoe pieceShape; 	// Forme de la pièce
-	private Point coords;		// Coordonnées dans la grille
 	
+	// Constructeur par défaut : No_Shape
 	public Shape(){
-		coords = new Point(0,0);
 		pieceShape = Tetrominoe.No_Shape;
 	}
 	
-	public Shape(Grid grid){
-		// Placement de la pièce en haut au centre de la grille
-		coords = new Point(grid.getWidth()/2 - 1, 2);	
-		
+	// Sélectionne un tétrominoe aléatoirement
+	public void randomShape(){
 		// Tirage au sort de la pièce
 		Random r = new Random();
-        int x = Math.abs(r.nextInt()) % 7 + 1;
+        int z = Math.abs(r.nextInt()) % 7 + 1;
         Tetrominoe[] values = Tetrominoe.values(); 
-        pieceShape = values[x];
+        pieceShape = values[z];
 	}
 	
+	// Getters / Setters
+	public Tetrominoe getTetrominoe(){ return pieceShape; }
+	public void setTetrominoe(Tetrominoe shape){ pieceShape = shape; }
+	
+	// Déplacements des pièces
 	public Shape rotate(){
 		if (pieceShape == Tetrominoe.O_Shape)
             return this;
 
         Shape result = new Shape();
-        result.coords = this.coords;
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
@@ -38,4 +39,6 @@ public class Shape {
         
         return result;
 	}
+	
+	
 }
