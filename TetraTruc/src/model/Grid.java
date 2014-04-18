@@ -37,10 +37,14 @@ public class Grid {
 		}
 	}
 	
-	// Supprime une ligne
+	// Supprime une ligne et fait tomber toutes les lignes supérieures
 	public void removeLine(int line){
-		for(int i=0; i<width; ++i){
-			grid[line][i].setTetrominoe(Tetrominoe.No_Shape);
+		// Parcourir toutes les lignes supérieures
+		for(int currLine=line; currLine>0; --currLine){
+			// Parcourir la ligne
+			for(int i=0; i<width; ++i){
+				grid[currLine][i] = grid[currLine-1][i];
+			}
 		}
 	}
 	
