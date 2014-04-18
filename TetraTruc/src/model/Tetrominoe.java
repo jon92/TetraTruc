@@ -14,18 +14,18 @@ public enum Tetrominoe {
 	T_Shape(new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, 1)),
 	I_Shape(new Point(0, -1), new Point(0, 0), new Point(0, 1), new Point(0, 2));
 	
-	private Point brick1, brick2, brick3, brick4;		// Emplacements des différentes cases du tétrominoe
+	private Brick brick1, brick2, brick3, brick4;		// Emplacements des différentes cases du tétrominoe
 	
 	// Constructeur
 	Tetrominoe(Point a, Point b, Point c, Point d){
-		brick1 = a;
-		brick2 = b;
-		brick3 = c;
-		brick4 = d;
+		brick1 = new Brick(a);
+		brick2 = new Brick(b);
+		brick3 = new Brick(c);
+		brick4 = new Brick(d);
 	}
 	
 	// Getters / Setters
-	public Point getBrick(int index){
+	public Brick getBrick(int index){
 		switch(index){
 			case 1: 
 				return brick1;

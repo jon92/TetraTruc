@@ -33,8 +33,8 @@ public class Shape {
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
-        	result.pieceShape.getBrick(i).setX(this.pieceShape.getBrick(i).getY());
-        	result.pieceShape.getBrick(i).setY(-this.pieceShape.getBrick(i).getX());
+        	result.pieceShape.getBrick(i).getPoint().setX(this.pieceShape.getBrick(i).getPoint().getY());
+        	result.pieceShape.getBrick(i).getPoint().setY(-this.pieceShape.getBrick(i).getPoint().getX());
         }
         
         return result;
