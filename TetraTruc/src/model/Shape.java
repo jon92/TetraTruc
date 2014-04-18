@@ -1,17 +1,14 @@
 package model;
 
-import java.awt.Color;
 import java.util.Random;
 import model.Tetrominoe;
 
 public class Shape {
 	private Tetrominoe pieceShape; 	// Forme de la pièce
-	private Color colorShape;
 	
 	// Constructeur par défaut : No_Shape
 	public Shape(){
 		pieceShape = Tetrominoe.No_Shape;
-		colorShape = Color.WHITE;
 	}
 	
 	// Sélectionne un tétrominoe aléatoirement
@@ -43,14 +40,6 @@ public class Shape {
         return result;
 	}
 	
-	// modifier la couleur de la forme selon le thème
-	public void setColor(){
-		
-	}
-	
-	//retourner la couleur colorShape
-	public Color getColor(){
-		return colorShape;
-	}
+
 	
 }
