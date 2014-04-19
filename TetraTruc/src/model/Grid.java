@@ -44,6 +44,14 @@ public class Grid {
 	public Shape shapeAt(int line, int col){ return grid[line][col]; }
 	
 	
+	
+	// Générer une nouvelle pièce
+	public void newShape(){
+		curShape.randomShape();
+		curX = width/2 + 1;
+		curY = 2;
+	}
+	
 	// Remplit les cases de la grille concernées par la pièce actuelle
 	private void putCurShape(){
 		// Parcourir les 4 briques du tetrominoe
@@ -100,7 +108,7 @@ public class Grid {
 	
 	// Déplacer la pièce courante
 	public void moveTo(int newX, int newY){
-		if(canMoveTo(newX, newY)){
+		if(canMoveTo(newX, newY) && newY>=curY ){	// On vérifie que la pièce peut effectuer le déplacement et qu'il se fait bien vers le bas
 			clearCurShape();	// Supprime la pièce de son emplacement actuel
 			curX = newX;		// Affecte les nouvelles coordonnées de la pièce
 			curY = newY;
@@ -119,6 +127,13 @@ public class Grid {
 		}
 	}
 	
+	// Faire tomber la pièce directement tout en bas
+	public void dropBottom(){
+		while(canMoveTo(curX, curY+1)){
+			moveTo(curX, curY+1);
+		}
+	}
+	
 	
 	// Affecte à toutes les cases de la grille le Tetrominoe vide
 	private void clearGrid(){
@@ -130,7 +145,7 @@ public class Grid {
 	}
 	
 	// Supprime une ligne et fait tomber toutes les lignes supérieures
-	public void removeLine(int line){
+	private void removeLine(int line){
 		// Parcourir toutes les lignes supérieures
 		for(int currLine=line; currLine>0; --currLine){
 			// Parcourir la ligne
