@@ -19,7 +19,7 @@ public class GameEngine implements Observable {
 	private GameState state;
 	private static GameEngine gameESingleton = new GameEngine();
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
-	//Contient les paramètres de jeu (pseudo, difficulté...)
+	//Contient les paramÃ¨tres de jeu (pseudo, difficultÃ©...)
 	private HashMap<String, String> gameParams;
 	private Board board;
 	
@@ -33,14 +33,16 @@ public class GameEngine implements Observable {
 	
 	public void initGame(){
 		
-		//sauvegarde de la dernière config utilisateur
+		//sauvegarde de la derniÃ¨re config utilisateur
 		this.savePrefs();
 		
-		//Création d'un joueur
+		//CrÃ©ation d'un joueur
 		Player player = new Player(this.gameParams.get("pseudo"));
 		
-		//Création d'une board 
-		this.board = new Board(player, this.gameParams.get("difficulte"));
+	
+// /!\ A modifier!			
+		//CrÃ©ation d'une board 
+		this.board = new Board(player, this.gameParams.get("difficulte"), "Theme1");
 		
 		//Lancement du jeu
 	}
@@ -66,10 +68,10 @@ public class GameEngine implements Observable {
 	
 	public void setGameParams(HashMap<String, String> gameParams){
 		this.gameParams = gameParams;
-		System.out.println("--- Paramètres de la partie ---");
+		System.out.println("--- ParamÃ¨tres de la partie ---");
 		System.out.println("Mode : " + this.gameParams.get("mode"));
 		System.out.println("Pseudo : " + this.gameParams.get("pseudo"));
-		System.out.println("Difficulté : " + this.gameParams.get("difficulte"));
+		System.out.println("DifficultÃ© : " + this.gameParams.get("difficulte"));
 	}
 	
 	public void setState(String state){
