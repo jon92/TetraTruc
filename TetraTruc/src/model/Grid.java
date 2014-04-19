@@ -61,14 +61,6 @@ public class Grid {
 			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
 		}
 	}
-	
-	// Met à jour la position de la pièce courante
-	private void updateCurShape(int newX, int newY){
-		clearCurShape();	// Supprime la pièce de son emplacement actuel
-		curX = newX;		// Affecte les nouvelles coordonnées de la pièce
-		curY = newY;
-		putCurShape();		// Place la pièce à son nouvel emplacement
-	}
 
 	// Teste si la pièce passée en paramètres peut se déplacer aux nouvelles coordonnées
 	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
@@ -104,6 +96,27 @@ public class Grid {
 		if(shapeCanMoveTo(curShapeRotated, curX, curY))
 			return true;
 		return false;
+	}
+	
+	// Déplacer la pièce courante
+	public void moveTo(int newX, int newY){
+		if(canMoveTo(newX, newY)){
+			clearCurShape();	// Supprime la pièce de son emplacement actuel
+			curX = newX;		// Affecte les nouvelles coordonnées de la pièce
+			curY = newY;
+			putCurShape();		// Place la pièce à son nouvel emplacement
+			return;
+		}
+	}
+	
+	// Tourner la pièce courante
+	public void rotate(){
+		if(canRotate()){
+			clearCurShape();	// Supprime la pièce de son emplacement actuel
+			curShape = curShape.rotate();	// Tourne la pièce
+			putCurShape();		// Place la pièce à son nouvel emplacement
+			return;
+		}
 	}
 	
 	
