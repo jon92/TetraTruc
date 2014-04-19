@@ -41,7 +41,7 @@ public class Grid {
 	// Getters/Setters
 	public int getHeight(){ return height; }
 	public int getWidth(){ return width; }
-	public Shape shapeAt(int x, int y){ return grid[x][y]; }
+	public Shape shapeAt(int line, int col){ return grid[line][col]; }
 	
 	
 	// Remplit les cases de la grille concernées par la pièce actuelle
@@ -70,6 +70,42 @@ public class Grid {
 		putCurShape();		// Place la pièce à son nouvel emplacement
 	}
 
+	// Teste si la pièce passée en paramètres peut se déplacer aux nouvelles coordonnées
+	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
+		// Parcourir les 4 briques du tetrominoe
+		for(int brick=0; brick<4; ++brick){
+			// Nouvelles coordonnées de la brique
+			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
+			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
+			
+			// Tester si la case est libre
+			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
+				return false;
+			}
+			// Tester si la case est dans la grille
+			if( x<0 || x>width || y<0 || y>height ){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	// Teste si la pièce courante peut se déplacer aux nouvelles coordonnées
+	public boolean canMoveTo(int newX, int newY){
+		if(shapeCanMoveTo(curShape, newX, newY))
+			return true;
+		return false;
+	}
+	
+	// Teste si la pièce courante peut tourner
+	public boolean canRotate(){
+		Shape curShapeRotated = curShape.rotate();
+		if(shapeCanMoveTo(curShapeRotated, curX, curY))
+			return true;
+		return false;
+	}
+	
 	
 	// Affecte à toutes les cases de la grille le Tetrominoe vide
 	private void clearGrid(){
