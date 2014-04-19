@@ -14,32 +14,25 @@ public enum Tetrominoe {
 	T_Shape(new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, 1)),
 	I_Shape(new Point(0, -1), new Point(0, 0), new Point(0, 1), new Point(0, 2));
 	
-	private Brick brick1, brick2, brick3, brick4;		// Emplacements des différentes cases du tétrominoe
+	private Brick[] bricks;		// Emplacements des différentes cases du tétrominoe
 	
 	// Constructeur
 	Tetrominoe(Point a, Point b, Point c, Point d){
-		brick1 = new Brick(a);
-		brick2 = new Brick(b);
-		brick3 = new Brick(c);
-		brick4 = new Brick(d);
+		bricks = new Brick[4];
+		bricks[0] = new Brick(a);
+		bricks[1] = new Brick(b);
+		bricks[2] = new Brick(c);
+		bricks[3] = new Brick(d);
 	}
 	
 	// Getters / Setters
 	public Brick getBrick(int index){
-		switch(index){
-			case 1: 
-				return brick1;
-			case 2: 
-				return brick2;
-			case 3:
-				return brick3;
-			case 4:
-				return brick4;
-			default:
-				break;
+		if(index>=0 && index<=3){
+			return bricks[index];
 		}
-		System.err.println("Error : Invalid brick number, must be contained between 1 and 4.");
-		return null;
-		
+		else{
+			System.err.println("Error : Invalid brick number, must be contained between 0 and 3.");
+			return null;
+		}
 	}
 }

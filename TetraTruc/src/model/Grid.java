@@ -3,12 +3,21 @@ package model;
 public class Grid {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
+	private Shape curShape;			// Pièce en train de tomber
+	private int curX, curY;			// Emplacement de la pièce en train de tomber
 	
 	// Constructeur par défaut
 	public Grid(){
 		height = 20;
 		width = 10;
-		grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne] 
+		grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
+		
+		for(int i=0; i<height; ++i){
+			for(int j=0; j<width; ++j){
+				grid[i][j] = new Shape();
+			}
+		}
+		
 		clearGrid();	// Initialisation de la grille vide
 	}
 	
@@ -17,6 +26,13 @@ public class Grid {
 		height = h;
 		width = w;
 		grid = new Shape[height][width];
+		
+		for(int i=0; i<height; ++i){
+			for(int j=0; j<width; ++j){
+				grid[i][j] = new Shape();
+			}
+		}
+		
 		clearGrid();	// Initialisation de la grille vide
 	}
 	
@@ -27,6 +43,33 @@ public class Grid {
 	public int getWidth(){ return width; }
 	public Shape shapeAt(int x, int y){ return grid[x][y]; }
 	
+	
+	// Remplit les cases de la grille concernées par la pièce actuelle
+	private void putCurShape(){
+		// Parcourir les 4 briques du tetrominoe
+		for(int brick=0; brick<4; ++brick){
+			// Affecte à la case occupée par la brique la shape courante
+			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()] = curShape;
+		}
+	}
+	
+	// Vide les cases de la grille occupées par la pièce actuelle
+	private void clearCurShape(){
+		// Parcourir les 4 briques du tetrominoe
+		for(int brick=0; brick<4; ++brick){
+			// Affecte à la case occupée par la brique la shape courante
+			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
+		}
+	}
+	
+	// Met à jour la position de la pièce courante
+	private void updateCurShape(int newX, int newY){
+		clearCurShape();	// Supprime la pièce de son emplacement actuel
+		curX = newX;		// Affecte les nouvelles coordonnées de la pièce
+		curY = newY;
+		putCurShape();		// Place la pièce à son nouvel emplacement
+	}
+
 	
 	// Affecte à toutes les cases de la grille le Tetrominoe vide
 	private void clearGrid(){
@@ -48,7 +91,7 @@ public class Grid {
 		}
 	}
 	
-	// Supprime toutes les lignes vides
+	// Supprime toutes les lignes pleines
 	public void removeFullLines(){
 		boolean lineIsFull = true;
 		// Parcourir toutes les lignes
@@ -66,4 +109,5 @@ public class Grid {
 			lineIsFull = true;
 		}
 	}
+
 }
