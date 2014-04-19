@@ -1,7 +1,7 @@
 package model;
 
 import java.awt.Color;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Theme2 extends Theme{
 
@@ -11,7 +11,7 @@ public class Theme2 extends Theme{
 		this.music = "";
 		
 		
-		this.shapeColor = new Hashtable<Tetrominoe, Color>();
+		this.shapeColor = new HashMap<Tetrominoe, Color>();
 		shapeColor.put(Tetrominoe.I_Shape, Color.WHITE);
 		shapeColor.put(Tetrominoe.J_Shape, Color.WHITE);
 		shapeColor.put(Tetrominoe.L_Shape, Color.WHITE);
