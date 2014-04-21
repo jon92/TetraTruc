@@ -3,110 +3,77 @@ package vue;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.GridObserver;
+import model.Observer;
+import model.Point;
+import model.Shape;
 import model.Tetrominoe;
+import model.Theme;
 
 
 // TO DO : récupérer les infos de Grid pour squareNumberW et squareNumberH
 // TO DO : récupérer le thème choisi depuis le menu
 
 
-public class Grid2D{
+public class Grid2D implements GridObserver {
+	private int height, width; 	// Dimensions de la grille
+	private Brick2D[][] grid; 			// Grille de briques
 
-	//marges autour de la grille
-	private final int margins = 30;
-	
-	//Taille d'une case
-	private final int squareSize = 25;
-	
-	//Nombre de cases en largeur
-// /!\ A modifier : il faut que ça corresponde au nb de cases dans Grid	
-	private int squareNumberW = 10;
-	private int squareNumberH = 20;
-	
-	
-	public void drawGrid(Graphics g, int width, int height){
-		g.setColor(Color.RED);
+	// Constructeur par défaut
+	public void Grid2D(){
+		this.height = 20;
+		this.width = 10;
+		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
-		//Dessin des lignes verticales
-		int originX = margins;
-		int originY = margins;
-		int destX = margins;
-		int destY = this.squareNumberH * this.squareSize + margins-1;
-		
-		for(int i=0; i <= this.squareNumberW; ++i){
-		    g.drawLine(originX, originY, destX, destY);
-		    originX += this.squareSize;
-		    destX += this.squareSize;
+		for(int i=0; i<height; ++i){
+			for(int j=0; j<width; ++j){
+				this.grid[i][j] = new Brick2D();
+			}
 		}
 		
-		//Dessin des lignes horizontales
-		originX = margins;
-		originY = margins;
-		destX = this.squareNumberW * this.squareSize + margins-1;
-		destY = margins;
-		
-		for(int i=0; i <= this.squareNumberH; ++i){
-		    g.drawLine(originX, originY, destX, destY);
-		    originY += this.squareSize;
-		    destY += this.squareSize;
-		}
-	}               
-	
-/*	
-	public void paintShapes(Graphics g){
-		super.paint(g);
-		
-		int boardTop = (int) size.getHeight() - squareNumberH * squareSize;
-
-
-        for (int line = 0; line < squareNumberW; line++){
-			for (int column = 0; column < squareNumberH; column++){
-                Tetrominoe shape = shapeAt(column, squareNumberH - line - 1);
-                if (shape != Tetrominoe.No_Shape)
-                    drawBrick(g, 0 + column * squareSize,
-                               boardTop + line * squareSize, shape);
-            }
-        }
-
-        if (curPiece.getShape() != Tetrominoe.No_Shape) {
-            for (int i = 0; i < 4; ++i) {
-                int x = curX + curPiece.x(i);
-                int y = curY - curPiece.y(i);
-                drawBrick(g, 0 + x * squareSize,
-                           boardTop + (squareNumberH - y - 1) * squareSize,
-                           curPiece.getShape());
-            }
-        }
-		
-					
+		clearGrid();	// Initialisation de la grille vide
 	}
 	
-	// Color récupérée dans Theme
-	private void drawBrick(Graphics g, int x, int y, Tetrominoe shape){
-        
-//		Color color = theme.getColorByShape(shape) // theme à récupérer depuis quelquepart
+	// Constructeur personnalisé
+	public void Grid2D(int h, int w){
+		this.height = h;
+		this.width = w;
+		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
+		for(int i=0; i<height; ++i){
+			for(int j=0; j<width; ++j){
+				this.grid[i][j] = new Brick2D();
+			}
+		}
 		
-        // couleur
-        g.setColor(color);
-        g.fillRect(x + 1, y + 1, squareSize - 2, squareSize - 2);
+		clearGrid();	// Initialisation de la grille vide
+	}
 
-        // bordures
-        g.setColor(color.brighter());
-        g.drawLine(x, y + squareSize - 1, x, y);
-        g.drawLine(x, y, x + squareSize - 1, y);
-
-//      //lettre 
-// TO DO : fonction pour avoir directement la lettre depuis 
-        //g.drawString(shape.getTetrominoe().getBrick(TROUVER_INDEX).getLetter(), 0, 0);
-         
-        // bordures
-        g.setColor(color.darker());
-        g.drawLine(x + 1, y + squareSize - 1,
-                         x + squareSize - 1, y + squareSize - 1);
-        g.drawLine(x + squareSize - 1, y + squareSize - 1,
-                         x + squareSize - 1, y + 1);
-
-    }
-*/	
+	// Nettoyage de la grille
+	public void clearGrid(){
+		// Parcourir toute la grid et la remplir de Brick2D vide (transparentes, invisibles, NULL ou je ne sais quoi)
+	}
+	
+	public void draw(){
+		// TO-DO
+	}
+	
+	
+	// Récupérer la couleur en fonction du thème et du shape
+	public Color getColorForShape(Tetrominoe shape){
+		// Regarde le shape passé en paramètre, regarde dans le thème et retourne la bonne couleur
+		return null;
+	}
+	
+	
+	
+	@Override
+	public void update(Point[] coords, Tetrominoe[] shapes) {
+		for(int i=0; i<coords.length; ++i){
+			int x = coords[i].getX();
+			int y = coords[i].getY();
+			
+			grid[y][x].setColor(getColorForShape(shapes[i]));	// Modifie la couleur de la brique	
+		}
+	}
 }

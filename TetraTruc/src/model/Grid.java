@@ -1,10 +1,11 @@
 package model;
 
-public class Grid {
+public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
 	private Shape curShape;			// Piece en train de tomber
 	private int curX, curY;			// Emplacement de la piece en train de tomber
+	private GridObserver observer;	// Observateur pour la vue
 	
 	// Constructeur par defaut
 	public Grid(){
@@ -208,4 +209,12 @@ public class Grid {
 		}
 	}
 
+	
+	
+	
+	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
+	@Override
+	public void notifyObserver(Point[] coords, Tetrominoe[] shapes) {
+		observer.update(coords, shapes);		
+	}
 }
