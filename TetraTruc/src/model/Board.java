@@ -55,17 +55,7 @@ public class Board implements ActionListener {
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(grid.getCurShape().getTetrominoe().name());
 		grid.moveDown();
-		
 	}
 	
-	public static void main(String[] args) {
-		Player p = new Player("bob");
-		Board b = new Board(p, "Facile", "Theme1");
-		b.start();
-		while(true){
-			
-		}
-	}
 }

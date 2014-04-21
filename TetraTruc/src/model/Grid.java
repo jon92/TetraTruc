@@ -85,13 +85,13 @@ public class Grid {
 			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
 			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
 			
-			// Tester si la case est libre
-			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
+			// Tester si la case est dans la grille
+			if( x<0 || x>=width || y<0 || y>=height ){
 				putCurShape();
 				return false;
 			}
-			// Tester si la case est dans la grille
-			if( x<0 || x>width || y<0 || y>height ){
+			// Tester si la case est libre
+			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
 				putCurShape();
 				return false;
 			}
