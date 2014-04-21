@@ -19,7 +19,7 @@ public class GameEngine implements Observable {
 	private GameState state;
 	private static GameEngine gameESingleton = new GameEngine();
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
-	//Contient les paramètres de jeu (pseudo, difficulté...)
+	//Contient les parametres de jeu (pseudo, difficulte...)
 	private HashMap<String, String> gameParams;
 	private Board board;
 	
@@ -33,15 +33,15 @@ public class GameEngine implements Observable {
 	
 	public void initGame(){
 		
-		//sauvegarde de la dernière config utilisateur
+		//sauvegarde de la derniere config utilisateur
 		this.savePrefs();
 		
-		//Création d'un joueur
+		//Creation d'un joueur
 		Player player = new Player(this.gameParams.get("pseudo"));
 		
 	
 // /!\ A modifier!			
-		//Création d'une board 
+		//Creation d'une board 
 		this.board = new Board(player, this.gameParams.get("difficulte"), "Theme1");
 		
 		//Lancement du jeu

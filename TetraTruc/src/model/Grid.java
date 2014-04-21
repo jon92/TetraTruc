@@ -3,10 +3,10 @@ package model;
 public class Grid {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
-	private Shape curShape;			// Pièce en train de tomber
-	private int curX, curY;			// Emplacement de la pièce en train de tomber
+	private Shape curShape;			// Piece en train de tomber
+	private int curX, curY;			// Emplacement de la piece en train de tomber
 	
-	// Constructeur par défaut
+	// Constructeur par defaut
 	public Grid(){
 		height = 20;
 		width = 10;
@@ -21,7 +21,7 @@ public class Grid {
 		clearGrid();	// Initialisation de la grille vide
 	}
 	
-	// Constructeur personnalisé
+	// Constructeur personnalise
 	public Grid(int h, int w){
 		height = h;
 		width = w;
@@ -45,7 +45,7 @@ public class Grid {
 	
 	
 	
-	// Générer une nouvelle pièce
+	// Generer une nouvelle piece
 	public void newShape(){
 		curShape.randomShape();
 		curX = width/2 + 1;
@@ -53,29 +53,29 @@ public class Grid {
 		putCurShape();
 	}
 	
-	// Remplit les cases de la grille concernées par la pièce actuelle
+	// Remplit les cases de la grille concernees par la piece actuelle
 	private void putCurShape(){
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
-			// Affecte à la case occupée par la brique la shape courante
+			// Affecte a� la case occupee par la brique la shape courante
 			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()] = curShape;
 		}
 	}
 	
-	// Vide les cases de la grille occupées par la pièce actuelle
+	// Vide les cases de la grille occupees par la piece actuelle
 	private void clearCurShape(){
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
-			// Affecte à la case occupée par la brique la shape courante
+			// Affecte a la case occupee par la brique la shape courante
 			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
 		}
 	}
 
-	// Teste si la pièce passée en paramètres peut se déplacer aux nouvelles coordonnées
+	// Teste si la piece passee en parametres peut se deplacer aux nouvelles coordonnees
 	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
-			// Nouvelles coordonnées de la brique
+			// Nouvelles coordonnees de la brique
 			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
 			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
 			
@@ -92,14 +92,14 @@ public class Grid {
 		return true;
 	}
 	
-	// Teste si la pièce courante peut se déplacer aux nouvelles coordonnées
+	// Teste si la piece courante peut se deplacer aux nouvelles coordonnees
 	private boolean canMoveTo(int newX, int newY){
 		if(shapeCanMoveTo(curShape, newX, newY))
 			return true;
 		return false;
 	}
-	
-	// Teste si la pièce courante peut tourner
+
+	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
 		if(shapeCanMoveTo(curShapeRotated, curX, curY))
@@ -107,7 +107,7 @@ public class Grid {
 		return false;
 	}
 	
-	// Déplacer la pièce courante
+	// Deplacer la piece courante
 	private boolean moveTo(int newX, int newY){
 		if(canMoveTo(newX, newY) && newY>=curY ){	// On vérifie que la pièce peut effectuer le déplacement et qu'il se fait bien vers le bas
 			clearCurShape();	// Supprime la pièce de son emplacement actuel
@@ -142,18 +142,18 @@ public class Grid {
 		}
 	}
 	
-	// Tourner la pièce courante
+	// Tourner la piece courante
 	public void rotate(){
 		if(canRotate()){
-			clearCurShape();	// Supprime la pièce de son emplacement actuel
-			curShape = curShape.rotate();	// Tourne la pièce
-			putCurShape();		// Place la pièce à son nouvel emplacement
+			clearCurShape();	// Supprime la piece de son emplacement actuel
+			curShape = curShape.rotate();	// Tourne la piece
+			putCurShape();		// Place la piece a son nouvel emplacement
 			// Notifier la vue
 			return;
 		}
 	}
 	
-	// Faire tomber la pièce directement tout en bas
+	// Faire tomber la piece directement tout en bas
 	public void dropBottom(){
 		while(canMoveTo(curX, curY+1)){
 			moveDown();
@@ -161,7 +161,7 @@ public class Grid {
 	}
 	
 	
-	// Affecte à toutes les cases de la grille le Tetrominoe vide
+	// Affecte a toutes les cases de la grille le Tetrominoe vide
 	private void clearGrid(){
 		for(int line=0; line<height; ++line){
 			for(int col=0; col<width; ++col){
@@ -170,9 +170,9 @@ public class Grid {
 		}
 	}
 	
-	// Supprime une ligne et fait tomber toutes les lignes supérieures
+	// Supprime une ligne et fait tomber toutes les lignes superieures
 	private void removeLine(int line){
-		// Parcourir toutes les lignes supérieures
+		// Parcourir toutes les lignes superieures
 		for(int currLine=line; currLine>0; --currLine){
 			// Parcourir la ligne
 			for(int i=0; i<width; ++i){
