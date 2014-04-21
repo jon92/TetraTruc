@@ -1,8 +1,9 @@
 package model;
 
 public class Level {
-	private int level;
-	private int speed;
+	private int level;		// Niveau actuel
+	private int speed;		// Vitesse du jeu (delay du timer)
+
 	
 	// Constructeur par defaut
 	public Level(){
