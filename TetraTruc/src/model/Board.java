@@ -1,10 +1,16 @@
 package model;
 
-public class Board {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+public class Board implements ActionListener {
 	private final Player player;
 	private final int level;
 	private Grid grid;
 	private Theme theme;
+	private Timer timer;
 	
 	public Board(Player player, String level, String chosenTheme){
 		// joueur
@@ -18,17 +24,18 @@ public class Board {
 		else
 			this.level = 2;
 		
-		// grille de jeu
-		this.grid = new Grid();
-		
 		// theme
 		if (chosenTheme.equals("Theme2")){
 			this.theme = new Theme2();
 		}
 		else{
 			this.theme = new Theme1(); // par defaut, le theme est le Theme1
-		}
+		}	
 		
+		// grille de jeu
+		this.grid = new Grid();
+		
+		timer = new Timer(2000, this);	
 	}
 	
 	public Player getPlayer(){
@@ -41,6 +48,18 @@ public class Board {
 	
 	public Theme getTheme(){
 		return this.theme;
+	}
+	
+	public void start(){
+		this.grid.newShape();
+		//this.grid.getCurShape();
+		this.timer.start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		this.grid.oneLineDown();
+		System.out.println(this.grid.getCurShape().getTetrominoe());
 	}
 	
 }

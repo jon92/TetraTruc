@@ -43,6 +43,7 @@ public class GameEngine implements Observable {
 // /!\ A modifier!			
 		//Creation d'une board 
 		this.board = new Board(player, this.gameParams.get("difficulte"), "Theme1");
+		this.board.start();
 		
 		//Lancement du jeu
 	}
@@ -68,10 +69,10 @@ public class GameEngine implements Observable {
 	
 	public void setGameParams(HashMap<String, String> gameParams){
 		this.gameParams = gameParams;
-		System.out.println("--- Paramètres de la partie ---");
+		System.out.println("--- Parametres de la partie ---");
 		System.out.println("Mode : " + this.gameParams.get("mode"));
 		System.out.println("Pseudo : " + this.gameParams.get("pseudo"));
-		System.out.println("Difficulté : " + this.gameParams.get("difficulte"));
+		System.out.println("Difficulte : " + this.gameParams.get("difficulte"));
 	}
 	
 	public void setState(String state){

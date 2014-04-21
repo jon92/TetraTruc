@@ -2,7 +2,7 @@ package model;
 
 public class Brick {
 	private String letter;		// Lettre contenue dans la brique pour le mode anagramme
-	private Point point;		// Point de coordonnées dans le tetrominoe
+	private Point point;		// Point de coordonnees dans le tetrominoe
 	
 	// Constructeur
 	public Brick(){
@@ -25,6 +25,6 @@ public class Brick {
 	
 	
 	public void generateRandomLetter(){
-		// Récupère une lettre aléatoirement en tenant compte de la fréquence dans la langue du dictionnaire
+		// Recupere une lettre aleatoirement en tenant compte de la frequence dans la langue du dictionnaire
 	}
 }

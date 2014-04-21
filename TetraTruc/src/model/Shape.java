@@ -4,16 +4,16 @@ import java.util.Random;
 import model.Tetrominoe;
 
 public class Shape {
-	private Tetrominoe pieceShape; 	// Forme de la pièce
+	private Tetrominoe pieceShape; 	// Forme de la piece
 	
-	// Constructeur par défaut : No_Shape
+	// Constructeur par defaut : No_Shape
 	public Shape(){
 		pieceShape = Tetrominoe.No_Shape;
 	}
 	
-	// Sélectionne un tétrominoe aléatoirement
+	// Selectionne un tetrominoe aleatoirement
 	public void randomShape(){
-		// Tirage au sort de la pièce
+		// Tirage au sort de la piece
 		Random r = new Random();
         int z = Math.abs(r.nextInt()) % 7 + 1;
         Tetrominoe[] values = Tetrominoe.values(); 
@@ -24,7 +24,7 @@ public class Shape {
 	public Tetrominoe getTetrominoe(){ return pieceShape; }
 	public void setTetrominoe(Tetrominoe shape){ pieceShape = shape; }
 	
-	// Déplacements des pièces
+	// Deplacements des pieces
 	public Shape rotate(){
 		if (pieceShape == Tetrominoe.O_Shape)
             return this;

@@ -8,13 +8,14 @@ public class Grid {
 	
 	// Constructeur par defaut
 	public Grid(){
-		height = 20;
-		width = 10;
-		grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
+		this.height = 20;
+		this.width = 10;
+		this.curShape = new Shape();
+		this.grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
-				grid[i][j] = new Shape();
+				this.grid[i][j] = new Shape();
 			}
 		}
 		
@@ -23,13 +24,13 @@ public class Grid {
 	
 	// Constructeur personnalise
 	public Grid(int h, int w){
-		height = h;
-		width = w;
-		grid = new Shape[height][width];
+		this.height = h;
+		this.width = w;
+		this.grid = new Shape[height][width];
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
-				grid[i][j] = new Shape();
+				this.grid[i][j] = new Shape();
 			}
 		}
 		
@@ -39,6 +40,9 @@ public class Grid {
 	
 	
 	// Getters/Setters
+	public Shape getCurShape(){ return curShape; }
+	public int getCurX(){ return curX; }
+	public int getCurY(){ return curY; }
 	public int getHeight(){ return height; }
 	public int getWidth(){ return width; }
 	public Shape shapeAt(int line, int col){ return grid[line][col]; }
@@ -47,9 +51,9 @@ public class Grid {
 	
 	// Generer une nouvelle piece
 	public void newShape(){
-		curShape.randomShape();
-		curX = width/2 + 1;
-		curY = 2;
+		this.curShape.randomShape();
+		this.curX = this.width/2 + 1;
+		this.curY = 2;
 	}
 	
 	// Remplit les cases de la grille concernees par la piece actuelle
@@ -108,11 +112,21 @@ public class Grid {
 	
 	// Deplacer la piece courante
 	public void moveTo(int newX, int newY){
-		if(canMoveTo(newX, newY) && newY>=curY ){	// On vérifie que la pièce peut effectuer le déplacement et qu'il se fait bien vers le bas
-			clearCurShape();	// Supprime la pièce de son emplacement actuel
-			curX = newX;		// Affecte les nouvelles coordonnées de la pièce
+		if(canMoveTo(newX, newY) && newY>=curY ){	// On verifie que la piece peut effectuer le deplacement et qu'il se fait bien vers le bas
+			clearCurShape();	// Supprime la piece de son emplacement actuel
+			curX = newX;		// Affecte les nouvelles coordonnees de la piece
 			curY = newY;
-			putCurShape();		// Place la pièce à son nouvel emplacement
+			putCurShape();		// Place la piece a� son nouvel emplacement
+			return;
+		}
+	}
+	
+	// Deplacer la piece courante d'une ligne vers le bas
+	public void oneLineDown(){
+		if(canMoveTo(curX, curY-1)){	// On verifie que la piece peut effectuer le deplacement et qu'il se fait bien vers le bas
+			clearCurShape();	// Supprime la piece de son emplacement actuel		
+			curY -= 1;
+			putCurShape();		// Place la piece a� son nouvel emplacement
 			return;
 		}
 	}
