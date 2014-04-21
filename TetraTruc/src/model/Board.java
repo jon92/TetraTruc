@@ -10,7 +10,7 @@ public class Board {
 		// joueur
 		this.player = player;
 		
-		// niveau de difficulté
+		// niveau de difficulte
 		if(level.equals("Facile"))
 			this.level = 1;
 		else if(level.equals("Difficile"))
@@ -26,7 +26,7 @@ public class Board {
 			this.theme = new Theme2();
 		}
 		else{
-			this.theme = new Theme1(); // par défaut, le thème est le Theme1
+			this.theme = new Theme1(); // par defaut, le theme est le Theme1
 		}
 		
 	}

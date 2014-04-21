@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.HashMap;
 
 
-// Thème par défaut
+// Theme par defaut
 public class Theme1 extends Theme{
 	
 	public Theme1(){
