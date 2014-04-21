@@ -50,6 +50,7 @@ public class Grid {
 		curShape.randomShape();
 		curX = width/2 + 1;
 		curY = 2;
+		putCurShape();
 	}
 	
 	// Remplit les cases de la grille concernées par la pièce actuelle
@@ -92,14 +93,14 @@ public class Grid {
 	}
 	
 	// Teste si la pièce courante peut se déplacer aux nouvelles coordonnées
-	public boolean canMoveTo(int newX, int newY){
+	private boolean canMoveTo(int newX, int newY){
 		if(shapeCanMoveTo(curShape, newX, newY))
 			return true;
 		return false;
 	}
 	
 	// Teste si la pièce courante peut tourner
-	public boolean canRotate(){
+	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
 		if(shapeCanMoveTo(curShapeRotated, curX, curY))
 			return true;
@@ -107,13 +108,37 @@ public class Grid {
 	}
 	
 	// Déplacer la pièce courante
-	public void moveTo(int newX, int newY){
+	private boolean moveTo(int newX, int newY){
 		if(canMoveTo(newX, newY) && newY>=curY ){	// On vérifie que la pièce peut effectuer le déplacement et qu'il se fait bien vers le bas
 			clearCurShape();	// Supprime la pièce de son emplacement actuel
 			curX = newX;		// Affecte les nouvelles coordonnées de la pièce
 			curY = newY;
 			putCurShape();		// Place la pièce à son nouvel emplacement
-			return;
+			return true;
+		}
+		return false;
+	}
+	
+	// Déplacements joueur
+	public void moveLeft(){ 
+		if(moveTo(curX-1, curY))
+			// Notifier la vue
+	}
+	
+	public void moveRight(){ 
+		if(moveTo(curX+1, curY))
+			// Notifier la vue
+	}
+	
+	public void moveDown(){ 
+		// Si la pièce peut descendre d'une ligne
+		if(moveTo(curX, curY+1)){
+			// Notifier la vue
+		}
+		else{	// Sinon, c'est qu'elle posée
+			removeFullLines();
+			newShape();
+			// Notifier la vue
 		}
 	}
 	
@@ -123,6 +148,7 @@ public class Grid {
 			clearCurShape();	// Supprime la pièce de son emplacement actuel
 			curShape = curShape.rotate();	// Tourne la pièce
 			putCurShape();		// Place la pièce à son nouvel emplacement
+			// Notifier la vue
 			return;
 		}
 	}
@@ -130,7 +156,7 @@ public class Grid {
 	// Faire tomber la pièce directement tout en bas
 	public void dropBottom(){
 		while(canMoveTo(curX, curY+1)){
-			moveTo(curX, curY+1);
+			moveDown();
 		}
 	}
 	
