@@ -27,6 +27,7 @@ public class Grid {
 		this.height = h;
 		this.width = w;
 		this.grid = new Shape[height][width];
+		this.curShape = new Shape();
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
@@ -54,13 +55,16 @@ public class Grid {
 		this.curShape.randomShape();
 		this.curX = this.width/2 + 1;
 		this.curY = 2;
+		putCurShape();
 	}
 	
 	// Remplit les cases de la grille concernees par la piece actuelle
 	private void putCurShape(){
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
-			// Affecte a  la case occupee par la brique la shape courante
+			// Affecte aï¿½ la case occupee par la brique la shape courante
+			System.out.println("position en y de la premiere piece + " + (curY + curShape.getTetrominoe().getBrick(brick).getY()));
+			System.out.println("position en x de la premiere piece + " + (curX + curShape.getTetrominoe().getBrick(brick).getX()));
 			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()] = curShape;
 		}
 	}
@@ -82,12 +86,19 @@ public class Grid {
 			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
 			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
 			
+			System.out.println("int x " + x);
+			System.out.println("int y " + y);
+			System.out.println("vvvvvvvvvvvvvvvv : " + grid[y][x].getTetrominoe());
+			
 			// Tester si la case est libre
 			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
+
+				System.out.println("-----------------------------------------------------------");
 				return false;
 			}
 			// Tester si la case est dans la grille
 			if( x<0 || x>width || y<0 || y>height ){
+				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 				return false;
 			}
 		}
@@ -96,14 +107,14 @@ public class Grid {
 	}
 	
 	// Teste si la piece courante peut se deplacer aux nouvelles coordonnees
-	public boolean canMoveTo(int newX, int newY){
+	private boolean canMoveTo(int newX, int newY){
 		if(shapeCanMoveTo(curShape, newX, newY))
 			return true;
 		return false;
 	}
-	
+
 	// Teste si la piece courante peut tourner
-	public boolean canRotate(){
+	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
 		if(shapeCanMoveTo(curShapeRotated, curX, curY))
 			return true;
@@ -111,23 +122,39 @@ public class Grid {
 	}
 	
 	// Deplacer la piece courante
-	public void moveTo(int newX, int newY){
+	public boolean moveTo(int newX, int newY){
 		if(canMoveTo(newX, newY) && newY>=curY ){	// On verifie que la piece peut effectuer le deplacement et qu'il se fait bien vers le bas
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curX = newX;		// Affecte les nouvelles coordonnees de la piece
 			curY = newY;
-			putCurShape();		// Place la piece a  son nouvel emplacement
-			return;
+			putCurShape();		// Place la piece a son nouvel emplacement
+			return true;
 		}
+		return false;
 	}
 	
-	// Deplacer la piece courante d'une ligne vers le bas
-	public void oneLineDown(){
-		if(canMoveTo(curX, curY-1)){	// On verifie que la piece peut effectuer le deplacement et qu'il se fait bien vers le bas
-			clearCurShape();	// Supprime la piece de son emplacement actuel		
-			curY -= 1;
-			putCurShape();		// Place la piece a  son nouvel emplacement
-			return;
+	// Deplacements joueur
+	public void moveLeft(){ 
+		if(moveTo(curX-1, curY)){}
+			// Notifier la vue
+	}
+	
+	public void moveRight(){ 
+		if(moveTo(curX+1, curY)){}
+			// Notifier la vue
+	}
+	
+	public void moveDown(){ 
+		// Si la piece peut descendre d'une ligne
+		if(moveTo(curX, curY+1)){
+			// Notifier la vue
+			System.out.println("test1");
+		}
+		else{	// Sinon, c'est qu'elle posee
+			System.out.println("test2");
+			removeFullLines();
+			newShape();
+			// Notifier la vue
 		}
 	}
 	
@@ -136,7 +163,8 @@ public class Grid {
 		if(canRotate()){
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape = curShape.rotate();	// Tourne la piece
-			putCurShape();		// Place la piece a  son nouvel emplacement
+			putCurShape();		// Place la piece a son nouvel emplacement
+			// Notifier la vue
 			return;
 		}
 	}
@@ -144,7 +172,7 @@ public class Grid {
 	// Faire tomber la piece directement tout en bas
 	public void dropBottom(){
 		while(canMoveTo(curX, curY+1)){
-			moveTo(curX, curY+1);
+			moveDown();
 		}
 	}
 	

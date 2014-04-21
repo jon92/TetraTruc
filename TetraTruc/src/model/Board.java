@@ -7,22 +7,24 @@ import javax.swing.Timer;
 
 public class Board implements ActionListener {
 	private final Player player;
-	private final int level;
+	private final int difficulty;
 	private Grid grid;
 	private Theme theme;
 	private Timer timer;
+	private Level level;
 	
-	public Board(Player player, String level, String chosenTheme){
+	// Constructeur
+	public Board(Player player, String difficulty, String chosenTheme){
 		// joueur
 		this.player = player;
 		
 		// niveau de difficulte
-		if(level.equals("Facile"))
-			this.level = 1;
-		else if(level.equals("Difficile"))
-			this.level = 3;
+		if(difficulty.equals("Facile"))
+			this.difficulty = 1;
+		else if(difficulty.equals("Difficile"))
+			this.difficulty = 3;
 		else
-			this.level = 2;
+			this.difficulty = 2;
 		
 		// theme
 		if (chosenTheme.equals("Theme2")){
@@ -31,35 +33,37 @@ public class Board implements ActionListener {
 		else{
 			this.theme = new Theme1(); // par defaut, le theme est le Theme1
 		}	
-		
+
 		// grille de jeu
 		this.grid = new Grid();
+
+		// level
+		level = new Level();
 		
-		timer = new Timer(2000, this);	
+		// timer
+		timer = new Timer(level.getSpeed(), this);
 	}
 	
-	public Player getPlayer(){
-		return this.player;
-	}
+	// Getters / Setters
+	public Player getPlayer(){ return this.player; }	
+	public Grid getGrid(){ return this.grid; }	
+	public Theme getTheme(){ return this.theme; }
 	
-	public Grid getGrid(){
-		return this.grid;
-	}
-	
-	public Theme getTheme(){
-		return this.theme;
-	}
+	// Lancement/Arret du jeu
+
+	public void stop(){ timer.stop(); }
 	
 	public void start(){
 		this.grid.newShape();
 		//this.grid.getCurShape();
 		this.timer.start();
 	}
+	
+	// Methode appelee par le timer : fait descendre la piece automatiquement
+	public void actionPerformed(ActionEvent e) {
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		this.grid.oneLineDown();
-		System.out.println(this.grid.getCurShape().getTetrominoe());
+		System.out.println(" ------------------- \n" + "tetra : " + this.grid.getCurShape().getTetrominoe());
+		grid.moveDown();
 	}
 	
 }
