@@ -80,6 +80,7 @@ public class Grid {
 
 	// Teste si la piece passee en parametres peut se deplacer aux nouvelles coordonnees
 	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
+		clearCurShape();
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Nouvelles coordonnees de la brique
@@ -92,17 +93,18 @@ public class Grid {
 			
 			// Tester si la case est libre
 			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
-
+				putCurShape();
 				System.out.println("-----------------------------------------------------------");
 				return false;
 			}
 			// Tester si la case est dans la grille
 			if( x<0 || x>width || y<0 || y>height ){
+				putCurShape();
 				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 				return false;
 			}
 		}
-		
+		putCurShape();
 		return true;
 	}
 	
