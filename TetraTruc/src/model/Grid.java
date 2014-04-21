@@ -63,9 +63,7 @@ public class Grid {
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Affecte aï¿½ la case occupee par la brique la shape courante
-			System.out.println("position en y de la premiere piece + " + (curY + curShape.getTetrominoe().getBrick(brick).getY()));
-			System.out.println("position en x de la premiere piece + " + (curX + curShape.getTetrominoe().getBrick(brick).getX()));
-			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()] = curShape;
+			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(curShape.getTetrominoe());
 		}
 	}
 	
@@ -87,20 +85,14 @@ public class Grid {
 			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
 			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
 			
-			System.out.println("int x " + x);
-			System.out.println("int y " + y);
-			System.out.println("vvvvvvvvvvvvvvvv : " + grid[y][x].getTetrominoe());
-			
 			// Tester si la case est libre
 			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
 				putCurShape();
-				System.out.println("-----------------------------------------------------------");
 				return false;
 			}
 			// Tester si la case est dans la grille
 			if( x<0 || x>width || y<0 || y>height ){
 				putCurShape();
-				System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 				return false;
 			}
 		}
@@ -129,7 +121,7 @@ public class Grid {
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curX = newX;		// Affecte les nouvelles coordonnees de la piece
 			curY = newY;
-			putCurShape();		// Place la piece a son nouvel emplacement
+			putCurShape();		// Place la piece aï¿½son nouvel emplacement
 			return true;
 		}
 		return false;
@@ -150,10 +142,8 @@ public class Grid {
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
 			// Notifier la vue
-			System.out.println("test1");
 		}
 		else{	// Sinon, c'est qu'elle posee
-			System.out.println("test2");
 			removeFullLines();
 			newShape();
 			// Notifier la vue
@@ -164,7 +154,7 @@ public class Grid {
 	public void rotate(){
 		if(canRotate()){
 			clearCurShape();	// Supprime la piece de son emplacement actuel
-			curShape = curShape.rotate();	// Tourne la piece
+			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
 			// Notifier la vue
 			return;

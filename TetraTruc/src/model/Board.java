@@ -50,20 +50,22 @@ public class Board implements ActionListener {
 	public Theme getTheme(){ return this.theme; }
 	
 	// Lancement/Arret du jeu
-
 	public void stop(){ timer.stop(); }
-	
-	public void start(){
-		this.grid.newShape();
-		//this.grid.getCurShape();
-		this.timer.start();
-	}
+	public void start(){ grid.newShape(); timer.start(); }
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {
-
-		System.out.println(" ------------------- \n" + "tetra : " + this.grid.getCurShape().getTetrominoe());
+		System.out.println(grid.getCurShape().getTetrominoe().name());
 		grid.moveDown();
+		
 	}
 	
+	public static void main(String[] args) {
+		Player p = new Player("bob");
+		Board b = new Board(p, "Facile", "Theme1");
+		b.start();
+		while(true){
+			
+		}
+	}
 }

@@ -7,7 +7,7 @@ public class Level {
 	// Constructeur par defaut
 	public Level(){
 		level = 1;
-		speed = 400;
+		speed = 1000;
 	}
 	
 	public int getLevel(){ return level; }
