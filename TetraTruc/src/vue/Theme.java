@@ -1,9 +1,9 @@
-package model;
+package vue;
 
 import java.awt.Color;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+
+import model.Tetrominoe;
 
 
 // classe 'globale', les thèmes héritent de lui

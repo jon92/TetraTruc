@@ -9,7 +9,6 @@ public class Board implements ActionListener {
 	private final Player player;
 	private final int difficulty;
 	private Grid grid;
-	private Theme theme;
 	private Timer timer;
 	private Level level;
 	
@@ -25,14 +24,6 @@ public class Board implements ActionListener {
 			this.difficulty = 3;
 		else
 			this.difficulty = 2;
-		
-		// theme
-		if (chosenTheme.equals("Theme2")){
-			this.theme = new Theme2();
-		}
-		else{
-			this.theme = new Theme1(); // par defaut, le theme est le Theme1
-		}	
 
 		// grille de jeu
 		this.grid = new Grid();
@@ -47,7 +38,6 @@ public class Board implements ActionListener {
 	// Getters / Setters
 	public Player getPlayer(){ return this.player; }	
 	public Grid getGrid(){ return this.grid; }	
-	public Theme getTheme(){ return this.theme; }
 	
 	// Lancement/Arret du jeu
 	public void stop(){ timer.stop(); }

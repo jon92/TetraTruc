@@ -1,7 +1,9 @@
-package model;
+package vue;
 
 import java.awt.Color;
 import java.util.HashMap;
+
+import model.Tetrominoe;
 
 
 // Theme par defaut
