@@ -1,7 +1,5 @@
 package model;
 
-import javax.naming.directory.InvalidAttributeValueException;
-
 import model.Point;
 
 public enum Tetrominoe {
