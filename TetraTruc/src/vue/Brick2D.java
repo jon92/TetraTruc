@@ -9,9 +9,10 @@ public class Brick2D {
 	
 	// Constructeur par défaut
 	public Brick2D(int h, int w){
-		// Brique vide, transparente
 		pxlHeight = h;
 		pxlWidth = w;
+		letter = "";
+		color = null;
 	}
 	
 	public Brick2D(int h, int w, Color c, String l){

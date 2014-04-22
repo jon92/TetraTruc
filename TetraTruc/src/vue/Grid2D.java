@@ -8,7 +8,6 @@ import model.Observer;
 import model.Point;
 import model.Shape;
 import model.Tetrominoe;
-import model.Theme;
 
 
 // TO DO : récupérer les infos de Grid pour squareNumberW et squareNumberH
@@ -58,7 +57,11 @@ public class Grid2D implements GridObserver {
 
 	// Nettoyage de la grille
 	public void clearGrid(){
-		// Parcourir toute la grid et la remplir de Brick2D vide (transparentes, invisibles, NULL ou je ne sais quoi)
+		for(int line=0; line<height; ++line){
+			for(int col=0; col<width; ++col){
+				grid[line][col].setColor(null);
+			}
+		}
 	}
 	
 	public void draw(){
