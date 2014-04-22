@@ -16,18 +16,22 @@ import model.Theme;
 
 
 public class Grid2D implements GridObserver {
-	private int height, width; 	// Dimensions de la grille
+	private int height, width; 	// Dimensions de la grille, en cases
+	private int pxlHeight, pxlWidth;	// Dimensions de la grille, en pixels
 	private Brick2D[][] grid; 			// Grille de briques
 
 	// Constructeur par défaut
-	public void Grid2D(){
+	public Grid2D(){
 		this.height = 20;
 		this.width = 10;
+		this.pxlHeight = 400;
+		this.pxlWidth = 200;
+		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
-				this.grid[i][j] = new Brick2D();
+				this.grid[i][j] = new Brick2D(pxlHeight/height, pxlWidth/width);
 			}
 		}
 		
@@ -35,14 +39,17 @@ public class Grid2D implements GridObserver {
 	}
 	
 	// Constructeur personnalisé
-	public void Grid2D(int h, int w){
+	public Grid2D(int h, int w, int pxlH, int pxlW){
 		this.height = h;
 		this.width = w;
+		this.pxlHeight = pxlH;
+		this.pxlWidth = pxlW;
+		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
-				this.grid[i][j] = new Brick2D();
+				this.grid[i][j] = new Brick2D(pxlHeight/height, pxlWidth/width);
 			}
 		}
 		

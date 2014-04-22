@@ -19,6 +19,6 @@ public class GamePanel extends JPanel{
 	}
 
 	public void paintComponent(Graphics g){
-	    grid.drawGrid(g, this.width, this.height);
+	    //grid.drawGrid(g, this.width, this.height);
 	}               
 }
