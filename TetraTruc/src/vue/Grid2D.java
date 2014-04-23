@@ -119,15 +119,8 @@ public class Grid2D implements GridObserver{
 	
 	@Override
 	public void update(Point[] coords, Tetrominoe[] shapes) {
-		
 		this.coords = coords;
 		this.shapes = shapes;
-		
-		for(int i=0; i<coords.length; ++i){
-			int x = coords[i].getX();
-			int y = coords[i].getY();
-			
-			GraphicEngine.getSingleton().getGamePanel().repaint();
-		}
+		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}
 }
