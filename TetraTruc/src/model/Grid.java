@@ -56,8 +56,8 @@ public class Grid implements GridObservable {
 	// Generer une nouvelle piece
 	public void newShape(){
 		this.curShape.randomShape();
-		this.curX = this.width/2 + 1;
-		this.curY = 2;
+		this.curX = this.width/2 - 1;
+		this.curY = -curShape.minY();
 		putCurShape();
 	}
 	
@@ -132,28 +132,24 @@ public class Grid implements GridObservable {
 	
 	// Deplacements joueur
 	public void moveLeft(){ 
-		if(moveTo(curX-1, curY)){}
-			// Notifier la vue
-			notifyObserver();
+		if(moveTo(curX-1, curY))
+			notifyObserver();	// Notifier la vue
 	}
 	
 	public void moveRight(){ 
-		if(moveTo(curX+1, curY)){}
-			// Notifier la vue
-			notifyObserver();
+		if(moveTo(curX+1, curY))
+			notifyObserver();	// Notifier la vue
 	}
 	
 	public void moveDown(){ 
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
-			// Notifier la vue
-			notifyObserver();
+			notifyObserver();	// Notifier la vue
 		}
 		else{	// Sinon, c'est qu'elle posee
 			removeFullLines();
 			newShape();
-			// Notifier la vue
-			notifyObserver();
+			notifyObserver();	// Notifier la vue
 		}
 	}
 	
@@ -163,8 +159,7 @@ public class Grid implements GridObservable {
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
-			// Notifier la vue
-			notifyObserver();
+			notifyObserver();	// Notifier la vue
 			return;
 		}
 	}

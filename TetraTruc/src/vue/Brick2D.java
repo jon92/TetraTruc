@@ -19,7 +19,7 @@ public class Brick2D extends JPanel {
 		color = null;
 	}
 	
-	public Brick2D(int h, int w, Color c, String l, int margins){
+	public Brick2D(int h, int w, Color c, String l){
 		pxlHeight = h;
 		pxlWidth = w;
 		color = c;
@@ -34,7 +34,7 @@ public class Brick2D extends JPanel {
 
 	public void draw(Graphics g, Color color, int x, int y, int zero){
 		
-		//efface la brique dessinée au tour d'avant
+		//efface la brique dessinï¿½e au tour d'avant
 		g.clearRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
 		
 		g.setColor(color);

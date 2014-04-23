@@ -24,6 +24,23 @@ public class Shape {
 	public Tetrominoe getTetrominoe(){ return pieceShape; }
 	public void setTetrominoe(Tetrominoe shape){ pieceShape = shape; }
 	
+	// Taille minimale de la pièce
+	public int minX(){
+		int min = 0;
+		for(int i=0; i<4; ++i){
+			min = Math.min(min, pieceShape.getBrick(i).getX());
+		}
+		return min;
+	}
+	
+	public int minY(){
+		int min = 0;
+		for(int i=0; i<4; ++i){
+			min = Math.min(min, pieceShape.getBrick(i).getY());
+		}
+		return min;
+	}
+	
 	// Deplacements des pieces
 	public Shape rotate(){
 		if (pieceShape == Tetrominoe.O_Shape)
