@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Graphics;
+
 public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
@@ -132,22 +134,26 @@ public class Grid implements GridObservable {
 	public void moveLeft(){ 
 		if(moveTo(curX-1, curY)){}
 			// Notifier la vue
+			notifyObserver();
 	}
 	
 	public void moveRight(){ 
 		if(moveTo(curX+1, curY)){}
 			// Notifier la vue
+			notifyObserver();
 	}
 	
 	public void moveDown(){ 
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
 			// Notifier la vue
+			notifyObserver();
 		}
 		else{	// Sinon, c'est qu'elle posee
 			removeFullLines();
 			newShape();
 			// Notifier la vue
+			notifyObserver();
 		}
 	}
 	
@@ -158,6 +164,7 @@ public class Grid implements GridObservable {
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
 			// Notifier la vue
+			notifyObserver();
 			return;
 		}
 	}
@@ -207,14 +214,32 @@ public class Grid implements GridObservable {
 				removeLine(currLine);
 			lineIsFull = true;
 		}
-	}
-
-	
-	
+	} 
 	
 	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
 	@Override
-	public void notifyObserver(Point[] coords, Tetrominoe[] shapes) {
+	public void notifyObserver() {
+		Point coords[] = new Point[20*10];
+		Tetrominoe shapes[] = new Tetrominoe[20*10];
+		
+		for(int i=0; i<height; ++i){
+			for (int j=1; j<=width; ++j){
+				coords[i*width + j -1] = new Point(i+1, j);
+				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
+				System.out.println("Point(" + coords[i*width+j -1].getX() + ", " + coords[i*width+j -1].getY()  + ")");
+				System.out.println("Shape :" + shapes[i*width+j -1]);
+			}
+		}
 		observer.update(coords, shapes);		
+	}
+
+	@Override
+	public void addObserver(GridObserver obs) {
+		this.observer = obs;
+	}
+
+	@Override
+	public void delAllObservers() {
+		this.observer = null;
 	}
 }

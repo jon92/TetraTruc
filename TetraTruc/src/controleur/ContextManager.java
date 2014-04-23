@@ -46,6 +46,8 @@ public class ContextManager {
 		gameEngine.setGameParams(params);
 		gameEngine.setState("GAME");
 		gameEngine.initGame();
+		
+		gameEngine.getBoard().getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
 	}
 	
 	public void setExitState(){

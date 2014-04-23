@@ -1,6 +1,7 @@
 package model;
 
 public interface GridObservable {
-	
-	public void notifyObserver(Point[] coords, Tetrominoe[] shapes);
+	public void notifyObserver();
+	public void addObserver(GridObserver obs);
+	public void delAllObservers();
 }

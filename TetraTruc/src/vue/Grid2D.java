@@ -1,6 +1,10 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
 import model.GridObserver;
 import model.Point;
 import model.Tetrominoe;
@@ -10,11 +14,19 @@ import model.Tetrominoe;
 // TO DO : récupérer le thème choisi depuis le menu
 
 
-public class Grid2D implements GridObserver {
+public class Grid2D implements GridObserver{
 	private int height, width; 	// Dimensions de la grille, en cases
 	private int pxlHeight, pxlWidth;	// Dimensions de la grille, en pixels
 	private Brick2D[][] grid; 			// Grille de briques
+	private Point[] coords;
+	private Tetrominoe[] shapes;
 	private Theme theme;
+	
+	// ------- a supprimer plus tard ---------------
+		private final int margins = 30;
+		private final int squareSize = 20;
+		private int squareNumberW = 10;
+		private int squareNumberH = 20;
 
 	// Constructeur par défaut
 	public Grid2D(){
@@ -23,6 +35,8 @@ public class Grid2D implements GridObserver {
 		this.pxlHeight = 400;
 		this.pxlWidth = 200;
 		this.theme = new Theme1();
+		this.coords = null;
+		this.shapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -42,6 +56,8 @@ public class Grid2D implements GridObserver {
 		this.pxlHeight = pxlH;
 		this.pxlWidth = pxlW;
 		this.theme = t;
+		this.coords = null;
+		this.shapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -63,19 +79,55 @@ public class Grid2D implements GridObserver {
 		}
 	}
 	
-	public void draw(){
-		// TO-DO
+	public void draw(Graphics g, int width, int height){
+		
+		if(this.shapes != null && this.coords != null){
+			for(int i=0; i<this.coords.length; ++i){
+				int x = this.coords[i].getX();
+				int y = this.coords[i].getY();
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins);	// Modifie la couleur de la brique	
+			}
+		}
+		
+		// ---------- A supprimer plus tard -----------
+			g.setColor(Color.RED);
+	
+			//Dessin des lignes verticales
+			int originX = margins;
+			int originY = margins;
+			int destX = margins;
+			int destY = this.squareNumberH * this.squareSize + margins-1;
+	
+			for(int i=0; i <= this.squareNumberW; ++i){
+			    g.drawLine(originX, originY, destX, destY);
+			    originX += this.squareSize;
+			    destX += this.squareSize;
+			}
+	
+			//Dessin des lignes horizontales
+			originX = margins;
+			originY = margins;
+			destX = this.squareNumberW * this.squareSize + margins-1;
+			destY = margins;
+	
+			for(int i=0; i <= this.squareNumberH; ++i){
+			    g.drawLine(originX, originY, destX, destY);
+			    originY += this.squareSize;
+			    destY += this.squareSize;
+			}
 	}
-	
-	
 	
 	@Override
 	public void update(Point[] coords, Tetrominoe[] shapes) {
+		
+		this.coords = coords;
+		this.shapes = shapes;
+		
 		for(int i=0; i<coords.length; ++i){
 			int x = coords[i].getX();
 			int y = coords[i].getY();
 			
-			grid[y][x].setColor(theme.getColorByShape(shapes[i]));	// Modifie la couleur de la brique	
+			GraphicEngine.getSingleton().getGamePanel().repaint();
 		}
 	}
 }

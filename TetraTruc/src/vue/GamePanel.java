@@ -17,8 +17,12 @@ public class GamePanel extends JPanel{
 		this.width = width;	
 		this.height = height;
 	}
+	
+	public Grid2D getGrid2D(){
+		return this.grid;
+	}
 
 	public void paintComponent(Graphics g){
-	    //grid.drawGrid(g, this.width, this.height);
+	    grid.draw(g, this.width, this.height);
 	}               
 }

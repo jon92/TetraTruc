@@ -7,6 +7,7 @@ public class GraphicEngine implements Observer {
 	private Window window;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
 	private Menu2D currentMenu;
+	private GamePanel gamePanel;
 	
 	/*
 	private void GraphicEngine(){
@@ -22,6 +23,10 @@ public class GraphicEngine implements Observer {
 	
 	public static GraphicEngine getSingleton(){
 		return graphicESingleton;
+	}
+	
+	public GamePanel getGamePanel(){
+		return this.gamePanel;
 	}
 	
 	public HashMap<String, String> getGameParams(){
@@ -46,7 +51,8 @@ public class GraphicEngine implements Observer {
 	public void goToGame(){
 		this.window.getPanel().removeAll();
 		this.window.repaint();
-		this.window.setPanel(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight()));
+		this.gamePanel = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		this.window.setPanel(this.gamePanel);
 	}
 
 	@Override
