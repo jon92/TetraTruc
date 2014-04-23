@@ -31,7 +31,7 @@ public class Brick2D extends JPanel {
 	public void setColor(Color c){ color = c; }
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
-	
+
 	public void draw(Graphics g, Color color, int x, int y, int zero){
 		
 		//efface la brique dessinée au tour d'avant
