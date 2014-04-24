@@ -50,8 +50,9 @@ public class Shape {
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
+            int tempX = pieceShape.getBrick(i).getPoint().getX();
         	result.pieceShape.getBrick(i).getPoint().setX(this.pieceShape.getBrick(i).getPoint().getY());
-        	result.pieceShape.getBrick(i).getPoint().setY(-this.pieceShape.getBrick(i).getPoint().getX());
+        	result.pieceShape.getBrick(i).getPoint().setY(-tempX);
         }
         
         return result;

@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Graphics;
-
 public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
@@ -113,8 +111,16 @@ public class Grid implements GridObservable {
 	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
-		if(shapeCanMoveTo(curShapeRotated, curX, curY))
+		
+		if(shapeCanMoveTo(curShapeRotated, curX, curY)){
+			curShape.rotate();
+			curShape.rotate();
+			curShape.rotate();
 			return true;
+		}
+		curShape.rotate();
+		curShape.rotate();
+		curShape.rotate();
 		return false;
 	}
 	

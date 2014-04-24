@@ -2,9 +2,6 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
-import javax.swing.JPanel;
-
 import model.GridObserver;
 import model.Point;
 import model.Tetrominoe;
