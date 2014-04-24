@@ -111,8 +111,16 @@ public class Grid implements GridObservable {
 	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
-		if(shapeCanMoveTo(curShapeRotated, curX, curY))
+		
+		if(shapeCanMoveTo(curShapeRotated, curX, curY)){
+			curShape.rotate();
+			curShape.rotate();
+			curShape.rotate();
 			return true;
+		}
+		curShape.rotate();
+		curShape.rotate();
+		curShape.rotate();
 		return false;
 	}
 	
@@ -153,13 +161,13 @@ public class Grid implements GridObservable {
 	
 	// Tourner la piece courante
 	public void rotate(){
-		//if(canRotate()){
+		if(canRotate()){
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
 			notifyObserver();	// Notifier la vue
 			return;
-		//}
+		}
 	}
 	
 	// Faire tomber la piece directement tout en bas
