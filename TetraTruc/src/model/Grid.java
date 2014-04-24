@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Graphics;
-
 public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;

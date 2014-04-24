@@ -4,6 +4,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controleur.ContextManager;
+
 public class Window extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,9 @@ public class Window extends JFrame{
 		
 		this.setContentPane(panel);
 		this.setVisible(true);
+		
+		setFocusable(true);
+		this.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	}
 	
 	public JPanel getPanel(){
