@@ -118,10 +118,12 @@ public class Word {
     public static Word findWordWithSwitchedLetters (String[] letters, String file){
         
         // initialisation du mot le plus long au mot vide
-        Word longestWord = new Word ("", 0);        
+        Word longestWord = new Word ("", 0);   
+        
         Word tmp = new Word ("", 0);                
         boolean isInDictionary = true;  
         
+        // tableau qui vérifie quelle lettre est déjà utilisée
         int[] indexAlreadyToken = new int[letters.length];        
         int compteur = 0;      
         boolean isInIndex = false;
@@ -129,20 +131,22 @@ public class Word {
         
         
      
-        
+        // on parcourt toutes les lettres
             while (compteur != letters.length){
 
-                int cptIndex = 0;
+                int cptIndex = 0; // savoir dans quelle case rajouter les int dans indexAlreadyToken
 
                 // on "vide" le tableau indexAlreadyToken
                 for (int l=0; l<indexAlreadyToken.length; ++l){
                     indexAlreadyToken[l] = -1;
                 }
-
+                
+                // on indique que la lettre compteur est prise
                 indexAlreadyToken[0] = compteur;            
 
                 tmp.word = letters[compteur];          
 
+                // on parcourt toutes les lettres
                 for (int i = 0 ; i < letters.length; ++i){
 
                    // on vérifie que la lettre n'est pas dans le tableau des index déjà pris
@@ -152,7 +156,8 @@ public class Word {
                            break;
                        }
                    }
-
+                   
+                   // si la lettre n'est pas utilisé, on concatène tmp avec
                    if (isInIndex == false){
                        tmp.word = tmp.word.concat(letters[i]);                    
                        System.out.println(tmp.word);                    
