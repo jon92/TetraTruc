@@ -35,6 +35,9 @@ public class ContextManager {
 			case 40 : 
 				gameEngine.getBoard().getGrid().moveDown();
 			break;
+			case 32 : 
+				gameEngine.getBoard().getGrid().dropBottom();
+			break;
 		}
 	}
 	
