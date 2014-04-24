@@ -14,10 +14,11 @@ public class Shape {
 	// Selectionne un tetrominoe aleatoirement
 	public void randomShape(){
 		// Tirage au sort de la piece
-		Random r = new Random();
+		/*Random r = new Random();
         int z = Math.abs(r.nextInt()) % 7 + 1;
         Tetrominoe[] values = Tetrominoe.values(); 
-        pieceShape = values[z];
+        pieceShape = values[z];*/
+		pieceShape = Tetrominoe.Z_Shape;
 	}
 	
 	// Getters / Setters
@@ -50,8 +51,18 @@ public class Shape {
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
+        	System.out.println("av X n°" + i + " " + pieceShape.getBrick(i).getPoint().getX());
+            System.out.println("av Y n°" + i + " " + pieceShape.getBrick(i).getPoint().getY());
+        	
+            int tempX = pieceShape.getBrick(i).getPoint().getX();
+        	System.out.println("tempX = " + tempX);
+        	
         	result.pieceShape.getBrick(i).getPoint().setX(this.pieceShape.getBrick(i).getPoint().getY());
-        	result.pieceShape.getBrick(i).getPoint().setY(-this.pieceShape.getBrick(i).getPoint().getX());
+        	result.pieceShape.getBrick(i).getPoint().setY(-tempX);
+        	
+        	System.out.println("tempX = " + tempX);
+            System.out.println("  X n°" + i + " " + result.pieceShape.getBrick(i).getPoint().getX());
+            System.out.println("  Y n°" + i + " " + result.pieceShape.getBrick(i).getPoint().getY());
         }
         
         return result;
