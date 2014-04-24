@@ -90,7 +90,7 @@ public class Word {
 
                 while (line != null)
                 {
-                    System.out.println (line);
+                    //System.out.println (line);
                     // on teste si la ligne du dictionnaire correspond au mot à tester
                     if (line.equals(word.word)){
                         return true;
@@ -115,16 +115,103 @@ public class Word {
     
     
     // trouver un mot avec des lettres mélangées (anagramme)
-    // retourner une String ou un Word?
-    public Word findWordWithSwitchedLetters (char[] letters){
+    public static Word findWordWithSwitchedLetters (String[] letters, String file){
         
         // initialisation du mot le plus long au mot vide
-        Word longestWord = new Word ("", 0);
+        Word longestWord = new Word ("", 0);        
+        Word tmp = new Word ("", 0);                
+        boolean isInDictionary = true;  
+        
+        int[] indexAlreadyToken = new int[letters.length];        
+        int compteur = 0;      
+        boolean isInIndex = false;
         
         
         
+     
         
-    
+            while (compteur != letters.length){
+
+                int cptIndex = 0;
+
+                // on "vide" le tableau indexAlreadyToken
+                for (int l=0; l<indexAlreadyToken.length; ++l){
+                    indexAlreadyToken[l] = -1;
+                }
+
+                indexAlreadyToken[0] = compteur;            
+
+                tmp.word = letters[compteur];          
+
+                for (int i = 0 ; i < letters.length; ++i){
+
+                   // on vérifie que la lettre n'est pas dans le tableau des index déjà pris
+                   for (int k = 0; k< indexAlreadyToken.length; ++k){                    
+                       if (i == indexAlreadyToken[k]){
+                           isInIndex = true;
+                           break;
+                       }
+                   }
+
+                   if (isInIndex == false){
+                       tmp.word = tmp.word.concat(letters[i]);                    
+                       System.out.println(tmp.word);                    
+                       cptIndex++;                    
+                       indexAlreadyToken[cptIndex] = i;
+
+                       isInDictionary = findWordInDictionary(tmp, file);
+
+                       // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
+                       if (isInDictionary && tmp.word.length() > longestWord.size){
+                           longestWord.word = tmp.word;
+                           longestWord.size = tmp.size;
+                           System.out.println("LONGEST WORD "+ longestWord.word);
+                       }
+                   }
+
+                   isInIndex = false;
+
+                }
+
+                compteur ++;
+            }
+        
+        
+   
+        
+        /*while (compteur != letters.length){
+            
+                String lettreActuelle = letters[compteur];
+
+                tmp.word = letters[compteur];
+
+                for (int i = compteur + 1 ; i < letters.length; ++i){
+                    tmp.word = lettreActuelle.concat(letters[i]);
+                    tmp.size = tmp.word.length();
+                    
+                    for (int j = i+1; j< letters.length; ++j){
+                        tmp.word = tmp.word.concat(letters[j]);
+                        tmp.size = tmp.word.length();
+                        
+
+                        System.out.println(tmp.word);
+
+                        isInDictionary = findWordInDictionary(longestWord, file);
+
+                        // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
+                        if (isInDictionary && tmp.size > longestWord.size){
+                            longestWord.word = tmp.word;
+                            longestWord.size = tmp.size;
+                        }
+                    }
+                }
+
+                compteur ++;
+              
+        }
+        */  
+        
+        
         return longestWord;
     }
     
@@ -136,8 +223,13 @@ public class Word {
     // [TEST]
     public static void main(String[] args) throws FileNotFoundException {        
         Word word = new Word ("wesh", 5);
-        boolean check = findWordInDictionary(word,"media/lang/dictionary_FR.txt");
-        System.out.println("check "+ check);
+        //boolean check = findWordInDictionary(word,"media/lang/dictionary_FR.txt");
+        //System.out.println("check "+ check);
+        
+        String[] str = {"a", "b", "c", "d", "e", "f"} ;
+        
+        word = findWordWithSwitchedLetters(str, "media/lang/dictionary_FR.txt");
+        
     }
             
 }
