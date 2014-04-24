@@ -18,8 +18,10 @@ public class Word {
     Word(String[] word){
         // créer l'attribut word depuis les lettres des Brick entrées au fur et à mesure
         
-        // en déduire la taille du word
         
+        
+        // en déduire la taille du word
+        this.size = this.word.length();
     }
     
 	// [TEST]
@@ -27,6 +29,19 @@ public class Word {
         this.size = size;
         this.word = word;
     }
+    
+               
+    // retourner la taille du mot (important pour anagramme)
+    public int getSize(Word word){
+        return word.size;
+    }
+    
+     // retourner l'attribut word du mot 
+    public String getWord(Word word){
+        return word.word;
+    }
+    
+        
     
     
     // [TEST] parcourir le dictionnaire et afficher les mots 
@@ -63,6 +78,7 @@ public class Word {
     
     // trouver un mot dans le dictionaire
 // TODO  : améliorer le parcours : arrêter le parcours quand on a dépassé le mot (si le mot n'existe pas)
+// Voir la fonction compareTo de char
     public static boolean findWordInDictionary(Word word, String file){
         try{
             File f = new File (file);
@@ -97,24 +113,28 @@ public class Word {
         return false;
     };
     
-    // retourner la taille du mot (important pour anagramme)
-    public int getSize(Word word){
-        return 0;
-    }
-    
-     // retourner l'attribut word du mot 
-    public String getWord(Word word){
-        return "";
-    }
     
     // trouver un mot avec des lettres mélangées (anagramme)
     // retourner une String ou un Word?
-    public String findWordWithSwitchedLetters (char[] letters){
-        return "";
+    public Word findWordWithSwitchedLetters (char[] letters){
+        
+        // initialisation du mot le plus long au mot vide
+        Word longestWord = new Word ("", 0);
+        
+        
+        
+        
+    
+        return longestWord;
     }
     
-    public static void main(String[] args) throws FileNotFoundException {
-        
+    
+    
+    
+    
+    
+    // [TEST]
+    public static void main(String[] args) throws FileNotFoundException {        
         Word word = new Word ("wesh", 5);
         boolean check = findWordInDictionary(word,"media/lang/dictionary_FR.txt");
         System.out.println("check "+ check);
