@@ -102,6 +102,13 @@ public class Word {
                     if (line.equals(word.word)){
                         return true;
                     }
+                    
+                    // si le mot est dépassé, on arrête
+                    Character line1 = (Character) line.charAt(0);
+                    Character word1 = (Character) word.word.charAt(0);
+                    if (line1.compareTo(word1) > 0){
+                        break;
+                    }
                                         
                     line = br.readLine();
                 }
@@ -128,7 +135,7 @@ public class Word {
             return longestWord;
         }
         for(int i = 0; i < s1.length(); i++) {
-            longestWord = anag(s1.substring(0, i) + s1.substring(i+1, s1.length()), s1.charAt(i) + s2, longestWord);
+            longestWord = findWordWithSwitchedLetters(s1.substring(0, i) + s1.substring(i+1, s1.length()), s1.charAt(i) + s2, longestWord);
             
             Word w1 = new Word(s1, s1.length());
             Word w2 = new Word (s2, s2.length());
@@ -159,8 +166,8 @@ public class Word {
     
     // [TEST]
     public static void main(String[] args) throws FileNotFoundException {        
-        Word word = new Word ("wesh", 5);
-        //boolean check = findWordInDictionary(word,"media/lang/dictionary_FR.txt");
+        Word word = new Word ("atta", 5);
+        boolean check = findWordInDictionary(word);
         //System.out.println("check "+ check);
         Word word2 = new Word ("", 0);
         String[] str = {"a", "b", "c", "d", "e", "f"} ;
