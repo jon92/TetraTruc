@@ -12,7 +12,8 @@ public class Word {
     private String word;
     private int size;
     
-    // dictionnaire à la position "media/lang/dictionary_FR.txt"
+// A modifier selon quel dico on chois
+    private static Dictionary dico = Dictionary.FR;
     
     //constructeur
     Word(String[] word){
@@ -22,6 +23,12 @@ public class Word {
         
         // en déduire la taille du word
         this.size = this.word.length();
+    }
+    
+	// [TEST]
+    Word(){
+        this.size = 0;
+        this.word = "";
     }
     
 	// [TEST]
@@ -45,10 +52,10 @@ public class Word {
     
     
     // [TEST] parcourir le dictionnaire et afficher les mots 
-    public static void browseDictionary(String file) throws FileNotFoundException{
+    public static void browseDictionary() throws FileNotFoundException{
               
         try{
-            File f = new File (file);
+            File f = new File (dico.getPath());
             FileReader fr = new FileReader (f);
             BufferedReader br = new BufferedReader (fr);
 
@@ -79,9 +86,9 @@ public class Word {
     // trouver un mot dans le dictionaire
 // TODO  : améliorer le parcours : arrêter le parcours quand on a dépassé le mot (si le mot n'existe pas)
 // Voir la fonction compareTo de char
-    public static boolean findWordInDictionary(Word word, String file){
+    public static boolean findWordInDictionary(Word word){
         try{
-            File f = new File (file);
+            File f = new File (dico.getPath());
             FileReader fr = new FileReader (f);
             BufferedReader br = new BufferedReader (fr);
 
@@ -115,25 +122,24 @@ public class Word {
     
     
     // trouver un mot avec des lettres mélangées (anagramme)
-    public static Word findWordWithSwitchedLetters (String[] letters, String file){
+    /*public static Word findWordWithSwitchedLetters (String[] letters, Word longestWord){
         
         // initialisation du mot le plus long au mot vide
-        Word longestWord = new Word ("", 0);   
+        //Word longestWord = new Word ("", 0);   
         
         Word tmp = new Word ("", 0);                
         boolean isInDictionary = true;  
         
         // tableau qui vérifie quelle lettre est déjà utilisée
-        int[] indexAlreadyToken = new int[letters.length];        
+//        int[] indexAlreadyToken = new int[letters.length];        
+        int[] indexAlreadyToken = new int[600];        
         int compteur = 0;      
         boolean isInIndex = false;
         
         
-        
-     
         // on parcourt toutes les lettres
             while (compteur != letters.length){
-
+                
                 int cptIndex = 0; // savoir dans quelle case rajouter les int dans indexAlreadyToken
 
                 // on "vide" le tableau indexAlreadyToken
@@ -144,84 +150,98 @@ public class Word {
                 // on indique que la lettre compteur est prise
                 indexAlreadyToken[0] = compteur;            
 
-                tmp.word = letters[compteur];          
-
-                // on parcourt toutes les lettres
-                for (int i = 0 ; i < letters.length; ++i){
-
-                   // on vérifie que la lettre n'est pas dans le tableau des index déjà pris
-                   for (int k = 0; k< indexAlreadyToken.length; ++k){                    
-                       if (i == indexAlreadyToken[k]){
-                           isInIndex = true;
-                           break;
+                tmp.word = letters[compteur];
+                
+                for (int m = 0 ; m < letters.length; ++m){
+                    Word test = new Word("", 0);
+                    
+                    // on parcourt toutes les lettres
+                    for (int i = 0 ; i < letters.length; ++i){
+                        
+                       // on vérifie que la lettre n'est pas dans le tableau des index déjà pris
+                       for (int k = 0; k< indexAlreadyToken.length; ++k){                    
+                           if (i == indexAlreadyToken[k]){
+                               isInIndex = true;
+                               break;
+                           }
                        }
-                   }
-                   
-                   // si la lettre n'est pas utilisé, on concatène tmp avec
-                   if (isInIndex == false){
-                       tmp.word = tmp.word.concat(letters[i]);                    
-                       System.out.println(tmp.word);                    
-                       cptIndex++;                    
-                       indexAlreadyToken[cptIndex] = i;
 
-                       isInDictionary = findWordInDictionary(tmp, file);
+                       // si la lettre n'est pas utilisé, on concatène tmp avec
+                       if (isInIndex == false){
+                           test.word = test.word.concat(letters[i]);                    
+                           System.out.println(test.word);                    
+                           cptIndex++;                    
+                           indexAlreadyToken[cptIndex] = i;
 
-                       // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
-                       if (isInDictionary && tmp.word.length() > longestWord.size){
-                           longestWord.word = tmp.word;
-                           longestWord.size = tmp.size;
-                           System.out.println("LONGEST WORD "+ longestWord.word);
+                           isInDictionary = findWordInDictionary(test);
+
+                           // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
+                           if (isInDictionary && test.word.length() > longestWord.size){
+                               longestWord.word = test.word;
+                               longestWord.size = test.size;
+                               System.out.println("LONGEST WORD "+ longestWord.word);
+                           }
                        }
-                   }
 
-                   isInIndex = false;
+                       isInIndex = false;
+
+                    }
 
                 }
-
                 compteur ++;
             }
-        
-        
-   
-        
-        /*while (compteur != letters.length){
-            
-                String lettreActuelle = letters[compteur];
-
-                tmp.word = letters[compteur];
-
-                for (int i = compteur + 1 ; i < letters.length; ++i){
-                    tmp.word = lettreActuelle.concat(letters[i]);
-                    tmp.size = tmp.word.length();
-                    
-                    for (int j = i+1; j< letters.length; ++j){
-                        tmp.word = tmp.word.concat(letters[j]);
-                        tmp.size = tmp.word.length();
-                        
-
-                        System.out.println(tmp.word);
-
-                        isInDictionary = findWordInDictionary(longestWord, file);
-
-                        // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
-                        if (isInDictionary && tmp.size > longestWord.size){
-                            longestWord.word = tmp.word;
-                            longestWord.size = tmp.size;
-                        }
-                    }
-                }
-
-                compteur ++;
-              
-        }
-        */  
         
         
         return longestWord;
     }
     
+    */
     
     
+    public static Word findWordWithSwitchedLetters(String[] letters, Word longestWord){
+        
+        Word tmp = new Word();
+        
+        
+        
+        
+        
+        
+        return longestWord;
+    }
+    
+    public static Word anag(String s1, String s2, Word longestWord)  {
+        if(s1.length() == 0)    {
+            //System.out.println("LONGEST WORD FINAL "+ longestWord.word);
+            return longestWord;
+        }
+        for(int i = 0; i < s1.length(); i++) {
+            longestWord = anag(s1.substring(0, i) + s1.substring(i+1, s1.length()), s1.charAt(i) + s2, longestWord);
+            
+            Word w1 = new Word(s1, s1.length());
+            Word w2 = new Word (s2, s2.length());
+            
+            boolean s1IsInDictionary = findWordInDictionary(w1);
+            boolean s2IsInDictionary = findWordInDictionary(w2);
+
+            // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
+            /*if (s1IsInDictionary && s1.length() > longestWord.size){
+                longestWord.word = s1;
+                longestWord.size = s1.length();
+                System.out.println("LONGEST WORD "+ longestWord.word);
+            }
+            else*/ if(s2IsInDictionary && s2.length() > longestWord.size){
+                longestWord.word = s2;
+                longestWord.size = s2.length();
+                System.out.println("LONGEST WORD "+ longestWord.word);
+            }
+            
+           
+        }
+        
+        return longestWord;
+    }
+
     
     
     
@@ -230,11 +250,17 @@ public class Word {
         Word word = new Word ("wesh", 5);
         //boolean check = findWordInDictionary(word,"media/lang/dictionary_FR.txt");
         //System.out.println("check "+ check);
-        
+        Word word2 = new Word ("", 0);
         String[] str = {"a", "b", "c", "d", "e", "f"} ;
         
-        word = findWordWithSwitchedLetters(str, "media/lang/dictionary_FR.txt");
+        Word st1 = new Word("abcdef", 6);
         
+        
+        Word longestWord = new Word ("", 0);   
+        //word2 = findWordWithSwitchedLetters(str, longestWord);
+        
+        longestWord = anag("abracadabra", "", longestWord);
+        System.out.println(longestWord.word);
     }
             
 }
