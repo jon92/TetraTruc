@@ -122,95 +122,7 @@ public class Word {
     
     
     // trouver un mot avec des lettres mélangées (anagramme)
-    /*public static Word findWordWithSwitchedLetters (String[] letters, Word longestWord){
-        
-        // initialisation du mot le plus long au mot vide
-        //Word longestWord = new Word ("", 0);   
-        
-        Word tmp = new Word ("", 0);                
-        boolean isInDictionary = true;  
-        
-        // tableau qui vérifie quelle lettre est déjà utilisée
-//        int[] indexAlreadyToken = new int[letters.length];        
-        int[] indexAlreadyToken = new int[600];        
-        int compteur = 0;      
-        boolean isInIndex = false;
-        
-        
-        // on parcourt toutes les lettres
-            while (compteur != letters.length){
-                
-                int cptIndex = 0; // savoir dans quelle case rajouter les int dans indexAlreadyToken
-
-                // on "vide" le tableau indexAlreadyToken
-                for (int l=0; l<indexAlreadyToken.length; ++l){
-                    indexAlreadyToken[l] = -1;
-                }
-                
-                // on indique que la lettre compteur est prise
-                indexAlreadyToken[0] = compteur;            
-
-                tmp.word = letters[compteur];
-                
-                for (int m = 0 ; m < letters.length; ++m){
-                    Word test = new Word("", 0);
-                    
-                    // on parcourt toutes les lettres
-                    for (int i = 0 ; i < letters.length; ++i){
-                        
-                       // on vérifie que la lettre n'est pas dans le tableau des index déjà pris
-                       for (int k = 0; k< indexAlreadyToken.length; ++k){                    
-                           if (i == indexAlreadyToken[k]){
-                               isInIndex = true;
-                               break;
-                           }
-                       }
-
-                       // si la lettre n'est pas utilisé, on concatène tmp avec
-                       if (isInIndex == false){
-                           test.word = test.word.concat(letters[i]);                    
-                           System.out.println(test.word);                    
-                           cptIndex++;                    
-                           indexAlreadyToken[cptIndex] = i;
-
-                           isInDictionary = findWordInDictionary(test);
-
-                           // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
-                           if (isInDictionary && test.word.length() > longestWord.size){
-                               longestWord.word = test.word;
-                               longestWord.size = test.size;
-                               System.out.println("LONGEST WORD "+ longestWord.word);
-                           }
-                       }
-
-                       isInIndex = false;
-
-                    }
-
-                }
-                compteur ++;
-            }
-        
-        
-        return longestWord;
-    }
-    
-    */
-    
-    
-    public static Word findWordWithSwitchedLetters(String[] letters, Word longestWord){
-        
-        Word tmp = new Word();
-        
-        
-        
-        
-        
-        
-        return longestWord;
-    }
-    
-    public static Word anag(String s1, String s2, Word longestWord)  {
+    public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
         if(s1.length() == 0)    {
             //System.out.println("LONGEST WORD FINAL "+ longestWord.word);
             return longestWord;
@@ -225,12 +137,12 @@ public class Word {
             boolean s2IsInDictionary = findWordInDictionary(w2);
 
             // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
-            /*if (s1IsInDictionary && s1.length() > longestWord.size){
+            if (s1IsInDictionary && s1.length() > longestWord.size){
                 longestWord.word = s1;
                 longestWord.size = s1.length();
                 System.out.println("LONGEST WORD "+ longestWord.word);
             }
-            else*/ if(s2IsInDictionary && s2.length() > longestWord.size){
+            else if(s2IsInDictionary && s2.length() > longestWord.size){
                 longestWord.word = s2;
                 longestWord.size = s2.length();
                 System.out.println("LONGEST WORD "+ longestWord.word);
@@ -259,7 +171,7 @@ public class Word {
         Word longestWord = new Word ("", 0);   
         //word2 = findWordWithSwitchedLetters(str, longestWord);
         
-        longestWord = anag("abracadabra", "", longestWord);
+        longestWord = findWordWithSwitchedLetters("abracadabra", "", longestWord);
         System.out.println(longestWord.word);
     }
             
