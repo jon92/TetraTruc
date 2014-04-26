@@ -82,7 +82,8 @@ public class Word {
         
         
     }
-    
+
+    /*
     // trouver un mot dans le dictionaire
 // TODO  : améliorer le parcours : arrêter le parcours quand on a dépassé le mot (si le mot n'existe pas)
 // Voir la fonction compareTo de char
@@ -126,7 +127,46 @@ public class Word {
         }
         return false;
     };
+    */
     
+     /*
+    <?php
+        function find($mot, $dictionnaire, $begin, $end) {
+            if ($begin > $end)
+                return false;
+            $new = floor(($begin + $end) / 2);
+            $cmp = strcmp($dictionnaire[$new], $mot);
+            if ($cmp == 0)
+                return true;
+            else if ($cmp > 0)
+                return find($mot, $dictionnaire, $begin, $new - 1);
+            else
+                return find($mot, $dictionnaire, $new + 1, $end);
+        }
+        // exemple :
+        $dictionnaire = array('chat', 'cheval', 'chien', 'grenouille');
+        echo find('chien', $dictionnaire, 0, sizeof($dictionnaire) - 1);
+        ?>    
+    */
+    
+    public static boolean findWordInDictionary(Word wordToCheck, int begin, int end){
+        if (begin > end)
+            return false;
+        int middle = (begin + end) / 2;
+        
+        String wordDictionary = dico.getContent().get(middle);
+        
+        int compareWord = wordToCheck.word.compareTo(wordDictionary);
+        
+        if (compareWord == 0)
+            return true;
+        else if (compareWord < 0)
+            return findWordInDictionary(wordToCheck, begin, (middle - 1));
+        else
+            return findWordInDictionary(wordToCheck,  (middle + 1), end);
+        
+        
+    }
     
     // trouver un mot avec des lettres mélangées (anagramme)
     public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
@@ -140,8 +180,8 @@ public class Word {
             Word w1 = new Word(s1, s1.length());
             Word w2 = new Word (s2, s2.length());
             
-            boolean s1IsInDictionary = findWordInDictionary(w1);
-            boolean s2IsInDictionary = findWordInDictionary(w2);
+            boolean s1IsInDictionary = findWordInDictionary(w1, 0, dico.getNbLines());
+            boolean s2IsInDictionary = findWordInDictionary(w2, 0, dico.getNbLines());
 
             // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
             if (s1IsInDictionary && s1.length() > longestWord.size){
@@ -167,7 +207,7 @@ public class Word {
     // [TEST]
     public static void main(String[] args) throws FileNotFoundException {        
         Word word = new Word ("atta", 5);
-        boolean check = findWordInDictionary(word);
+        //boolean check = findWordInDictionary(word, 0, dico.getNbLines());
         //System.out.println("check "+ check);
         Word word2 = new Word ("", 0);
         String[] str = {"a", "b", "c", "d", "e", "f"} ;
@@ -178,7 +218,7 @@ public class Word {
         Word longestWord = new Word ("", 0);   
         //word2 = findWordWithSwitchedLetters(str, longestWord);
         
-        longestWord = findWordWithSwitchedLetters("abracadabra", "", longestWord);
+        longestWord = findWordWithSwitchedLetters("proebcgaaw", "", longestWord);
         System.out.println(longestWord.word);
     }
             
