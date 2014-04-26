@@ -83,92 +83,36 @@ public class Word {
         
     }
 
-    /*
-    // trouver un mot dans le dictionaire
-// TODO  : améliorer le parcours : arrêter le parcours quand on a dépassé le mot (si le mot n'existe pas)
-// Voir la fonction compareTo de char
-    public static boolean findWordInDictionary(Word word){
-        try{
-            File f = new File (dico.getPath());
-            FileReader fr = new FileReader (f);
-            BufferedReader br = new BufferedReader (fr);
-
-            try{
-                String line = br.readLine();
-
-                while (line != null)
-                {
-                    //System.out.println (line);
-                    // on teste si la ligne du dictionnaire correspond au mot à tester
-                    if (line.equals(word.word)){
-                        return true;
-                    }
-                    
-                    // si le mot est dépassé, on arrête
-                    Character line1 = (Character) line.charAt(0);
-                    Character word1 = (Character) word.word.charAt(0);
-                    if (line1.compareTo(word1) > 0){
-                        break;
-                    }
-                                        
-                    line = br.readLine();
-                }
-
-                br.close();
-                fr.close();
-            }
-            catch (IOException exception){
-                System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
-            }
-            
-        }
-        catch (FileNotFoundException exception){
-            System.out.println ("Le fichier n'a pas été trouvé");
-        }
-        return false;
-    };
-    */
-    
-     /*
-    <?php
-        function find($mot, $dictionnaire, $begin, $end) {
-            if ($begin > $end)
-                return false;
-            $new = floor(($begin + $end) / 2);
-            $cmp = strcmp($dictionnaire[$new], $mot);
-            if ($cmp == 0)
-                return true;
-            else if ($cmp > 0)
-                return find($mot, $dictionnaire, $begin, $new - 1);
-            else
-                return find($mot, $dictionnaire, $new + 1, $end);
-        }
-        // exemple :
-        $dictionnaire = array('chat', 'cheval', 'chien', 'grenouille');
-        echo find('chien', $dictionnaire, 0, sizeof($dictionnaire) - 1);
-        ?>    
-    */
-    
+    // Trouver un mot dans le dictionnaire.
+    // Paramètres : le mot qu'on cherche, 0 , taille du dico (nb de lignes) --> dico.getNbLines()
     public static boolean findWordInDictionary(Word wordToCheck, int begin, int end){
-        if (begin > end)
+        // si begin > end, le mot n'existe pas
+        if (begin > end){
             return false;
+        }
+        
         int middle = (begin + end) / 2;
         
         String wordDictionary = dico.getContent().get(middle);
         
         int compareWord = wordToCheck.word.compareTo(wordDictionary);
         
-        if (compareWord == 0)
+        // si c'est le même mot, il est dans le dico
+        if (compareWord == 0){
             return true;
-        else if (compareWord < 0)
+        }
+        // si le mot est + grand, on vérifie la moitié supérieure
+        else if (compareWord < 0){
             return findWordInDictionary(wordToCheck, begin, (middle - 1));
-        else
-            return findWordInDictionary(wordToCheck,  (middle + 1), end);
-        
-        
+        }
+        // si le mot est + petit, on vérifie la moitié inférieure
+        else{
+            return findWordInDictionary(wordToCheck,  (middle + 1), end);  
+        }
     }
     
     // trouver un mot avec des lettres mélangées (anagramme)
+    // Paramètres : String contenant les lettres mélangées, "", un Word vide 
     public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
         if(s1.length() == 0)    {
             //System.out.println("LONGEST WORD FINAL "+ longestWord.word);
@@ -218,7 +162,7 @@ public class Word {
         Word longestWord = new Word ("", 0);   
         //word2 = findWordWithSwitchedLetters(str, longestWord);
         
-        longestWord = findWordWithSwitchedLetters("proebcgaaw", "", longestWord);
+        longestWord = findWordWithSwitchedLetters("ajdoeqhpd", "", longestWord);
         System.out.println(longestWord.word);
     }
             
