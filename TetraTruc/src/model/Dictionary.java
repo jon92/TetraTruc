@@ -9,8 +9,9 @@ import java.util.Vector;
 
 public enum Dictionary {
     
-// ATTENTION METTRE LA VRAIE TAILLE DU DICO    
-	FR("media/lang/dictionary_FR.txt", "Français", 22000);
+	FR("media/lang/dictionary_FR.txt", "Français", 22739, 
+            "eeeeeeeeeeeeeessssssssaaaaaaaaiiiiiiiitttttttnnnnnnnrrrrrrruuuuuullllloooooddddcccpppmmmvvqqfbghjxyzwk"
+        );
 	
         private String path;
 	private String language;		// Langue du dictionnaire
@@ -19,12 +20,13 @@ public enum Dictionary {
         private Vector<String> content;
         
 	// Constructeur
-	Dictionary(String path, String language, int nbLines){
+	Dictionary(String path, String language, int nbLines, String freqletters){
             this.path = path;
             // Charger le dictionnaire
             this.language = language;
             this.nbLines = nbLines;
             this.content = constructVector();
+            this.freqLetters = freqletters;
 	}
         
         private Vector<String> constructVector(){
