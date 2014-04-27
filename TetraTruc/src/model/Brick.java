@@ -23,8 +23,23 @@ public class Brick {
 	public int getX(){ return point.getX(); }		// Raccourci pour ne pas passer par getPoint()
 	public int getY(){ return point.getY(); } 		// Raccourci pour ne pas passer par getPoint()
 	
-	
-	public void generateRandomLetter(){
-		// Recupere une lettre aleatoirement en tenant compte de la frequence dans la langue du dictionnaire
+        
+	// Recupere une lettre aleatoirement en tenant compte de la frequence dans la langue du dictionnaire
+	public void generateRandomLetter(Dictionary dico){
+            
+            int nombreAleatoire = (int)(Math.random() * (dico.getFreqLetters().length() + 1));
+            
+            char tmp = dico.getFreqLetters().charAt(nombreAleatoire);
+            
+            this.letter = Character.toString(tmp);
+                        
 	}
+    
+	//[TEST]
+        public static void main(String[] args){
+            Brick fr = new Brick();
+            fr.generateRandomLetter(Dictionary.FR);
+            System.out.println(fr.letter);
+        }
+        
 }
