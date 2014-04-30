@@ -67,19 +67,14 @@ public class Shape {
 	
 	// Deplacements des pieces
 	public Shape rotate(){
-		if (pieceShape == Tetrominoe.O_Shape)
-            return this;
-        
-        Shape result = new Shape();
-        result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
             int tempX = getBrick(i).getPoint().getX();
-        	result.getBrick(i).getPoint().setX(this.getBrick(i).getPoint().getY());
-        	result.getBrick(i).getPoint().setY(-tempX);
+        	this.getBrick(i).getPoint().setX(this.getBrick(i).getPoint().getY());
+        	this.getBrick(i).getPoint().setY(-tempX);
         }
         
-        return result;
+        return this;
 	}
 	
 
