@@ -243,16 +243,31 @@ public class Grid implements GridObservable {
 				coords[i*width + j -1] = new Point(i+1, j);
 				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
 				
-				System.out.println("$$$$$$" + curShape.getBrick(0).getLetter());
+				for(int z =0; z<4; ++z){
+					//if(grid[i][j-1].getBrick(z) != null){
+					//System.out.println("$$$$$$" + grid[i][j-1].getBrick(z).getLetter());
+					
+					if(grid[i][j-1].getTetrominoe() != Tetrominoe.No_Shape)
+						letters[i*width + j -1] = grid[i][j-1].getBrick(z).getLetter();
+					//}
+				}
+				
 				
 				if(curShape != null){
 					for(int l=0; l<4; ++l){
 						if(curY + curShape.getBrick(l).getPoint().getY() == i && curX + curShape.getBrick(l).getPoint().getX() == j-1){
-							//System.out.println("------------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&----------------------" + curShape.getBrick(l).getLetter());
-							letters[i*width + j -1] = curShape.getBrick(l).getLetter();
+							System.out.println("------------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&----------------------" + curShape.getBrick(l).getLetter());
+							//letters[i*width + j -1] = curShape.getBrick(l).getLetter();
+							System.out.println("i :" + i);
+							System.out.println("j-1 :" + (j-1));
+							for(int m=0; m<4; ++m){
+								grid[i][j-1].getBrick(m).setLetter(curShape.getBrick(l).getLetter());
+							}
+							letters[i*width + j -1] = grid[i][j-1].getBrick(l).getLetter();
 						}
 						if(letters[i*width + j -1]  == null ){
-							letters[i*width + j -1] = "*";
+							//letters[i*width + j -1] = "*";
+							
 						}
 					}
 				}
@@ -264,14 +279,7 @@ public class Grid implements GridObservable {
 			}
 		}
 		observer.update(coords, shapes, letters);	
-		
-		for(int i=0; i<height; ++i){
-			for (int j=1; j<=width; ++j){
-				for(int k =0; k<4; ++k){
-					grid[i][j-1].getBrick(k).setPlaced(false);
-				}
-			}
-		}
+
 	}
 
 	@Override

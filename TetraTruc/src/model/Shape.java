@@ -13,7 +13,13 @@ public class Shape {
 		pieceShape = Tetrominoe.No_Shape;
 		
 		for(int i=0; i<4; ++i){
-			this.bricks[i] = new Brick(pieceShape.getPoint(i));
+			this.bricks[i] = new Brick(new Point(0,0));
+		}
+	}
+	
+	public void generateRandomLetter(){
+		for(int i=0; i<4; ++i){
+			this.getBrick(i).generateRandomLetter(Dictionary.FR);
 		}
 	}
 	
@@ -38,6 +44,8 @@ public class Shape {
         for(int i=0; i<4; ++i){
 			this.bricks[i].setPoint(pieceShape.getPoint(i));
 		}
+        
+        this.generateRandomLetter();
 	}
 	
 	// Getters / Setters

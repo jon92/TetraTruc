@@ -13,7 +13,7 @@ public class Brick {
 	}
 	
 	public Brick(Point p){
-        this.generateRandomLetter(Dictionary.FR);
+        //this.generateRandomLetter(Dictionary.FR);
 		this.point = p;
 		this.placed = false;
 	}

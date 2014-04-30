@@ -44,6 +44,8 @@ public class Brick2D extends JPanel {
 		}
 
 		g.setColor(Color.BLACK);
-		g.drawString(letter, (int)(zero + (y-1)*pxlWidth + pxlWidth*0.5), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.5) );
+		if(letter != null){
+			g.drawString(letter, (int)(zero + (y-1)*pxlWidth + pxlWidth*0.5), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.5) );
+		}
 	}
 }
