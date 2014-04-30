@@ -47,6 +47,7 @@ public class SoloMenu extends Menu2D {
 		this.pseudoJTF = new JTextField();
 		this.pseudoJTF.setForeground(Color.BLUE);
 		this.pseudoJTF.setBounds((int)(width*0.5-70), (int)(height*0.5-180), 140, 40);
+		//pseudoJTF.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	    
 		//Choix de la difficulté
 		JLabel level = new JLabel("Difficulté");

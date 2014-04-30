@@ -24,6 +24,23 @@ public class Shape {
 	public Tetrominoe getTetrominoe(){ return pieceShape; }
 	public void setTetrominoe(Tetrominoe shape){ pieceShape = shape; }
 	
+	// Taille minimale de la pièce
+	public int minX(){
+		int min = 0;
+		for(int i=0; i<4; ++i){
+			min = Math.min(min, pieceShape.getBrick(i).getX());
+		}
+		return min;
+	}
+	
+	public int minY(){
+		int min = 0;
+		for(int i=0; i<4; ++i){
+			min = Math.min(min, pieceShape.getBrick(i).getY());
+		}
+		return min;
+	}
+	
 	// Deplacements des pieces
 	public Shape rotate(){
 		if (pieceShape == Tetrominoe.O_Shape)
@@ -33,8 +50,9 @@ public class Shape {
         result.pieceShape = pieceShape;
 
         for (int i = 0; i < 4; ++i) {
+            int tempX = pieceShape.getBrick(i).getPoint().getX();
         	result.pieceShape.getBrick(i).getPoint().setX(this.pieceShape.getBrick(i).getPoint().getY());
-        	result.pieceShape.getBrick(i).getPoint().setY(-this.pieceShape.getBrick(i).getPoint().getX());
+        	result.pieceShape.getBrick(i).getPoint().setY(-tempX);
         }
         
         return result;

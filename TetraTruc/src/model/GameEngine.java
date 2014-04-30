@@ -48,6 +48,10 @@ public class GameEngine implements Observable {
 		//Lancement du jeu
 	}
 	
+	public Board getBoard(){
+		return this.board;
+	}
+	
 	public GameState getState(){
 		return this.state;
 	}

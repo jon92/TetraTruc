@@ -1,10 +1,11 @@
 package model;
 
-public class Grid {
+public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
 	private Shape curShape;			// Piece en train de tomber
 	private int curX, curY;			// Emplacement de la piece en train de tomber
+	private GridObserver observer;	// Observateur pour la vue
 	
 	// Constructeur par defaut
 	public Grid(){
@@ -53,8 +54,8 @@ public class Grid {
 	// Generer une nouvelle piece
 	public void newShape(){
 		this.curShape.randomShape();
-		this.curX = this.width/2 + 1;
-		this.curY = 2;
+		this.curX = this.width/2 - 1;
+		this.curY = -curShape.minY();
 		putCurShape();
 	}
 	
@@ -110,8 +111,16 @@ public class Grid {
 	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
 		Shape curShapeRotated = curShape.rotate();
-		if(shapeCanMoveTo(curShapeRotated, curX, curY))
+		
+		if(shapeCanMoveTo(curShapeRotated, curX, curY)){
+			curShape.rotate();
+			curShape.rotate();
+			curShape.rotate();
 			return true;
+		}
+		curShape.rotate();
+		curShape.rotate();
+		curShape.rotate();
 		return false;
 	}
 	
@@ -129,24 +138,24 @@ public class Grid {
 	
 	// Deplacements joueur
 	public void moveLeft(){ 
-		if(moveTo(curX-1, curY)){}
-			// Notifier la vue
+		if(moveTo(curX-1, curY))
+			notifyObserver();	// Notifier la vue
 	}
 	
 	public void moveRight(){ 
-		if(moveTo(curX+1, curY)){}
-			// Notifier la vue
+		if(moveTo(curX+1, curY))
+			notifyObserver();	// Notifier la vue
 	}
 	
 	public void moveDown(){ 
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
-			// Notifier la vue
+			notifyObserver();	// Notifier la vue
 		}
 		else{	// Sinon, c'est qu'elle posee
 			removeFullLines();
 			newShape();
-			// Notifier la vue
+			notifyObserver();	// Notifier la vue
 		}
 	}
 	
@@ -156,7 +165,7 @@ public class Grid {
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
-			// Notifier la vue
+			notifyObserver();	// Notifier la vue
 			return;
 		}
 	}
@@ -206,6 +215,32 @@ public class Grid {
 				removeLine(currLine);
 			lineIsFull = true;
 		}
+	} 
+	
+	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
+	@Override
+	public void notifyObserver() {
+		Point coords[] = new Point[20*10];
+		Tetrominoe shapes[] = new Tetrominoe[20*10];
+		
+		for(int i=0; i<height; ++i){
+			for (int j=1; j<=width; ++j){
+				coords[i*width + j -1] = new Point(i+1, j);
+				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
+				System.out.println("Point(" + coords[i*width+j -1].getX() + ", " + coords[i*width+j -1].getY()  + ")");
+				System.out.println("Shape :" + shapes[i*width+j -1]);
+			}
+		}
+		observer.update(coords, shapes);		
 	}
 
+	@Override
+	public void addObserver(GridObserver obs) {
+		this.observer = obs;
+	}
+
+	@Override
+	public void delAllObservers() {
+		this.observer = null;
+	}
 }
