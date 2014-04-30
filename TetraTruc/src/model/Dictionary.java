@@ -13,11 +13,11 @@ public enum Dictionary {
             "eeeeeeeeeeeeeessssssssaaaaaaaaiiiiiiiitttttttnnnnnnnrrrrrrruuuuuullllloooooddddcccpppmmmvvqqfbghjxyzwk"
         );
 	
-        private String path;
+    private String path;
 	private String language;		// Langue du dictionnaire
 	private String freqLetters;		// Fréquence d'apparition des lettres dans la langue du dictionnaire
 	private int nbLines;
-        private Vector<String> content;
+    private Vector<String> content;
         
 	// Constructeur
 	Dictionary(String path, String language, int nbLines, String freqletters){
@@ -63,9 +63,9 @@ public enum Dictionary {
 	// Getters
 	public String getLanguage(){ return language; }
 	public String getFreqLetters(){ return freqLetters; }
-        public String getPath(){ return path; }
-        public int getNbLines(){ return nbLines; }
-        public Vector<String> getContent(){ return content; }
+    public String getPath(){ return path; }
+    public int getNbLines(){ return nbLines; }
+    public Vector<String> getContent(){ return content; }
 
     String FR(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
