@@ -88,7 +88,7 @@ public class Grid2D implements GridObserver{
 		}
 		
 		// ---------- A supprimer plus tard -----------
-			g.setColor(Color.RED);
+			g.setColor(Color.WHITE);
 	
 			//Dessin des lignes verticales
 			int originX = margins;
