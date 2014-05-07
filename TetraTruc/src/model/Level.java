@@ -16,7 +16,7 @@ public class Level {
 	
 	// Getters / Setters
 	public int getLevel(){ return level; }
-	public void setLevel(int l){ level=l; calcSpeed(); }
+	public void setLevel(int l){ level=l; calcSpeed(); calcNbLinesRequired(); }
 	public int getSpeed(){ return speed; }
 	public void incrNbLinesRemoved(int n){ nbLinesRemoved+=n; }		// Incrémente le nombre de lignes détruites
 	
