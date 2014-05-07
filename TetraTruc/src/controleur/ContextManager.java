@@ -34,6 +34,12 @@ public class ContextManager {
 			
 			case 40 : 
 				gameEngine.getBoard().getGrid().moveDown();
+                                // on ajoute des points au joueur
+                                gameEngine.getBoard().getPlayer().setScore(1);
+                                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
+			break;
+			case 32 : 
+				gameEngine.getBoard().getGrid().dropBottom();
 			break;
 		}
 	}
@@ -51,24 +57,24 @@ public class ContextManager {
 	}
 	
 	public void setSoloState(){
-		System.out.println("Menu Solo activé");
+		System.out.println("Menu Solo activÃ©");
 		gameEngine.setState("SOLO_MENU");
 	}
 	
 	public void setMultiState(){
-		System.out.println("Menu Multi activé");
+		System.out.println("Menu Multi activÃ©");
 		gameEngine.setState("MULTI_MENU");
 	}
 	
 	public void setOptionsState(){
-		System.out.println("Options activées");
+		System.out.println("Options activÃ©es");
 		gameEngine.setState("OPTIONS_MENU");
 	}
 	
 	public void setGameState(){
-		System.out.println("Jeu lancé");
+		System.out.println("Jeu lancÃ©");
 
-		//Passage des paramètres de jeu choisis par le joueur (pseudo, difficulté...)
+		//Passage des paramÃ¨tres de jeu choisis par le joueur (pseudo, difficultÃ©...)
 		HashMap<String, String> params = graphicEngine.getGameParams();
 		gameEngine.setGameParams(params);
 		gameEngine.setState("GAME");

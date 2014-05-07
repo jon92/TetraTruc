@@ -17,6 +17,7 @@ public class Grid2D implements GridObserver{
 	private Brick2D[][] grid; 			// Grille de briques
 	private Point[] coords;
 	private Tetrominoe[] shapes;
+	private String[] letters;
 	private Theme theme;
 	
 	// ------- a supprimer plus tard ---------------
@@ -82,12 +83,12 @@ public class Grid2D implements GridObserver{
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins, letters[i]);	// Modifie la couleur de la brique	
 			}
 		}
 		
 		// ---------- A supprimer plus tard -----------
-			g.setColor(Color.RED);
+			g.setColor(Color.WHITE);
 	
 			//Dessin des lignes verticales
 			int originX = margins;
@@ -115,9 +116,10 @@ public class Grid2D implements GridObserver{
 	}
 	
 	@Override
-	public void update(Point[] coords, Tetrominoe[] shapes) {
+	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters) {
 		this.coords = coords;
 		this.shapes = shapes;
+		this.letters = letters;
 		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}
 }

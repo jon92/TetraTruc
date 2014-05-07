@@ -1,8 +1,8 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
 
 public class Brick2D extends JPanel {
@@ -32,14 +32,22 @@ public class Brick2D extends JPanel {
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
 
-	public void draw(Graphics g, Color color, int x, int y, int zero){
+	public void draw(Graphics g, Color color, int x, int y, int zero, String letter){
 		
-		//efface la brique dessin�e au tour d'avant
+		//efface la brique dessinée au tour d'avant
 		g.clearRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
 		
 		g.setColor(color);
 		
-		if(color != null)
+		if(color != null){
 			g.fillRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
+		}
+
+		g.setColor(Color.WHITE);
+		if(letter != null){
+                        Font police = new Font("Helvetica",Font.BOLD, 15);
+                        g.setFont(police);
+			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
+		}
 	}
 }
