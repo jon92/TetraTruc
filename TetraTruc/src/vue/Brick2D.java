@@ -19,6 +19,8 @@ public class Brick2D extends JPanel implements MouseListener {
 		pxlWidth = w;
 		letter = "";
 		color = null;
+                
+		this.addMouseListener(this);
 	}
 	
 	public Brick2D(int h, int w, Color c, String l){
@@ -26,6 +28,8 @@ public class Brick2D extends JPanel implements MouseListener {
 		pxlWidth = w;
 		color = c;
 		letter = l;
+                
+		this.addMouseListener(this);
 	}
 	
 	// Getters / Setters
@@ -55,7 +59,7 @@ public class Brick2D extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+		System.out.println("wazaaaa "+ letter);
     }
 
     @Override
@@ -75,6 +79,6 @@ public class Brick2D extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

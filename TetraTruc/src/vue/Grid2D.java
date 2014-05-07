@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
-
 import model.GridObserver;
 import model.Observer;
 import model.Point;
@@ -117,6 +116,20 @@ public class Grid2D implements GridObserver{
 			}
 	}
 	
+        // retourne la hauteur de la grille
+        public int getHeight(){
+            return height;
+        }
+        
+        // retourne la largeur de la grille
+        public int getWidth(){
+            return width;
+        }
+        
+        public Brick2D[][] getGrid(){
+            return grid;
+        }
+             
 	@Override
 	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters) {
 		this.coords = coords;

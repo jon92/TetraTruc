@@ -31,6 +31,16 @@ public class GamePanel extends JPanel implements BoardObserver{
 		this.score = 0;
 		
 		this.drawBackground();
+                
+                
+		// on ajoute les Bricks au JPanel
+		for(int i=0; i<grid.getHeight(); ++i){
+			for(int j=0; j<grid.getWidth(); ++j){                            
+				this.add(this.grid.getGrid()[i][j]);
+			}
+		}
+                
+                
 	}
 	
 	public JPanel getPanel(){
