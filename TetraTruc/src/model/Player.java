@@ -14,12 +14,16 @@ public class Player {
 		return this.pseudo;
 	}
         
-        public int getScore(){
-            return score;
-        }
-        
-        // Ajoute au score le nombre entier passé en paramètre
-        public void setScore(int addToScore){
-            score = score + addToScore;
-        }
+    public int getScore(){
+        return score;
+    }
+    
+    public void setScore(int value){
+        score = value;
+    }
+    
+    // Ajoute au score le nombre entier passé en paramètre
+    public void incrementScore(int value){
+    	score += value;
+	}
 }

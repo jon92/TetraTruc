@@ -2,7 +2,9 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 import model.GridObserver;
+import model.Observer;
 import model.Point;
 import model.Tetrominoe;
 
@@ -24,7 +26,8 @@ public class Grid2D implements GridObserver{
 	private String[] nextLetters;
 	
 	// ------- a supprimer plus tard ---------------
-		private final int margins = 30;
+		private final int marginLeft = 46;
+		private final int marginTop = 82;
 		private final int squareSize = 20;
 		private int squareNumberW = 10;
 		private int squareNumberH = 20;
@@ -88,7 +91,7 @@ public class Grid2D implements GridObserver{
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins, letters[i]);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, letters[i]);	// Modifie la couleur de la brique	
 			}
 		}
 		
@@ -98,28 +101,30 @@ public class Grid2D implements GridObserver{
 		}
 		
 		// ---------- A supprimer plus tard -----------
-			g.setColor(Color.WHITE);
+			g.setColor(new Color(30, 30, 30));
 	
 			//Dessin des lignes verticales
-			int originX = margins;
-			int originY = margins;
-			int destX = margins;
-			int destY = this.squareNumberH * this.squareSize + margins-1;
+			int originX = marginLeft;
+			int originY = marginTop;
+			int destX = marginLeft;
+			int destY = this.squareNumberH * this.squareSize + marginTop-1;
 	
 			for(int i=0; i <= this.squareNumberW; ++i){
-			    g.drawLine(originX, originY, destX, destY);
+				if(i>0 && i<this.squareNumberW)
+					g.drawLine(originX, originY, destX, destY);
 			    originX += this.squareSize;
 			    destX += this.squareSize;
 			}
 	
 			//Dessin des lignes horizontales
-			originX = margins;
-			originY = margins;
-			destX = this.squareNumberW * this.squareSize + margins-1;
-			destY = margins;
+			originX = marginLeft;
+			originY = marginTop;
+			destX = this.squareNumberW * this.squareSize + marginLeft-1;
+			destY = marginTop;
 	
 			for(int i=0; i <= this.squareNumberH; ++i){
-			    g.drawLine(originX, originY, destX, destY);
+				if(i>0 && i< this.squareNumberH)
+					g.drawLine(originX, originY, destX, destY);
 			    originY += this.squareSize;
 			    destY += this.squareSize;
 			}

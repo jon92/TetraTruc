@@ -1,7 +1,10 @@
 package vue;
 
 import java.util.HashMap;
+
 import model.Observer;
+import model.Point;
+import model.Tetrominoe;
 
 public class GraphicEngine implements Observer {
 	private Window window;
@@ -49,10 +52,14 @@ public class GraphicEngine implements Observer {
 	public void goToOptionsMenu(){
 	}
 	public void goToGame(){
-		this.window.getPanel().removeAll();
+		this.window.getContentPane().removeAll();
 		this.window.repaint();
 		this.gamePanel = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
-		this.window.setPanel(this.gamePanel);
+		this.window.setContentPane(this.gamePanel);
+		this.gamePanel.setPanel(this.window.getPanel());
+		this.window.getContentPane().revalidate();
+		this.window.repaint();
+		this.window.setVisible(true);
 	}
 
 	@Override

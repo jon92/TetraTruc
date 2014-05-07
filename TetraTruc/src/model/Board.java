@@ -5,12 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class Board implements ActionListener {
+public class Board implements ActionListener, BoardObservable {
 	private final Player player;
 	private final int difficulty;
 	private Grid grid;
 	private Timer timer;
 	private Level level;
+	private BoardObserver observer;
 	
 	// Constructeur
 	public Board(Player player, String difficulty, String chosenTheme){
@@ -48,6 +49,26 @@ public class Board implements ActionListener {
 		level.incrNbLinesRemoved(grid.moveDown());
 		level.up();
 		timer.setDelay(level.getSpeed());
+	}
+	
+	public void incrementScore(int value){
+		this.getPlayer().incrementScore(value);
+		this.updateObserver();
+	}
+
+	@Override
+	public void updateObserver() {
+		this.observer.update(this.player.getScore());
+	}
+
+	@Override
+	public void addObserver(BoardObserver obs) {
+		this.observer = obs;	
+	}
+
+	@Override
+	public void delAllObservers() {
+		this.observer = null;
 	}
 	
 }
