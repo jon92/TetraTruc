@@ -210,6 +210,11 @@ public class Grid implements GridObservable {
 				grid[currLine][i] = grid[currLine-1][i];
 			}
 		}
+		
+		// Traitement spécifique à la premiere ligne
+		for(int i=0; i<width; ++i){
+			grid[0][i] = new Shape();
+		}
 	}
 	
 	// Supprime toutes les lignes pleines
