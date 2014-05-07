@@ -45,7 +45,9 @@ public class Board implements ActionListener {
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {
-		grid.moveDown();
+		level.incrNbLinesRemoved(grid.moveDown());
+		level.up();
+		timer.setDelay(level.getSpeed());
 	}
 	
 }

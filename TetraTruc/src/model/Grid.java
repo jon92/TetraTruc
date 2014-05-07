@@ -153,15 +153,18 @@ public class Grid implements GridObservable {
 			notifyObserver();	// Notifier la vue
 	}
 	
-	public void moveDown(){ 
+	// Retourne le nombre de lignes détruites
+	public int moveDown(){ 
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
 			notifyObserver();	// Notifier la vue
+			return 0;
 		}
 		else{	// Sinon, c'est qu'elle posee
-			removeFullLines();
+			int fullLines = removeFullLines();
 			newShape();
 			notifyObserver();	// Notifier la vue
+			return fullLines;
 		}
 	}
 	
@@ -210,8 +213,9 @@ public class Grid implements GridObservable {
 	}
 	
 	// Supprime toutes les lignes pleines
-	public void removeFullLines(){
+	public int removeFullLines(){
 		boolean lineIsFull = true;
+		int nbFullLines = 0;
 		// Parcourir toutes les lignes
 		for(int currLine=0; currLine<height; ++currLine){
 			// Parcourir toutes les cases de la ligne
@@ -222,10 +226,14 @@ public class Grid implements GridObservable {
 			}
 			
 			// Si la ligne est pleine, on la supprime
-			if(lineIsFull)
+			if(lineIsFull){
 				removeLine(currLine);
+				nbFullLines++;
+			}
 			lineIsFull = true;
 		}
+		
+		return nbFullLines;
 	} 
 	
 	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
@@ -264,10 +272,6 @@ public class Grid implements GridObservable {
 						}
 					}
 				}
-				
-				//System.out.println("Point(" + coords[i*width+j -1].getX() + ", " + coords[i*width+j -1].getY()  + ")");
-				//System.out.println("Shape :" + shapes[i*width+j -1]);
-				//System.out.println("Letter :" + letters[i*width+j -1]);
 				
 			}
 		}
