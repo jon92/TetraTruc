@@ -37,10 +37,12 @@ public class ContextManager {
                 // on ajoute des points au joueur
                 //gameEngine.getBoard().getPlayer().setScore(1);
 				gameEngine.getBoard().incrementScore(1);
-                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
+                                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
 			break;
 			case 32 : 
 				gameEngine.getBoard().getGrid().dropBottom();
+                                gameEngine.getBoard().incrementScore(5);
+                                System.out.println("score + 5 descente totale : "+ gameEngine.getBoard().getPlayer().getScore());
 			break;
 		}
 	}
