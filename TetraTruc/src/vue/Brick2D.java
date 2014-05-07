@@ -32,22 +32,25 @@ public class Brick2D extends JPanel {
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
 
-	public void draw(Graphics g, Color color, int x, int y, int zero, String letter){
+	public void draw(Graphics g, Color color, int x, int y, int zeroX, int zeroY, String letter){
 		
 		//efface la brique dessinée au tour d'avant
-		g.clearRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
+		g.clearRect(zeroX + (y-1)*pxlWidth, zeroY + (x-1)*pxlHeight, pxlWidth, pxlHeight);
 		
 		g.setColor(color);
 		
 		if(color != null){
-			g.fillRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
+			g.fillRect(zeroX + (y-1)*pxlWidth, zeroY + (x-1)*pxlHeight, pxlWidth, pxlHeight);
+		}else{
+			g.setColor(new Color(25, 25, 25));
+			g.fillRect(zeroX + (y-1)*pxlWidth, zeroY + (x-1)*pxlHeight, pxlWidth, pxlHeight);
 		}
 
 		g.setColor(Color.WHITE);
 		if(letter != null){
             Font police = new Font("Helvetica",Font.BOLD, 15);
             g.setFont(police);
-			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
+			g.drawString(letter.toUpperCase(), (int)(zeroX + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zeroY + (x-1)*pxlHeight + pxlHeight*0.8) );
 		}
 	}
 }
