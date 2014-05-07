@@ -253,10 +253,6 @@ public class Grid implements GridObservable {
 				if(curShape != null){
 					for(int l=0; l<4; ++l){
 						if(curY + curShape.getBrick(l).getPoint().getY() == i && curX + curShape.getBrick(l).getPoint().getX() == j-1){
-							System.out.println("------------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&----------------------" + curShape.getBrick(l).getLetter());
-							//letters[i*width + j -1] = curShape.getBrick(l).getLetter();
-							System.out.println("i :" + i);
-							System.out.println("j-1 :" + (j-1));
 							for(int m=0; m<4; ++m){
 								grid[i][j-1].getBrick(m).setLetter(curShape.getBrick(l).getLetter());
 							}
