@@ -3,9 +3,9 @@ package vue;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.JPanel;
 
-public class Brick2D extends JPanel {
+
+public class Brick2D{
 	private static final long serialVersionUID = 1L;
 	private Color color;
 	private String letter;
