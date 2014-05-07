@@ -4,6 +4,7 @@ public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
 	private Shape curShape;			// Piece en train de tomber
+	private Shape nextShape;		// Pièce qui va venir après
 	private int curX, curY;			// Emplacement de la piece en train de tomber
 	private GridObserver observer;	// Observateur pour la vue
 	
@@ -12,6 +13,7 @@ public class Grid implements GridObservable {
 		this.height = 20;
 		this.width = 10;
 		this.curShape = new Shape();
+		this.nextShape = new Shape();
 		this.grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
 		for(int i=0; i<height; ++i){
@@ -29,6 +31,7 @@ public class Grid implements GridObservable {
 		this.width = w;
 		this.grid = new Shape[height][width];
 		this.curShape = new Shape();
+		this.nextShape = new Shape();
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
@@ -43,6 +46,7 @@ public class Grid implements GridObservable {
 	
 	// Getters/Setters
 	public Shape getCurShape(){ return curShape; }
+	public Shape getNextShape(){ return nextShape; }
 	public int getCurX(){ return curX; }
 	public int getCurY(){ return curY; }
 	public int getHeight(){ return height; }
@@ -53,8 +57,11 @@ public class Grid implements GridObservable {
 	
 	// Generer une nouvelle piece
 	public void newShape(){
-		this.curShape = new Shape();
-		this.curShape.randomShape();
+		if(nextShape.getTetrominoe() == Tetrominoe.No_Shape)
+			this.nextShape.randomShape();
+		this.curShape = nextShape;
+		this.nextShape = new Shape();
+		this.nextShape.randomShape();
 		this.curX = this.width/2 - 1;
 		this.curY = -curShape.minY();
 		putCurShape();
@@ -239,9 +246,12 @@ public class Grid implements GridObservable {
 	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
 	@Override
 	public void notifyObserver() {
-		Point coords[] = new Point[20*10];
-		Tetrominoe shapes[] = new Tetrominoe[20*10];
-		String letters[] = new String[20*10];
+		Point coords[] = new Point[height*width];
+		Tetrominoe shapes[] = new Tetrominoe[height*width];
+		String letters[] = new String[height*width];
+		
+		Tetrominoe nextShape[] = new Tetrominoe[4];
+		String nextLetters[] = new String[4];
 		
 		for(int i=0; i<height; ++i){
 			for (int j=1; j<=width; ++j){
@@ -249,12 +259,8 @@ public class Grid implements GridObservable {
 				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
 				
 				for(int z =0; z<4; ++z){
-					//if(grid[i][j-1].getBrick(z) != null){
-					//System.out.println("$$$$$$" + grid[i][j-1].getBrick(z).getLetter());
-					
 					if(grid[i][j-1].getTetrominoe() != Tetrominoe.No_Shape)
 						letters[i*width + j -1] = grid[i][j-1].getBrick(z).getLetter();
-					//}
 				}
 				
 				
@@ -276,7 +282,13 @@ public class Grid implements GridObservable {
 				
 			}
 		}
-		observer.update(coords, shapes, letters);	
+		
+		for(int i=0; i<4; ++i){
+			nextShape[i] = this.nextShape.getTetrominoe();
+			nextLetters[i] = this.nextShape.getBrick(i).getLetter();
+		}
+		
+		observer.update(coords, shapes, letters, nextShape, nextLetters);	
 
 	}
 

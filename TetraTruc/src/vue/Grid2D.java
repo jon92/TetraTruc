@@ -20,6 +20,9 @@ public class Grid2D implements GridObserver{
 	private String[] letters;
 	private Theme theme;
 	
+	private Tetrominoe[] nextShapes;	// Infos concernant la pièce à venir
+	private String[] nextLetters;
+	
 	// ------- a supprimer plus tard ---------------
 		private final int margins = 30;
 		private final int squareSize = 20;
@@ -35,6 +38,7 @@ public class Grid2D implements GridObserver{
 		this.theme = new Theme1();
 		this.coords = null;
 		this.shapes = null;
+		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -56,6 +60,7 @@ public class Grid2D implements GridObserver{
 		this.theme = t;
 		this.coords = null;
 		this.shapes = null;
+		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -78,13 +83,18 @@ public class Grid2D implements GridObserver{
 	}
 	
 	public void draw(Graphics g, int width, int height){
-		
+		// Dessin des briques de la grille
 		if(this.shapes != null && this.coords != null){
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
 				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins, letters[i]);	// Modifie la couleur de la brique	
 			}
+		}
+		
+		// Dessin de la nextShape
+		for(int i=0; i<4; ++i){
+			grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), i, i, margins, nextLetters[i]);	// Modifie la couleur de la brique
 		}
 		
 		// ---------- A supprimer plus tard -----------
@@ -116,10 +126,14 @@ public class Grid2D implements GridObserver{
 	}
 	
 	@Override
-	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters) {
+	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters, Tetrominoe[] nextShapes, String[] nextLetters) {
 		this.coords = coords;
 		this.shapes = shapes;
 		this.letters = letters;
+		
+		this.nextShapes = nextShapes;
+		this.nextLetters = nextLetters;
+		
 		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}
 }
