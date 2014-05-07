@@ -3,9 +3,11 @@ package vue;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
-public class Brick2D extends JPanel {
+public class Brick2D extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	private Color color;
 	private String letter;
@@ -50,4 +52,29 @@ public class Brick2D extends JPanel {
 			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
 		}
 	}
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
