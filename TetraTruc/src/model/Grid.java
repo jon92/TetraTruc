@@ -80,7 +80,6 @@ public class Grid implements GridObservable {
 
 	// Teste si la piece passee en parametres peut se deplacer aux nouvelles coordonnees
 	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
-		clearCurShape();
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Nouvelles coordonnees de la brique
@@ -89,52 +88,45 @@ public class Grid implements GridObservable {
 			
 			// Tester si la case est dans la grille
 			if( x<0 || x>=width || y<0 || y>=height ){
-				putCurShape();
 				return false;
 			}
 			// Tester si la case est libre
 			if(grid[y][x].getTetrominoe() != Tetrominoe.No_Shape){
-				putCurShape();
 				return false;
 			}
 		}
-		putCurShape();
 		return true;
 	}
 	
 	// Teste si la piece courante peut se deplacer aux nouvelles coordonnees
 	private boolean canMoveTo(int newX, int newY){
-		if(shapeCanMoveTo(curShape, newX, newY))
+		clearCurShape();
+		if(shapeCanMoveTo(curShape, newX, newY)){
+			putCurShape();
 			return true;
+		}
+		putCurShape();
 		return false;
 	}
 
 	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
-		
-		for(int i=0; i<4; ++i){
-			System.out.println("avant num" + i + " X " + curShape.getBrick(i).getX() + " Y " + curShape.getBrick(i).getY());
-		}
+		clearCurShape();
 		
 		Shape curShapeRotated = curShape.rotate();
-		
-		for(int i=0; i<4; ++i){
-			System.out.println("apres num" + i + " X " + curShapeRotated.getBrick(i).getX() + " Y " + curShapeRotated.getBrick(i).getY());
-		}
-		for(int i=0; i<4; ++i){
-			System.out.println("modif num" + i + " X " + curShape.getBrick(i).getX() + " Y " + curShape.getBrick(i).getY());
-		}
 		
 		if(shapeCanMoveTo(curShapeRotated, curX, curY)){
 			curShapeRotated.rotate();
 			curShapeRotated.rotate();
 			curShapeRotated.rotate();
 			curShape = curShapeRotated;
+			putCurShape();
 			return true;
 		}
 		curShapeRotated.rotate();
 		curShapeRotated.rotate();
 		curShapeRotated.rotate();
+		putCurShape();
 		return false;
 	}
 	
