@@ -53,6 +53,7 @@ public class Grid implements GridObservable {
 	
 	// Generer une nouvelle piece
 	public void newShape(){
+		this.curShape = new Shape();
 		this.curShape.randomShape();
 		this.curX = this.width/2 - 1;
 		this.curY = -curShape.minY();
@@ -64,7 +65,7 @@ public class Grid implements GridObservable {
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Affecte a� la case occupee par la brique la shape courante
-			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(curShape.getTetrominoe());
+			grid[curY + curShape.getBrick(brick).getY()][curX + curShape.getBrick(brick).getX()].setTetrominoe(curShape.getTetrominoe());
 		}
 	}
 	
@@ -73,7 +74,7 @@ public class Grid implements GridObservable {
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Affecte a la case occupee par la brique la shape courante
-			grid[curY + curShape.getTetrominoe().getBrick(brick).getY()][curX + curShape.getTetrominoe().getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
+			grid[curY + curShape.getBrick(brick).getY()][curX + curShape.getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
 		}
 	}
 
@@ -83,8 +84,8 @@ public class Grid implements GridObservable {
 		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Nouvelles coordonnees de la brique
-			int x = newX + newShape.getTetrominoe().getBrick(brick).getX();
-			int y = newY + newShape.getTetrominoe().getBrick(brick).getY();
+			int x = newX + newShape.getBrick(brick).getX();
+			int y = newY + newShape.getBrick(brick).getY();
 			
 			// Tester si la case est dans la grille
 			if( x<0 || x>=width || y<0 || y>=height ){
@@ -110,9 +111,30 @@ public class Grid implements GridObservable {
 
 	// Teste si la piece courante peut tourner
 	private boolean canRotate(){
+		
+		for(int i=0; i<4; ++i){
+			System.out.println("avant num" + i + " X " + curShape.getBrick(i).getX() + " Y " + curShape.getBrick(i).getY());
+		}
+		
 		Shape curShapeRotated = curShape.rotate();
-		if(shapeCanMoveTo(curShapeRotated, curX, curY))
+		
+		for(int i=0; i<4; ++i){
+			System.out.println("apres num" + i + " X " + curShapeRotated.getBrick(i).getX() + " Y " + curShapeRotated.getBrick(i).getY());
+		}
+		for(int i=0; i<4; ++i){
+			System.out.println("modif num" + i + " X " + curShape.getBrick(i).getX() + " Y " + curShape.getBrick(i).getY());
+		}
+		
+		if(shapeCanMoveTo(curShapeRotated, curX, curY)){
+			curShapeRotated.rotate();
+			curShapeRotated.rotate();
+			curShapeRotated.rotate();
+			curShape = curShapeRotated;
 			return true;
+		}
+		curShapeRotated.rotate();
+		curShapeRotated.rotate();
+		curShapeRotated.rotate();
 		return false;
 	}
 	
@@ -153,13 +175,13 @@ public class Grid implements GridObservable {
 	
 	// Tourner la piece courante
 	public void rotate(){
-		//if(canRotate()){
+		if(canRotate()){
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
 			notifyObserver();	// Notifier la vue
 			return;
-		//}
+		}
 	}
 	
 	// Faire tomber la piece directement tout en bas
@@ -214,16 +236,50 @@ public class Grid implements GridObservable {
 	public void notifyObserver() {
 		Point coords[] = new Point[20*10];
 		Tetrominoe shapes[] = new Tetrominoe[20*10];
+		String letters[] = new String[20*10];
 		
 		for(int i=0; i<height; ++i){
 			for (int j=1; j<=width; ++j){
 				coords[i*width + j -1] = new Point(i+1, j);
 				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
-				System.out.println("Point(" + coords[i*width+j -1].getX() + ", " + coords[i*width+j -1].getY()  + ")");
-				System.out.println("Shape :" + shapes[i*width+j -1]);
+				
+				for(int z =0; z<4; ++z){
+					//if(grid[i][j-1].getBrick(z) != null){
+					//System.out.println("$$$$$$" + grid[i][j-1].getBrick(z).getLetter());
+					
+					if(grid[i][j-1].getTetrominoe() != Tetrominoe.No_Shape)
+						letters[i*width + j -1] = grid[i][j-1].getBrick(z).getLetter();
+					//}
+				}
+				
+				
+				if(curShape != null){
+					for(int l=0; l<4; ++l){
+						if(curY + curShape.getBrick(l).getPoint().getY() == i && curX + curShape.getBrick(l).getPoint().getX() == j-1){
+							System.out.println("------------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&----------------------" + curShape.getBrick(l).getLetter());
+							//letters[i*width + j -1] = curShape.getBrick(l).getLetter();
+							System.out.println("i :" + i);
+							System.out.println("j-1 :" + (j-1));
+							for(int m=0; m<4; ++m){
+								grid[i][j-1].getBrick(m).setLetter(curShape.getBrick(l).getLetter());
+							}
+							letters[i*width + j -1] = grid[i][j-1].getBrick(l).getLetter();
+						}
+						if(letters[i*width + j -1]  == null ){
+							//letters[i*width + j -1] = "*";
+							
+						}
+					}
+				}
+				
+				//System.out.println("Point(" + coords[i*width+j -1].getX() + ", " + coords[i*width+j -1].getY()  + ")");
+				//System.out.println("Shape :" + shapes[i*width+j -1]);
+				//System.out.println("Letter :" + letters[i*width+j -1]);
+				
 			}
 		}
-		observer.update(coords, shapes);		
+		observer.update(coords, shapes, letters);	
+
 	}
 
 	@Override

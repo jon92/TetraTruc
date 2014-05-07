@@ -13,4 +13,13 @@ public class Player {
 	public String getPseudo(){
 		return this.pseudo;
 	}
+        
+        public int getScore(){
+            return score;
+        }
+        
+        // Ajoute au score le nombre entier passé en paramètre
+        public void setScore(int addToScore){
+            score = score + addToScore;
+        }
 }
