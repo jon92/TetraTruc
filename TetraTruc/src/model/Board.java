@@ -11,6 +11,7 @@ public class Board implements ActionListener, BoardObservable {
 	private Grid grid;
 	private Timer timer;
 	private Level level;
+	private BoardObserver observer;
 	
 	// Constructeur
 	public Board(Player player, String difficulty, String chosenTheme){
@@ -49,23 +50,25 @@ public class Board implements ActionListener, BoardObservable {
 		level.up();
 		timer.setDelay(level.getSpeed());
 	}
-
-	@Override
-	public void updateObserver() {
-		// TODO Auto-generated method stub
-		
+	
+	public void incrementScore(int value){
+		this.getPlayer().incrementScore(value);
+		this.updateObserver();
 	}
 
 	@Override
-	public void addObserver(GridObserver obs) {
-		// TODO Auto-generated method stub
-		
+	public void updateObserver() {
+		this.observer.update(this.player.getScore());
+	}
+
+	@Override
+	public void addObserver(BoardObserver obs) {
+		this.observer = obs;	
 	}
 
 	@Override
 	public void delAllObservers() {
-		// TODO Auto-generated method stub
-		
+		this.observer = null;
 	}
 	
 }

@@ -2,6 +2,6 @@ package model;
 
 public interface BoardObservable {
 	public void updateObserver();
-	public void addObserver(GridObserver obs);
+	public void addObserver(BoardObserver obs);
 	public void delAllObservers();
 }

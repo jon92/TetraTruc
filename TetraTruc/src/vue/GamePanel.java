@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,13 +10,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel{
+import model.BoardObserver;
+
+public class GamePanel extends JPanel implements BoardObserver{
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private Grid2D grid;
 	private int width, height;
 	private BufferedImage background;
+	private int score;
 	
 	public GamePanel(JPanel panel, int width, int height){
 		this.panel = panel;
@@ -24,6 +28,7 @@ public class GamePanel extends JPanel{
 		this.width = width;	
 		this.height = height;
 		this.background = null;
+		this.score = 0;
 		
 		this.drawBackground();
 	}
@@ -59,5 +64,17 @@ public class GamePanel extends JPanel{
 	public void paintComponent(Graphics g){
 		g.drawImage(this.background, 0, 0, null);
 	    grid.draw(g, this.width, this.height);
-	}               
+	    
+	    Font police = new Font("Helvetica",Font.BOLD, 15);
+        g.setFont(police);
+		g.drawString(Integer.toString(this.score), 10, 10);
+	
+	}
+
+	@Override
+	public void update(int score) {
+		this.score = score;
+		GraphicEngine.getSingleton().getGamePanel().repaint();
+	}    
+	
 }

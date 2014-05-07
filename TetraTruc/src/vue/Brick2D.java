@@ -45,8 +45,8 @@ public class Brick2D extends JPanel {
 
 		g.setColor(Color.WHITE);
 		if(letter != null){
-                        Font police = new Font("Helvetica",Font.BOLD, 15);
-                        g.setFont(police);
+            Font police = new Font("Helvetica",Font.BOLD, 15);
+            g.setFont(police);
 			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
 		}
 	}

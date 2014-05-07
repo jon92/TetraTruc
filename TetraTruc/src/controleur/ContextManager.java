@@ -34,9 +34,10 @@ public class ContextManager {
 			
 			case 40 : 
 				gameEngine.getBoard().getGrid().moveDown();
-                                // on ajoute des points au joueur
-                                gameEngine.getBoard().getPlayer().setScore(1);
-                                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
+                // on ajoute des points au joueur
+                //gameEngine.getBoard().getPlayer().setScore(1);
+				gameEngine.getBoard().incrementScore(1);
+                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
 			break;
 			case 32 : 
 				gameEngine.getBoard().getGrid().dropBottom();
@@ -80,6 +81,7 @@ public class ContextManager {
 		gameEngine.setState("GAME");
 		gameEngine.initGame();
 		
+		gameEngine.getBoard().addObserver(graphicEngine.getGamePanel());
 		gameEngine.getBoard().getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
 	}
 	
