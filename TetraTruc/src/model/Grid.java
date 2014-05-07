@@ -145,25 +145,25 @@ public class Grid implements GridObservable {
 	// Deplacements joueur
 	public void moveLeft(){ 
 		if(moveTo(curX-1, curY))
-			notifyObserver();	// Notifier la vue
+			updateObserver();	// Notifier la vue
 	}
 	
 	public void moveRight(){ 
 		if(moveTo(curX+1, curY))
-			notifyObserver();	// Notifier la vue
+			updateObserver();	// Notifier la vue
 	}
 	
 	// Retourne le nombre de lignes détruites
 	public int moveDown(){ 
 		// Si la piece peut descendre d'une ligne
 		if(moveTo(curX, curY+1)){
-			notifyObserver();	// Notifier la vue
+			updateObserver();	// Notifier la vue
 			return 0;
 		}
 		else{	// Sinon, c'est qu'elle posee
 			int fullLines = removeFullLines();
 			newShape();
-			notifyObserver();	// Notifier la vue
+			updateObserver();	// Notifier la vue
 			return fullLines;
 		}
 	}
@@ -174,7 +174,7 @@ public class Grid implements GridObservable {
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curShape.rotate();	// Tourne la piece
 			putCurShape();		// Place la piece a son nouvel emplacement
-			notifyObserver();	// Notifier la vue
+			updateObserver();	// Notifier la vue
 			return;
 		}
 	}
@@ -238,7 +238,7 @@ public class Grid implements GridObservable {
 	
 	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
 	@Override
-	public void notifyObserver() {
+	public void updateObserver() {
 		Point coords[] = new Point[20*10];
 		Tetrominoe shapes[] = new Tetrominoe[20*10];
 		String letters[] = new String[20*10];

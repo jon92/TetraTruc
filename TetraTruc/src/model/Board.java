@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class Board implements ActionListener {
+public class Board implements ActionListener, BoardObservable {
 	private final Player player;
 	private final int difficulty;
 	private Grid grid;
@@ -48,6 +48,24 @@ public class Board implements ActionListener {
 		level.incrNbLinesRemoved(grid.moveDown());
 		level.up();
 		timer.setDelay(level.getSpeed());
+	}
+
+	@Override
+	public void updateObserver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addObserver(GridObserver obs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delAllObservers() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

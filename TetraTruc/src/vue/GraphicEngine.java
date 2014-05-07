@@ -1,7 +1,10 @@
 package vue;
 
 import java.util.HashMap;
+
 import model.Observer;
+import model.Point;
+import model.Tetrominoe;
 
 public class GraphicEngine implements Observer {
 	private Window window;
