@@ -97,7 +97,8 @@ public class Grid2D implements GridObserver{
 		
 		// Dessin de la nextShape
 		for(int i=0; i<4; ++i){
-			grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), i, i, marginLeft, marginTop, nextLetters[i]);	// Modifie la couleur de la brique
+			if(this.nextShapes != null)
+				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), i, i, marginLeft, marginTop, nextLetters[i]);	// Modifie la couleur de la brique
 		}
 		
 		// ---------- A supprimer plus tard -----------
