@@ -91,14 +91,54 @@ public class Grid2D implements GridObserver{
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, letters[i]);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, letters[i], 1);	// Modifie la couleur de la brique	
+			}
+		}
+		
+		
+		//pour centrer les nextShapes dans l'affichage
+		int gapX = 0;
+		int gapY = 0;
+		if(this.nextShapes != null){
+			switch(this.nextShapes[0]){
+				case Z_Shape :
+					gapX = 7;
+					gapY = 17;
+					break;
+				case I_Shape:
+					gapX = -1;
+					gapY = 9;
+					break;
+				case J_Shape:
+					gapX = 6;
+					gapY = 2;
+					break;
+				case L_Shape:
+					gapX = 7;
+					gapY = 17;
+					break;
+				case No_Shape:
+					break;
+				case O_Shape:
+					break;
+				case S_Shape:
+					gapX = 6;
+					gapY = 1;
+					break;
+				case T_Shape:
+					gapX = 1;
+					gapY = 8;
+					break;
+				default:
+					break;
+					
 			}
 		}
 		
 		// Dessin de la nextShape
 		for(int i=0; i<4; ++i){
 			if(this.nextShapes != null)
-				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), i, i, marginLeft, marginTop, nextLetters[i]);	// Modifie la couleur de la brique
+				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, nextLetters[i], 0.8f);	// Modifie la couleur de la brique
 		}
 		
 		// ---------- A supprimer plus tard -----------

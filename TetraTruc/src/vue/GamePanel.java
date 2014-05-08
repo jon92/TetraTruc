@@ -67,9 +67,12 @@ public class GamePanel extends JPanel implements BoardObserver{
 		g.drawImage(this.background, 0, 0, null);
 	    grid.draw(g, this.width, this.height);
 	    
+	    
+	    //Dessin du score
+		g.setColor(Color.WHITE);
 	    Font police = new Font("Helvetica",Font.BOLD, 15);
         g.setFont(police);
-		g.drawString(Integer.toString(this.score), 10, 10);
+		g.drawString(Integer.toString(this.score), 74, 38);
 	
 	}
 
