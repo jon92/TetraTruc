@@ -38,7 +38,7 @@ public class Grid2D implements GridObserver{
 		this.width = 10;
 		this.pxlHeight = 400;
 		this.pxlWidth = 200;
-		this.theme = new Theme1();
+		this.theme = new ThemeDefault();
 		this.coords = null;
 		this.shapes = null;
 		this.nextShapes = null;

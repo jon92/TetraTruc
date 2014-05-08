@@ -20,15 +20,17 @@ public class GamePanel extends JPanel implements BoardObserver{
 	private int width, height;
 	private BufferedImage background;
 	private int score;
+	private Theme theme;
 	
 	public GamePanel(JPanel panel, int width, int height){
 		this.panel = panel;
 		this.setBackground(Color.RED);
-		this.grid = new Grid2D();
 		this.width = width;	
 		this.height = height;
 		this.background = null;
 		this.score = 0;
+		this.theme = new ThemeDefault();
+		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
 		this.drawBackground();
 	}
@@ -52,7 +54,7 @@ public class GamePanel extends JPanel implements BoardObserver{
 	private void drawBackground(){
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("media/img/bg.jpg"));
+			img = ImageIO.read(new File(theme.getBackground()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

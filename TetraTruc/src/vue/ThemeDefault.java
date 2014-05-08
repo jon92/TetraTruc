@@ -7,10 +7,10 @@ import model.Tetrominoe;
 
 
 // Theme par defaut
-public class Theme1 extends Theme{
+public class ThemeDefault extends Theme{
 	
-	public Theme1(){
-		this.background = "";
+	public ThemeDefault(){
+		this.background = "media/img/bg.jpg";
 		
 		this.music = "";
 		
