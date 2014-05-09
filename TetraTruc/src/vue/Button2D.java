@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
-public class Button2D extends JButton implements MouseListener{
+public class Button2D extends JButton{
 	
 	private static final long serialVersionUID = 1L;
 	private final String name;
@@ -16,8 +14,6 @@ public class Button2D extends JButton implements MouseListener{
 	public Button2D(String name){
 		super(name);
 		this.name = name;
-		
-		this.addMouseListener(this);
 	}
 	
 	public void paintComponent (Graphics g){
@@ -36,30 +32,5 @@ public class Button2D extends JButton implements MouseListener{
 	
 	public String getName(){
 		return this.name;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		
 	}
 }

@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		g.setColor(Color.WHITE);
 	    Font police = new Font("Helvetica",Font.PLAIN, 15);
         g.setFont(police);
-		g.drawString(Integer.toString(this.score), 74, 38);
+		g.drawString(Integer.toString(this.score), 74, 37);
 		
 		//Dessin du pseudo
 		if(this.pseudo != "")
