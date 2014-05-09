@@ -152,7 +152,7 @@ public class Grid2D implements GridObserver{
 		// Dessin de la nextShape
 		for(int i=0; i<4; ++i){
 			if(this.nextShapes != null)
-				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, 0.8f);	// Modifie la couleur de la brique
+				nextBricks[i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, 0.8f);	// Modifie la couleur de la brique
 		}
 		
 		// ---------- A supprimer plus tard -----------
