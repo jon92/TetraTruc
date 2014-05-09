@@ -70,4 +70,34 @@ public enum Dictionary {
     String FR(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    // Trouver un mot dans le dictionnaire.
+    // Paramètres : le mot qu'on cherche, 0 , taille du dico (nb de lignes) --> dico.getNbLines()
+    public boolean containsWord(String word, int begin, int end){
+        // si begin > end, le mot n'existe pas
+        if (begin > end){
+            return false;
+        }
+        
+        int middle = (begin + end) / 2;
+        String wordMiddleDictionary = this.getContent().get(middle);
+        
+        int compareWord = word.compareTo(wordMiddleDictionary);
+        
+        // si c'est le même mot, il est dans le dico
+        if (compareWord == 0){
+            return true;
+        }
+        // si le mot est + grand, on vérifie la moitié supérieure
+        else if (compareWord < 0){
+            return this.containsWord(word, begin, (middle - 1));
+        }
+        // si le mot est + petit, on vérifie la moitié inférieure
+        else{
+            return this.containsWord(word, (middle + 1), end);  
+        }
+    }
+    
+    
 }
