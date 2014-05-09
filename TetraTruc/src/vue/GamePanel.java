@@ -87,8 +87,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int line = (e.getY()-grid.getMarginTop()) / grid.getSquareSize();
-		int col = (e.getX() - grid.getMarginLeft()) / grid.getSquareSize();
+		int line = (e.getY()-grid.getOriginGridTop()) / grid.getSquareSize();
+		int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
 		
 		// Test si on clique en dehors de la grille
 		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth())
