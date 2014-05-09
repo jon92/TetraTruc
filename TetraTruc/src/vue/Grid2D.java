@@ -126,8 +126,14 @@ public class Grid2D implements GridObserver{
             return width;
         }
         
+        // retourne le tableau de Brick2D
         public Brick2D[][] getGrid(){
             return grid;
+        }
+        
+        // retourne coords
+        public Point[] getCoords(){
+            return coords;
         }
              
 	@Override

@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
-public class Brick2D extends JPanel implements MouseListener {
+public class Brick2D /*extends JPanel implements MouseListener*/ {
 	private static final long serialVersionUID = 1L;
 	private Color color;
 	private String letter;
@@ -18,9 +18,8 @@ public class Brick2D extends JPanel implements MouseListener {
 		pxlHeight = h;
 		pxlWidth = w;
 		letter = "";
-		color = null;
-                
-		this.addMouseListener(this);
+		color = null;                
+		//this.addMouseListener(this);
 	}
 	
 	public Brick2D(int h, int w, Color c, String l){
@@ -29,7 +28,7 @@ public class Brick2D extends JPanel implements MouseListener {
 		color = c;
 		letter = l;
                 
-		this.addMouseListener(this);
+		//this.addMouseListener(this);
 	}
 	
 	// Getters / Setters
@@ -56,7 +55,7 @@ public class Brick2D extends JPanel implements MouseListener {
 			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
 		}
 	}
-
+/*
     @Override
     public void mouseClicked(MouseEvent e) {
 		System.out.println("wazaaaa "+ letter);
@@ -80,5 +79,5 @@ public class Brick2D extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
-    
+    */
 }
