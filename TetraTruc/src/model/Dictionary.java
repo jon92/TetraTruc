@@ -100,4 +100,25 @@ public enum Dictionary {
     }
     
     
+    // Chercher s'il existe un mot commençant par les caractères passés en paramètres
+    public boolean beginningExists(String word){
+    	int begin=0;
+    	int end=1;
+    	String letterToCheck = word.substring(begin, end);
+    	
+    	// On parcourt tout le dictionnaire
+    	for(int dicoLine=0; dicoLine<=nbLines; ++dicoLine){
+    		// Si on trouve dans le dictionnaire un mot qui commence par le mot qu'on est en train de tester, on peut passer à la lettre suivante
+    		while( letterToCheck.equalsIgnoreCase(content.get(dicoLine).substring(begin, end)) ){
+    			begin++;
+    			end++;
+    			if(begin >= word.length()){
+    				return true;
+    			}
+    			letterToCheck = word.substring(begin, end);
+    		}
+    	}
+    	return false;
+    }
+    
 }
