@@ -59,7 +59,7 @@ public class Board implements ActionListener, BoardObservable {
 
 	@Override
 	public void updateObserver() {
-		this.observer.update(this.player.getScore(), this.level.getLevel());
+		this.observer.update(this.player.getScore(), this.level.getLevel(), this.player.getPseudo());
 	}
 
 	@Override
