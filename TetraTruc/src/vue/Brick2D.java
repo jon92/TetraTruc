@@ -37,22 +37,25 @@ public class Brick2D /*extends JPanel implements MouseListener*/ {
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
 
-	public void draw(Graphics g, Color color, int x, int y, int zero, String letter){
+	public void draw(Graphics g, Color color, int x, int y, int zeroX, int zeroY, String letter, float sizeCoeff){
 		
 		//efface la brique dessinée au tour d'avant
-		g.clearRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
-		
+		g.clearRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff), (int)(zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
+			
 		g.setColor(color);
 		
 		if(color != null){
-			g.fillRect(zero + (y-1)*pxlWidth, zero + (x-1)*pxlHeight, pxlWidth, pxlHeight);
+			g.fillRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff),(int)( zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
+		}else{
+			g.setColor(new Color(25, 25, 25));
+			g.fillRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff), (int)(zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
 		}
 
 		g.setColor(Color.WHITE);
 		if(letter != null){
-            Font police = new Font("Helvetica",Font.BOLD, 15);
+            Font police = new Font("Helvetica",Font.BOLD, (int)(15*sizeCoeff));
             g.setFont(police);
-			g.drawString(letter.toUpperCase(), (int)(zero + (y-1)*pxlWidth + pxlWidth*0.2), (int)(zero + (x-1)*pxlHeight + pxlHeight*0.8) );
+			g.drawString(letter.toUpperCase(), (int)(zeroX + (y-1)*pxlWidth*sizeCoeff + pxlWidth*0.2*sizeCoeff), (int)(zeroY + (x-1)*pxlHeight*sizeCoeff + pxlHeight*sizeCoeff*0.8) );
 		}
 	}
 /*

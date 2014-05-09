@@ -21,8 +21,12 @@ public class Grid2D implements GridObserver{
 	private String[] letters;
 	private Theme theme;
 	
+	private Tetrominoe[] nextShapes;	// Infos concernant la pièce à venir
+	private String[] nextLetters;
+	
 	// ------- a supprimer plus tard ---------------
-		private final int margins = 30;
+		private final int marginLeft = 46;
+		private final int marginTop = 82;
 		private final int squareSize = 20;
 		private int squareNumberW = 10;
 		private int squareNumberH = 20;
@@ -33,9 +37,10 @@ public class Grid2D implements GridObserver{
 		this.width = 10;
 		this.pxlHeight = 400;
 		this.pxlWidth = 200;
-		this.theme = new Theme1();
+		this.theme = new ThemeDefault();
 		this.coords = null;
 		this.shapes = null;
+		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -57,6 +62,7 @@ public class Grid2D implements GridObserver{
 		this.theme = t;
 		this.coords = null;
 		this.shapes = null;
+		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		
@@ -79,38 +85,86 @@ public class Grid2D implements GridObserver{
 	}
 	
 	public void draw(Graphics g, int width, int height){
-		
+		// Dessin des briques de la grille
 		if(this.shapes != null && this.coords != null){
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, margins, letters[i]);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, letters[i], 1);	// Modifie la couleur de la brique	
 			}
 		}
 		
+		
+		//pour centrer les nextShapes dans l'affichage
+		int gapX = 0;
+		int gapY = 0;
+		if(this.nextShapes != null){
+			switch(this.nextShapes[0]){
+				case Z_Shape :
+					gapX = 7;
+					gapY = 17;
+					break;
+				case I_Shape:
+					gapX = -1;
+					gapY = 9;
+					break;
+				case J_Shape:
+					gapX = 6;
+					gapY = 2;
+					break;
+				case L_Shape:
+					gapX = 7;
+					gapY = 17;
+					break;
+				case No_Shape:
+					break;
+				case O_Shape:
+					break;
+				case S_Shape:
+					gapX = 6;
+					gapY = 1;
+					break;
+				case T_Shape:
+					gapX = 1;
+					gapY = 8;
+					break;
+				default:
+					break;
+					
+			}
+		}
+		
+		// Dessin de la nextShape
+		for(int i=0; i<4; ++i){
+			if(this.nextShapes != null)
+				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, nextLetters[i], 0.8f);	// Modifie la couleur de la brique
+		}
+		
 		// ---------- A supprimer plus tard -----------
-			g.setColor(Color.WHITE);
+			g.setColor(new Color(30, 30, 30));
 	
 			//Dessin des lignes verticales
-			int originX = margins;
-			int originY = margins;
-			int destX = margins;
-			int destY = this.squareNumberH * this.squareSize + margins-1;
+			int originX = marginLeft;
+			int originY = marginTop;
+			int destX = marginLeft;
+			int destY = this.squareNumberH * this.squareSize + marginTop-1;
 	
 			for(int i=0; i <= this.squareNumberW; ++i){
-			    g.drawLine(originX, originY, destX, destY);
+				if(i>0 && i<this.squareNumberW)
+					g.drawLine(originX, originY, destX, destY);
 			    originX += this.squareSize;
 			    destX += this.squareSize;
 			}
 	
 			//Dessin des lignes horizontales
-			originX = margins;
-			originY = margins;
-			destX = this.squareNumberW * this.squareSize + margins-1;
-			destY = margins;
+			originX = marginLeft;
+			originY = marginTop;
+			destX = this.squareNumberW * this.squareSize + marginLeft-1;
+			destY = marginTop;
 	
 			for(int i=0; i <= this.squareNumberH; ++i){
-			    g.drawLine(originX, originY, destX, destY);
+				if(i>0 && i< this.squareNumberH)
+					g.drawLine(originX, originY, destX, destY);
 			    originY += this.squareSize;
 			    destY += this.squareSize;
 			}
@@ -137,10 +191,14 @@ public class Grid2D implements GridObserver{
         }
              
 	@Override
-	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters) {
+	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters, Tetrominoe[] nextShapes, String[] nextLetters) {
 		this.coords = coords;
 		this.shapes = shapes;
 		this.letters = letters;
+		
+		this.nextShapes = nextShapes;
+		this.nextLetters = nextLetters;
+		
 		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}
 }

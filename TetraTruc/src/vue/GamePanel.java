@@ -23,15 +23,17 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener{
 	private int width, height;
 	private BufferedImage background;
 	private int score;
+	private Theme theme;
 	
 	public GamePanel(JPanel panel, int width, int height){
 		this.panel = panel;
 		this.setBackground(Color.RED);
-		this.grid = new Grid2D();
 		this.width = width;	
 		this.height = height;
 		this.background = null;
 		this.score = 0;
+		this.theme = new ThemeDefault();
+		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
 		this.drawBackground();
                 
@@ -69,7 +71,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener{
 	private void drawBackground(){
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("media/img/bg.jpg"));
+			img = ImageIO.read(new File(theme.getBackground()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,9 +84,12 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener{
 		g.drawImage(this.background, 0, 0, null);
 	    grid.draw(g, this.width, this.height);
 	    
+	    
+	    //Dessin du score
+		g.setColor(Color.WHITE);
 	    Font police = new Font("Helvetica",Font.BOLD, 15);
         g.setFont(police);
-		g.drawString(Integer.toString(this.score), 10, 10);
+		g.drawString(Integer.toString(this.score), 74, 38);
 	
 	}
 
