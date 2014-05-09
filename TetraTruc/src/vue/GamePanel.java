@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private int width, height;
 	private BufferedImage background;
 	private int score;
+	private int level;
 	private Theme theme;
 	
 	public GamePanel(JPanel panel, int width, int height){
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.height = height;
 		this.background = null;
 		this.score = 0;
+		this.level = 1;
 		this.theme = new ThemeDefault();
 		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
@@ -76,12 +78,17 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	    Font police = new Font("Helvetica",Font.BOLD, 15);
         g.setFont(police);
 		g.drawString(Integer.toString(this.score), 74, 38);
+		
+		 //Dessin du level
+		g.setColor(new Color(16, 77, 91));
+		g.drawString(Integer.toString(this.level), 169, 525);
 	
 	}
 
 	@Override
-	public void update(int score) {
+	public void update(int score, int level) {
 		this.score = score;
+		this.level = level;
 		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}
 

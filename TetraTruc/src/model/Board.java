@@ -49,6 +49,7 @@ public class Board implements ActionListener, BoardObservable {
 		level.incrNbLinesRemoved(grid.moveDown());
 		level.up();
 		timer.setDelay(level.getSpeed());
+		this.updateObserver();
 	}
 	
 	public void incrementScore(int value){
@@ -58,7 +59,7 @@ public class Board implements ActionListener, BoardObservable {
 
 	@Override
 	public void updateObserver() {
-		this.observer.update(this.player.getScore());
+		this.observer.update(this.player.getScore(), this.level.getLevel());
 	}
 
 	@Override
