@@ -69,7 +69,6 @@ public class Grid implements GridObservable {
 	
 	// Remplit les cases de la grille concernees par la piece actuelle
 	private void putCurShape(){
-		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Affecte a� la case occupee par la brique la shape courante
 			grid[curY + curShape.getBrick(brick).getY()][curX + curShape.getBrick(brick).getX()].setTetrominoe(curShape.getTetrominoe());
@@ -78,7 +77,6 @@ public class Grid implements GridObservable {
 	
 	// Vide les cases de la grille occupees par la piece actuelle
 	private void clearCurShape(){
-		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Affecte a la case occupee par la brique la shape courante
 			grid[curY + curShape.getBrick(brick).getY()][curX + curShape.getBrick(brick).getX()].setTetrominoe(Tetrominoe.No_Shape);
@@ -87,7 +85,6 @@ public class Grid implements GridObservable {
 
 	// Teste si la piece passee en parametres peut se deplacer aux nouvelles coordonnees
 	private boolean shapeCanMoveTo(Shape newShape, int newX, int newY){
-		// Parcourir les 4 briques du tetrominoe
 		for(int brick=0; brick<4; ++brick){
 			// Nouvelles coordonnees de la brique
 			int x = newX + newShape.getBrick(brick).getX();
@@ -258,12 +255,13 @@ public class Grid implements GridObservable {
 				coords[i*width + j -1] = new Point(i+1, j);
 				shapes[i*width + j -1] = grid[i][j-1].getTetrominoe();
 				
+				
+				//Creation du tableau de lettres 
 				for(int z =0; z<4; ++z){
 					if(grid[i][j-1].getTetrominoe() != Tetrominoe.No_Shape)
 						letters[i*width + j -1] = grid[i][j-1].getBrick(z).getLetter();
 				}
-				
-				
+		
 				if(curShape != null){
 					for(int l=0; l<4; ++l){
 						if(curY + curShape.getBrick(l).getPoint().getY() == i && curX + curShape.getBrick(l).getPoint().getX() == j-1){
@@ -271,10 +269,6 @@ public class Grid implements GridObservable {
 								grid[i][j-1].getBrick(m).setLetter(curShape.getBrick(l).getLetter());
 							}
 							letters[i*width + j -1] = grid[i][j-1].getBrick(l).getLetter();
-						}
-						if(letters[i*width + j -1]  == null ){
-							//letters[i*width + j -1] = "*";
-							
 						}
 					}
 				}

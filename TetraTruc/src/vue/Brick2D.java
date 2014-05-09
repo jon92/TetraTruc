@@ -12,16 +12,16 @@ public class Brick2D extends JPanel {
 	private int pxlWidth, pxlHeight;		// Taille en pixels de la brique
 	
 	// Constructeur par défaut
-	public Brick2D(int h, int w){
-		pxlHeight = h;
-		pxlWidth = w;
+	public Brick2D(int length){
+		pxlHeight = length;
+		pxlWidth = length;
 		letter = "";
 		color = null;
 	}
 	
-	public Brick2D(int h, int w, Color c, String l){
-		pxlHeight = h;
-		pxlWidth = w;
+	public Brick2D(int length, Color c, String l){
+		pxlHeight = length;
+		pxlWidth = length;
 		color = c;
 		letter = l;
 	}
