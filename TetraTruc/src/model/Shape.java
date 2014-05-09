@@ -41,8 +41,10 @@ public class Shape {
         Tetrominoe[] values = Tetrominoe.values(); 
         pieceShape = values[z];
         
+        
         for(int i=0; i<4; ++i){
-			this.bricks[i].setPoint(pieceShape.getPoint(i));
+			this.bricks[i].getPoint().setX((pieceShape.getPoint(i).getX()));
+			this.bricks[i].getPoint().setY((pieceShape.getPoint(i).getY()));
 		}
         
         this.generateRandomLetter();
