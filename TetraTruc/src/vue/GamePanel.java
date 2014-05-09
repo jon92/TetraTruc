@@ -3,6 +3,8 @@ package vue;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 
 import model.BoardObserver;
 
-public class GamePanel extends JPanel implements BoardObserver{
+public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -33,6 +35,7 @@ public class GamePanel extends JPanel implements BoardObserver{
 		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
 		this.drawBackground();
+		this.addMouseListener(this);
 	}
 	
 	public JPanel getPanel(){
@@ -80,6 +83,47 @@ public class GamePanel extends JPanel implements BoardObserver{
 	public void update(int score) {
 		this.score = score;
 		GraphicEngine.getSingleton().getGamePanel().repaint();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int line = (e.getY()-grid.getMarginTop()) / grid.getSquareSize();
+		int col = (e.getX() - grid.getMarginLeft()) / grid.getSquareSize();
+		
+		// Test si on clique en dehors de la grille
+		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth())
+			return;
+		
+		String letter = grid.getBrick(line, col).getLetter();
+		// Test si la case est vide
+		if(letter == null)
+			return;
+		
+		System.out.println(letter);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}    
 	
 }

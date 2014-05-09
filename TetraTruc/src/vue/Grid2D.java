@@ -19,11 +19,10 @@ public class Grid2D implements GridObserver{
 	private Brick2D[][] grid; 			// Grille de briques
 	private Point[] coords;
 	private Tetrominoe[] shapes;
-	private String[] letters;
 	private Theme theme;
 	
 	private Tetrominoe[] nextShapes;	// Infos concernant la pièce à venir
-	private String[] nextLetters;
+	private Brick2D[] nextBricks;
 	
 	// ------- a supprimer plus tard ---------------
 		private final int marginLeft = 46;
@@ -44,12 +43,15 @@ public class Grid2D implements GridObserver{
 		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
-		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
 				this.grid[i][j] = new Brick2D(pxlHeight/height, pxlWidth/width);
 			}
 		}
+		
+		this.nextBricks = new Brick2D[4];
+		for(int i=0; i<4; ++i)
+			this.nextBricks[i] = new Brick2D(pxlHeight/height, pxlWidth/width);
 		
 		clearGrid();	// Initialisation de la grille vide
 	}
@@ -66,15 +68,27 @@ public class Grid2D implements GridObserver{
 		this.nextShapes = null;
 		
 		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
-		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
 				this.grid[i][j] = new Brick2D(pxlHeight/height, pxlWidth/width);
 			}
 		}
 		
+		this.nextBricks = new Brick2D[4];
+		for(int i=0; i<4; ++i)
+			this.nextBricks[i] = new Brick2D(pxlHeight/height, pxlWidth/width);
+		
+		
 		clearGrid();	// Initialisation de la grille vide
 	}
+	
+	// Getters / Setters
+	public Brick2D getBrick(int line, int col){ return grid[line][col]; }
+	public int getMarginLeft(){ return marginLeft; }
+	public int getMarginTop(){ return marginTop; }
+	public int getSquareSize(){ return squareSize; }
+	public int getWidth(){ return width; }
+	public int getHeight(){ return height; }
 
 	// Nettoyage de la grille
 	public void clearGrid(){
@@ -91,7 +105,7 @@ public class Grid2D implements GridObserver{
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, letters[i], 1);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, marginLeft, marginTop, 1);	// Modifie la couleur de la brique	
 			}
 		}
 		
@@ -138,7 +152,7 @@ public class Grid2D implements GridObserver{
 		// Dessin de la nextShape
 		for(int i=0; i<4; ++i){
 			if(this.nextShapes != null)
-				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, nextLetters[i], 0.8f);	// Modifie la couleur de la brique
+				grid[i][i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + gapX, 106 + gapY, 0.8f);	// Modifie la couleur de la brique
 		}
 		
 		// ---------- A supprimer plus tard -----------
@@ -175,10 +189,16 @@ public class Grid2D implements GridObserver{
 	public void update(Point[] coords, Tetrominoe[] shapes, String[] letters, Tetrominoe[] nextShapes, String[] nextLetters) {
 		this.coords = coords;
 		this.shapes = shapes;
-		this.letters = letters;
+		for(int i=0; i<height; ++i){
+			for(int j=0; j<width; ++j){
+				grid[i][j].setLetter(letters[i*width+j]);
+			}
+		}
 		
 		this.nextShapes = nextShapes;
-		this.nextLetters = nextLetters;
+		for(int i=0; i<4; ++i){
+			nextBricks[i].setLetter(nextLetters[i]);
+		}
 		
 		GraphicEngine.getSingleton().getGamePanel().repaint();
 	}

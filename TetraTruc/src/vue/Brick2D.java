@@ -32,7 +32,7 @@ public class Brick2D extends JPanel {
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
 
-	public void draw(Graphics g, Color color, int x, int y, int zeroX, int zeroY, String letter, float sizeCoeff){
+	public void draw(Graphics g, Color color, int x, int y, int zeroX, int zeroY, float sizeCoeff){
 		
 		//efface la brique dessinée au tour d'avant
 		g.clearRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff), (int)(zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
