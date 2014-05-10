@@ -2,7 +2,10 @@ package controleur;
 
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import vue.GraphicEngine;
+import vue.NoAvailablePrint;
 import model.GameEngine;
 
 public class ContextManager {
@@ -72,6 +75,10 @@ public class ContextManager {
 	public void setOptionsState(){
 		System.out.println("Options activées");
 		gameEngine.setState("OPTIONS_MENU");
+		
+		NoAvailablePrint error = new NoAvailablePrint();
+		error.alertNoAvailable();
+		
 	}
 	
 	public void setGameState(){
