@@ -19,13 +19,17 @@ public class Board implements ActionListener, BoardObservable {
 		this.player = player;
 		
 		// niveau de difficulte
-		if(difficulty.equals("Facile"))
-			this.difficulty = 1;
-		else if(difficulty.equals("Difficile"))
-			this.difficulty = 3;
-		else
-			this.difficulty = 2;
-
+		if(difficulty != null){
+			if(difficulty.equals("Facile"))
+				this.difficulty = 1;
+			else if(difficulty.equals("Difficile"))
+				this.difficulty = 3;
+			else
+				this.difficulty = 2;
+		}else{
+			this.difficulty = 0;
+		}
+		
 		// grille de jeu
 		this.grid = new Grid();
 

@@ -22,6 +22,10 @@ public class Menu2D {
 		this.prefs = new HashMap<String, String>();
 	}
 	
+	public JPanel getPanel(){
+		return this.panel;
+	}
+	
 	public HashMap<String, String> getMenuParams(){
 		return this.params;
 	}
