@@ -63,17 +63,17 @@ public class ContextManager {
 	}
 	
 	public void setSoloState(){
-		System.out.println("Menu Solo activé");
+		System.out.println("Menu Solo actif");
 		gameEngine.setState("SOLO_MENU");
 	}
 	
 	public void setMultiState(){
-		System.out.println("Menu Multi activé");
+		System.out.println("Menu Multi actif");
 		gameEngine.setState("MULTI_MENU");
 	}
 	
 	public void setOptionsState(){
-		System.out.println("Options activées");
+		System.out.println("Options actives");
 		gameEngine.setState("OPTIONS_MENU");
 		
 		NoAvailablePrint error = new NoAvailablePrint();
@@ -82,7 +82,7 @@ public class ContextManager {
 	}
 	
 	public void setGameState(){
-		System.out.println("Jeu lancé");
+		System.out.println("Jeu lance");
 
 		//Passage des paramètres de jeu choisis par le joueur (pseudo, difficulté...)
 		HashMap<String, String> params = graphicEngine.getGameParams();
