@@ -19,13 +19,17 @@ public class Board implements ActionListener, BoardObservable {
 		this.player = player;
 		
 		// niveau de difficulte
-		if(difficulty.equals("Facile"))
-			this.difficulty = 1;
-		else if(difficulty.equals("Difficile"))
-			this.difficulty = 3;
-		else
-			this.difficulty = 2;
-
+		if(difficulty != null){
+			if(difficulty.equals("Facile"))
+				this.difficulty = 1;
+			else if(difficulty.equals("Difficile"))
+				this.difficulty = 3;
+			else
+				this.difficulty = 2;
+		}else{
+			this.difficulty = 0;
+		}
+		
 		// grille de jeu
 		this.grid = new Grid();
 
@@ -49,6 +53,7 @@ public class Board implements ActionListener, BoardObservable {
 		level.incrNbLinesRemoved(grid.moveDown());
 		level.up();
 		timer.setDelay(level.getSpeed());
+		this.updateObserver();
 	}
 	
 	public void incrementScore(int value){
@@ -58,7 +63,7 @@ public class Board implements ActionListener, BoardObservable {
 
 	@Override
 	public void updateObserver() {
-		this.observer.update(this.player.getScore());
+		this.observer.update(this.player.getScore(), this.level.getLevel(), this.player.getPseudo());
 	}
 
 	@Override
