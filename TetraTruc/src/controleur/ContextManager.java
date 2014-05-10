@@ -90,6 +90,7 @@ public class ContextManager {
 	public void setExitState(){
 		System.out.println("Quitter le jeu");
 		gameEngine.setState("EXIT");
+		System.exit(0);
 	}
 	
 }
