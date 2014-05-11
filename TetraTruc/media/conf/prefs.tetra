@@ -1,3 +1,5 @@
-mode @ solo
-difficulte @ Difficile
-pseudo @ jonathan douet
+mode @ multi
+players @ 2
+pseudo2 @ joueur2
+difficulte @ 
+pseudo1 @ joueur1

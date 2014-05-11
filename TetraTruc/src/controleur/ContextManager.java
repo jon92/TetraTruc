@@ -1,5 +1,6 @@
 package controleur;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import vue.GraphicEngine;
@@ -11,47 +12,62 @@ public class ContextManager {
 	private GameEngine gameEngine = GameEngine.getSingleton();
 	private GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 	private static ContextManager managerSingleton = new ContextManager();
+	private ArrayList<ArrayList<Integer>> configs = new ArrayList<ArrayList<Integer>>();
 	
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
+		ArrayList<Integer> config1 = new ArrayList<Integer>();
+		config1.add(37);
+		config1.add(39);
+		config1.add(38);
+		config1.add(40);
+		config1.add(32);
+		this.configs.add(config1);
+
+		ArrayList<Integer> config2 = new ArrayList<Integer>();
+		config2.add(81);
+		config2.add(68);
+		config2.add(90);
+		config2.add(83);
+		config2.add(16);
+		this.configs.add(config2);
 	}
-	
-	public void doKeyAction(int action){
-		if(gameEngine.getBoard() == null) return;
-		switch (action){
-			case 37 : 
-				gameEngine.getBoard().getGrid().moveLeft();
-				break;
+
+	public void doKeyAction(int action, int config){
+		if(gameEngine.getBoard(0) == null) return;
+		
+		int left = this.configs.get(config).get(0);
+		int right = this.configs.get(config).get(1);
+		int up = this.configs.get(config).get(2);
+		int down = this.configs.get(config).get(3);
+		int bottom = this.configs.get(config).get(4);
+		
+		if(action == left){
 			
-			case 39 : 
-				gameEngine.getBoard().getGrid().moveRight();
-				break;
+			gameEngine.getBoard(config).getGrid().moveLeft();
 			
-			case 38 : 
-				gameEngine.getBoard().getGrid().rotate();
-				break;
+		}else if(action == right){
 			
-			case 40 : 
-				gameEngine.getBoard().getGrid().moveDown();
-                // on ajoute des points au joueur
-                //gameEngine.getBoard().getPlayer().setScore(1);
-				gameEngine.getBoard().incrementScore(1);
-                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
-                break;
+			gameEngine.getBoard(config).getGrid().moveRight();
 			
-			case 32 : 
-				gameEngine.getBoard().getGrid().dropBottom();
-				break;
+		}else if(action == up){
 			
-			case 10 :
-				gameEngine.getBoard().getGrid().getDico().validateSelection(true);
-				break;
-				
-			/*default :
-				System.out.println(action);
-				break;
-			*/
+			gameEngine.getBoard(config).getGrid().rotate();
+			
+		}else if(action == down){
+			
+			gameEngine.getBoard(config).getGrid().moveDown();
+			gameEngine.getBoard(config).incrementScore(1);
+			
+		}else if(action == bottom){
+			
+			gameEngine.getBoard(config).getGrid().dropBottom();
+			
+		}else if(action == 10){
+			
+			gameEngine.getBoard(config).getGrid().getDico().validateSelection(true);
+			
 		}
 	}
 	
@@ -68,22 +84,22 @@ public class ContextManager {
 	}
 	
 	public void setSoloState(){
-		System.out.println("Menu Solo activé");
+		System.out.println("Menu Solo actif");
 		gameEngine.setState("SOLO_MENU");
 	}
 	
 	public void setMultiState(){
-		System.out.println("Menu Multi activé");
+		System.out.println("Menu Multi actif");
 		gameEngine.setState("MULTI_MENU");
 	}
 	
 	public void setOptionsState(){
-		System.out.println("Options activées");
+		System.out.println("Options actives");
 		gameEngine.setState("OPTIONS_MENU");
 	}
 	
 	public void setGameState(){
-		System.out.println("Jeu lancé");
+		System.out.println("Jeu lance");
 
 		//Passage des paramètres de jeu choisis par le joueur (pseudo, difficulté...)
 		HashMap<String, String> params = graphicEngine.getGameParams();
@@ -91,8 +107,10 @@ public class ContextManager {
 		gameEngine.setState("GAME");
 		gameEngine.initGame();
 		
-		gameEngine.getBoard().addObserver(graphicEngine.getGamePanel());
-		gameEngine.getBoard().getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
+		for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
+			gameEngine.getBoard(i).addObserver(graphicEngine.getGamePanel(i));
+			gameEngine.getBoard(i).getGrid().addObserver(graphicEngine.getGamePanel(i).getGrid2D());
+		}
 	}
 	
 	public void setExitState(){
