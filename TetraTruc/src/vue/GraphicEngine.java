@@ -66,12 +66,13 @@ public class GraphicEngine implements Observer {
 		this.window.repaint();
 		if(this.nbPlayers >1){
 			this.window.dispose();
-			this.window = new Window(818, 600);
+			this.window = new Window(807, 600);
 		}
 		JPanel pan = new JPanel();
 		pan.setPreferredSize(new Dimension(this.window.getWidth()*2, this.window.getHeight()*2));
 		this.window.setContentPane(pan);
-		this.window.setLayout(new GridLayout(1, 2));
+		GridLayout gl = new GridLayout(1,2);
+		this.window.setLayout(gl);
 		
 		for(int i=0; i<this.nbPlayers; ++i){
 			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight(), i));
