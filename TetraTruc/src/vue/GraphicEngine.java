@@ -3,6 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
@@ -15,7 +16,8 @@ public class GraphicEngine implements Observer {
 	private Window window;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
 	private Menu2D currentMenu;
-	private GamePanel gamePanel;
+	//private GamePanel gamePanel;
+	private ArrayList<GamePanel> gamePanels = new ArrayList<GamePanel>();
 	private int nbPlayers;
 	
 	/*
@@ -35,8 +37,8 @@ public class GraphicEngine implements Observer {
 		return graphicESingleton;
 	}
 	
-	public GamePanel getGamePanel(){
-		return this.gamePanel;
+	public GamePanel getGamePanel(int i){
+		return this.gamePanels.get(i);
 	}
 	
 	public HashMap<String, String> getGameParams(){
@@ -74,16 +76,18 @@ public class GraphicEngine implements Observer {
 			this.window.dispose();
 			this.window = new Window(818, 600);
 		}
-		this.gamePanel = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		//this.gamePanel = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+		this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight()));
 		JPanel pan = new JPanel();
 		pan.setPreferredSize(new Dimension(this.window.getWidth()*2, this.window.getHeight()*2));
 		this.window.setContentPane(pan);
 		this.window.setLayout(new GridLayout(1, 2));
-		this.window.getContentPane().add(this.gamePanel);
+		this.window.getContentPane().add(this.gamePanels.get(0));
 		
 		if(this.nbPlayers >1){
-			JPanel gamePanel2 = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
-			this.window.getContentPane().add(gamePanel2);
+			//JPanel gamePanel2 = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
+			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight()));
+			this.window.getContentPane().add(this.gamePanels.get(1));
 		}
 		
 		//this.window.setContentPane(this.gamePanel);

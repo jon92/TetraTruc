@@ -200,7 +200,7 @@ public class Grid2D implements GridObserver{
 		// Dessin des briques de la nextShape
 		for(int i=0; i<4; ++i){
 			if(this.nextShapes != null)
-				nextBricks[i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), 329 + offsetX, 106 + offsetY, 0.8f);	// Modifie la couleur de la brique
+				nextBricks[i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), originNextShapeLeft + offsetX, originNextShapeTop + offsetY, 0.8f);	// Modifie la couleur de la brique
 		}
 	}
 	
@@ -222,6 +222,7 @@ public class Grid2D implements GridObserver{
 			nextBricks[i].setLetter(nextLetters[i]);
 		}
 		
-		GraphicEngine.getSingleton().getGamePanel().repaint();
+		GraphicEngine.getSingleton().getGamePanel(0).repaint();
+		GraphicEngine.getSingleton().getGamePanel(1).repaint();
 	}
 }

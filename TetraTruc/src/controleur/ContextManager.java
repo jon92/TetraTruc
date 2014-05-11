@@ -81,8 +81,10 @@ public class ContextManager {
 		gameEngine.setState("GAME");
 		gameEngine.initGame();
 		
-		gameEngine.getBoard(0).addObserver(graphicEngine.getGamePanel());
-		gameEngine.getBoard(0).getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
+		for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
+			gameEngine.getBoard(i).addObserver(graphicEngine.getGamePanel(i));
+			gameEngine.getBoard(i).getGrid().addObserver(graphicEngine.getGamePanel(i).getGrid2D());
+		}
 	}
 	
 	public void setExitState(){

@@ -103,7 +103,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.score = score;
 		this.level = level;
 		this.pseudo = pseudo;
-		GraphicEngine.getSingleton().getGamePanel().repaint();
+		GraphicEngine.getSingleton().getGamePanel(0).repaint();
+		GraphicEngine.getSingleton().getGamePanel(1).repaint();
 	}
 
 	@Override

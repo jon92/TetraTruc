@@ -88,7 +88,7 @@ public class SoloMenu extends Menu2D {
 		super.params = new HashMap<String, String>();
 		super.params.put("mode", "solo");
 		super.params.put("players", "1");
-		super.params.put("pseudo", this.pseudoJTF.getText());
+		super.params.put("pseudo1", this.pseudoJTF.getText());
 		
 		if(this.getSelectedButton(this.bg) != null)
 			super.params.put("difficulte", this.getSelectedButton(this.bg).getText());
