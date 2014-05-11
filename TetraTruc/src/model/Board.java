@@ -43,6 +43,7 @@ public class Board implements ActionListener, BoardObservable {
 	// Lancement/Arret du jeu
 	public void stop(){ timer.stop(); }
 	public void start(){ grid.newShape(); timer.start(); }
+	public void restart(){ timer.start(); }
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {
