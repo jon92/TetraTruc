@@ -25,7 +25,9 @@ public class MultiMenu extends Menu2D {
 	public HashMap<String, String> getMenuParams(){
 		super.params = new HashMap<String, String>();
 		super.params.put("mode", "multi");
-		super.params.put("pseudo", "");
+		super.params.put("players", "2");
+		super.params.put("pseudo1", "joueur1");
+		super.params.put("pseudo2", "joueur2");
 		super.params.put("difficulte", "");
 		
 		return super.params;

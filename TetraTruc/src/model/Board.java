@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class Board implements ActionListener, BoardObservable {
+public class Board extends Thread implements ActionListener, BoardObservable {
 	private final Player player;
 	private final int difficulty;
 	private Grid grid;
@@ -14,7 +14,7 @@ public class Board implements ActionListener, BoardObservable {
 	private BoardObserver observer;
 	
 	// Constructeur
-	public Board(Player player, String difficulty, String chosenTheme){
+	public Board(Dictionary dico, Player player, String difficulty, String chosenTheme){
 		// joueur
 		this.player = player;
 		
@@ -31,7 +31,7 @@ public class Board implements ActionListener, BoardObservable {
 		}
 		
 		// grille de jeu
-		this.grid = new Grid();
+		this.grid = new Grid(20, 10, dico);
 
 		// level
 		level = new Level();
@@ -45,8 +45,9 @@ public class Board implements ActionListener, BoardObservable {
 	public Grid getGrid(){ return this.grid; }	
 	
 	// Lancement/Arret du jeu
-	public void stop(){ timer.stop(); }
-	public void start(){ grid.newShape(); timer.start(); }
+	public void pause(){ timer.stop(); }
+	public void run(){ grid.newShape(); timer.start(); }
+	public void restart(){ timer.start(); }
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {

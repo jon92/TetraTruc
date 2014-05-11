@@ -3,6 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ public class GraphicEngine implements Observer {
 	private Window window;
 	private static GraphicEngine graphicESingleton = new GraphicEngine();
 	private Menu2D currentMenu;
-	private GamePanel gamePanel;
+	private ArrayList<GamePanel> gamePanels = new ArrayList<GamePanel>();
 	private int nbPlayers;
 	
 	/*
@@ -35,17 +36,12 @@ public class GraphicEngine implements Observer {
 		return graphicESingleton;
 	}
 	
-	public GamePanel getGamePanel(){
-		return this.gamePanel;
-	}
-	
-	public Window getWindow(){
-		return this.window;
-	}
-	
-	public HashMap<String, String> getGameParams(){
-		return(this.currentMenu.getMenuParams());
-	}
+
+	public Window getWindow(){return this.window; }
+	public GamePanel getGamePanel(int i){ return this.gamePanels.get(i); }
+	public HashMap<String, String> getGameParams(){ return(this.currentMenu.getMenuParams()); }
+	public int getNbPlayers(){ return this.nbPlayers; }
+
 	
 	public void goToMainMenu(){
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
@@ -62,8 +58,6 @@ public class GraphicEngine implements Observer {
 	public void goToMultiMenu(){
 		MultiMenu multiMenu = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
 		multiMenu.create();
-		MultiMenu multiMenu2 = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
-		multiMenu2.create();
 		this.currentMenu = multiMenu;
 		this.nbPlayers = 2;
 	}
@@ -71,28 +65,23 @@ public class GraphicEngine implements Observer {
 	}
 	public void goToGame(){
 		this.window.getContentPane().removeAll();
-		//this.window.setSize(818, 600);
 
 		this.window.repaint();
 		if(this.nbPlayers >1){
 			this.window.dispose();
-			this.window = new Window(818, 600);
+			this.window = new Window(807, 600);
 		}
-		this.gamePanel = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		JPanel pan = new JPanel();
 		pan.setPreferredSize(new Dimension(this.window.getWidth()*2, this.window.getHeight()*2));
 		this.window.setContentPane(pan);
-		this.window.setLayout(new GridLayout(1, 2));
-		this.window.getContentPane().add(this.gamePanel);
+		GridLayout gl = new GridLayout(1,2);
+		this.window.setLayout(gl);
 		
-		if(this.nbPlayers >1){
-			JPanel gamePanel2 = new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
-			this.window.getContentPane().add(gamePanel2);
+		for(int i=0; i<this.nbPlayers; ++i){
+			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight(), i));
+			this.window.getContentPane().add(this.gamePanels.get(i));
 		}
 		
-		//this.window.setContentPane(this.gamePanel);
-		//this.gamePanel.setPanel(this.window.getPanel());
-		//this.window.getContentPane().revalidate();
 		this.window.repaint();
 		this.window.setVisible(true);
 	}

@@ -20,6 +20,7 @@ import model.GameEngine;
 public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
 	private static final long serialVersionUID = 1L;
+	private int id;
 	private JPanel panel;
 	private Grid2D grid;
 	private int width, height;
@@ -32,7 +33,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private GameButton2D saveButton;
 	private GameButton2D exitButton;
 	
-	public GamePanel(JPanel panel, int width, int height){
+	public GamePanel(JPanel panel, int width, int height, int i){
+		this.id = i;
 		this.panel = panel;
 		this.setBackground(Color.RED);
 		this.width = width;	
@@ -42,7 +44,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.level = 1;
 		this.pseudo = "";
 		this.theme = new ThemeDefault();
-		this.grid = new Grid2D(20, 10, 400, 200, theme);
+		this.grid = new Grid2D(20, 10, 400, 200, theme, this.id);
 		
 		
 		// création et placement des boutons 		
@@ -104,7 +106,6 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		try {
 			img = ImageIO.read(new File(theme.getBackground()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -143,7 +144,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.score = score;
 		this.level = level;
 		this.pseudo = pseudo;
-		GraphicEngine.getSingleton().getGamePanel().repaint();
+		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
 	}
 
 	@Override
