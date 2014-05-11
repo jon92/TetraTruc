@@ -127,18 +127,38 @@ public class ContextManager {
 		}
 	}
 	
+	// Etat quitter
 	public void setExitState(){
 		System.out.println("Quitter le jeu");
 		gameEngine.setState("EXIT");
 		System.exit(0);
 	}
 	
+	// Etat pause
 	public void setPauseState(){
-		System.out.println("Pause");
-		NoAvailablePrint error = new NoAvailablePrint();
-		error.alertNoAvailable();
+		
+		if (this.graphicEngine.getGamePanel(0).getIsOnPause() == false ){
+		
+			System.out.println("Pause");
+	
+			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
+				this.gameEngine.getBoard(i).pause();
+			}
+		}
+		
+		else{
+			System.out.println("Fin de la pause");
+		
+			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
+				this.gameEngine.getBoard(i).restart();
+			}
+		}
+		
+		this.graphicEngine.getGamePanel(0).changeIsOnPause();
+	
 	}
 	
+	// Sauvegarder
 	public void setSaveState(){
 		System.out.println("Sauvegarde");
 		NoAvailablePrint error = new NoAvailablePrint();
