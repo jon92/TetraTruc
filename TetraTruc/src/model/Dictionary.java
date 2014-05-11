@@ -99,6 +99,24 @@ public enum Dictionary {
         }
     }
     
+	
+	public boolean foundAnAnagram(int line){
+		String word = new String();
+		System.out.println("Mode Anagramme activé !");
+		// Attendre que le joueur ait validé en appuyant sur Entrée
+		while(!validateSelection()){
+			// Récupérer les lettres cliquées
+			// Vérifier qu'elles sont bien sur la bonne ligne pour les prendre en compte ou non
+			System.out.println("Boucle");
+			// Si le mot existe, TRUE, sinon FALSE
+			if(containsWord(word, 0, nbLines))
+				return true;
+			return false;
+		}
+		
+		return false;
+	}
+    
     
     // Chercher s'il existe un mot commençant par les caractères passés en paramètres
     public boolean beginningExists(String word){
