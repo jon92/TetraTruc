@@ -13,6 +13,7 @@ import model.Tetrominoe;
 
 
 public class Grid2D implements GridObserver{
+	private int id;
 	private int height, width; 	// Dimensions de la grille, en cases
 	private int pxlHeight, pxlWidth;	// Dimensions de la grille, en pixels
 	private final int squareSize; //Dimension d'une brique
@@ -33,6 +34,7 @@ public class Grid2D implements GridObserver{
 
 	// Constructeur par defaut
 	public Grid2D(){
+		this.id = 0;
 		this.height = 20;
 		this.width = 10;
 		this.pxlHeight = 400;
@@ -67,7 +69,8 @@ public class Grid2D implements GridObserver{
 	}
 	
 	// Constructeur personnalise
-	public Grid2D(int h, int w, int pxlH, int pxlW, Theme t){
+	public Grid2D(int h, int w, int pxlH, int pxlW, Theme t, int id){
+		this.id = id;
 		this.height = h;
 		this.width = w;
 		this.pxlHeight = pxlH;
@@ -221,8 +224,8 @@ public class Grid2D implements GridObserver{
 		for(int i=0; i<4; ++i){
 			nextBricks[i].setLetter(nextLetters[i]);
 		}
-		
-		GraphicEngine.getSingleton().getGamePanel(0).repaint();
-		GraphicEngine.getSingleton().getGamePanel(1).repaint();
+
+		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
+
 	}
 }
