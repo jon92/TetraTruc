@@ -155,11 +155,15 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 			// on teste si on a cliqué sur un bouton
 			if (e.getSource() == this.pauseButton){
 				System.out.println("PAUUUUUUUUUUUUUUUUUSE !");
-				GameEngine.getSingleton().setState("EXIT");
-		 		System.exit(0);
+				NoAvailablePrint error = new NoAvailablePrint();
+				error.alertNoAvailable();
 			}
 			else if (e.getSource() == this.saveButton){
 				System.out.println("SAUVEGAAAAAAAARDE ! ");
+				// on affiche que le menu n'est pas disponible
+				NoAvailablePrint error = new NoAvailablePrint();
+				error.alertNoAvailable();
+				
 			}
 			else if (e.getSource() == this.exitButton){
 				System.out.println("QUITTEEEEEEEEEEEEER ! ");
