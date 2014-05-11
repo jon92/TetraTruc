@@ -157,12 +157,12 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		}	
 			
 			
-			String letter = grid.getBrick(line, col).getLetter();
-			// Test si la case est vide
-			if(letter == null)
-				return;
-			
-			System.out.println(letter);
+		String letter = grid.getBrick(line, col).getLetter();
+		// Test si la case est vide
+		if(letter == null)
+			return;
+		
+		System.out.println(letter);
 
 	}
 
