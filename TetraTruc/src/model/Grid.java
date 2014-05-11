@@ -7,6 +7,7 @@ public class Grid implements GridObservable {
 	private Shape nextShape;		// Pièce qui va venir après
 	private int curX, curY;			// Emplacement de la piece en train de tomber
 	private GridObserver observer;	// Observateur pour la vue
+	private Dictionary dico;		// Dictionnaire pour les fonctions worddle et anagramme
 	
 	// Constructeur par defaut
 	public Grid(){
@@ -26,10 +27,11 @@ public class Grid implements GridObservable {
 	}
 	
 	// Constructeur personnalise
-	public Grid(int h, int w){
+	public Grid(int h, int w, Dictionary dico){
 		this(); // appel du constructeur de base
 		this.height = h;
 		this.width = w;
+		this.dico = dico;
 	}
 	
 	
@@ -41,6 +43,7 @@ public class Grid implements GridObservable {
 	public int getCurY(){ return curY; }
 	public int getHeight(){ return height; }
 	public int getWidth(){ return width; }
+	public Dictionary getDico(){ return dico; }
 	public Shape shapeAt(int line, int col){ return grid[line][col]; }
 	
 	
@@ -221,14 +224,17 @@ public class Grid implements GridObservable {
 			
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
-				removeLine(currLine);
-				nbFullLines++;
+				if(dico.foundAnAnagram(currLine)){
+					removeLine(currLine);
+					nbFullLines++;
+				}
 			}
 			lineIsFull = true;
 		}
 		
 		return nbFullLines;
-	} 
+	}
+	
 	
 	// Envoie à la Grid2D un tableau de coordonnées contenant les cases ayant été modifiées, et un tableau correspondant aux shapes à ces coordonnées
 	@Override

@@ -70,4 +70,132 @@ public enum Dictionary {
     String FR(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    // Trouver un mot dans le dictionnaire.
+    // Paramètres : le mot qu'on cherche, 0 , taille du dico (nb de lignes) --> dico.getNbLines()
+    public boolean containsWord(String word, int begin, int end){
+        // si begin > end, le mot n'existe pas
+        if (begin > end){
+            return false;
+        }
+        
+        int middle = (begin + end) / 2;
+        String wordMiddleDictionary = this.getContent().get(middle);
+        
+        int compareWord = word.compareTo(wordMiddleDictionary);
+        
+        // si c'est le même mot, il est dans le dico
+        if (compareWord == 0){
+            return true;
+        }
+        // si le mot est + grand, on vérifie la moitié supérieure
+        else if (compareWord < 0){
+            return this.containsWord(word, begin, (middle - 1));
+        }
+        // si le mot est + petit, on vérifie la moitié inférieure
+        else{
+            return this.containsWord(word, (middle + 1), end);  
+        }
+    }
+    
+    public boolean validateSelection(boolean bool){
+    	if(bool)
+    		return true;
+    	return false;
+    }
+	
+	public boolean foundAnAnagram(int line){
+		String word = new String();
+		System.out.println("Mode Anagramme activé !");
+		// Attendre que le joueur ait validé en appuyant sur Entrée
+		while(!validateSelection()){
+			// Récupérer les lettres cliquées
+			// Vérifier qu'elles sont bien sur la bonne ligne pour les prendre en compte ou non
+			System.out.println("Boucle");
+			// Si le mot existe, TRUE, sinon FALSE
+			if(containsWord(word, 0, nbLines))
+				return true;
+			return false;
+		}
+		
+		return false;
+	}
+    
+    
+    // Chercher s'il existe un mot commençant par les caractères passés en paramètres
+    public boolean beginningExists(String word){
+    	int begin=0;
+    	int end=1;
+    	String letterToCheck = word.substring(begin, end);
+    	
+    	// On parcourt tout le dictionnaire
+    	for(int dicoLine=0; dicoLine<=nbLines; ++dicoLine){
+    		// Si on trouve dans le dictionnaire un mot qui commence par le mot qu'on est en train de tester, on peut passer à la lettre suivante
+    		while( begin < content.get(dicoLine).length() && letterToCheck.equalsIgnoreCase(content.get(dicoLine).substring(begin, end)) ){
+    			begin++;
+    			end++;
+    			if(begin >= word.length()){
+    				return true;
+    			}
+    			letterToCheck = word.substring(begin, end);
+    		}
+    	}
+    	return false;
+    }
+    
+    
+    public Vector<String> findAllAnagrams(Vector<String> allAnagrams, String word, String letters){
+    	
+    	if( containsWord(word, 0, nbLines) ){
+    		allAnagrams.add(word);
+    	}
+    	
+    	if( letters.length() == 0 ){
+    		return allAnagrams;
+    	}
+    	
+    	for(int i=0; i<letters.length(); ++i){
+    		String anagram = new String( word.concat(letters.substring(i, i+1)) );
+    		if(this.beginningExists(anagram)){
+    			if(i==0){
+    				System.out.println("1111111111");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(1, letters.length())));
+    			}
+    			else if(i==letters.length()-1){
+    				System.out.println("33333333333");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i)));
+    			}
+    			else{
+    				System.out.println("2222222222");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i).concat(letters.substring(i+1, letters.length()))));
+    			}
+    			System.out.println("Coucou !");
+    		}	
+    	}
+    	
+    	return allAnagrams;
+    }
+    
+    public static void main(String[] args) {
+		Dictionary dico = Dictionary.FR;
+		if(dico.beginningExists("feru")){
+			System.out.println("Ca existe");
+		}
+		else{
+			System.out.println("Ca existe pas");
+		}
+		
+		Vector<String> anagrams = new Vector<String>();
+		anagrams = dico.findAllAnagrams(anagrams, "", "etre");
+		System.out.println("_____________________________________________________");
+		for(int i=0; i<anagrams.size(); ++i){
+			System.out.println(anagrams.get(i));
+		}
+		System.out.println("Fini !");
+	}
+    
 }

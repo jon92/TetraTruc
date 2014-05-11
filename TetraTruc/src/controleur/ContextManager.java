@@ -33,7 +33,7 @@ public class ContextManager {
 		config2.add(16);
 		this.configs.add(config2);
 	}
-	
+
 	public void doKeyAction(int action, int config){
 		if(gameEngine.getBoard(0) == null) return;
 		
@@ -63,6 +63,10 @@ public class ContextManager {
 		}else if(action == bottom){
 			
 			gameEngine.getBoard(config).getGrid().dropBottom();
+			
+		}else if(action == 10){
+			
+			gameEngine.getBoard(config).getGrid().getDico().validateSelection(true);
 			
 		}
 	}

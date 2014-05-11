@@ -21,10 +21,12 @@ public class GameEngine implements Observable {
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	//Contient les parametres de jeu (pseudo, difficulte...)
 	private HashMap<String, String> gameParams;
+	private Dictionary dico;
 	private ArrayList<Board> boards = new ArrayList<Board>();
 	
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
+		this.dico = Dictionary.FR;
 	}
 	
 	public static GameEngine getSingleton(){
@@ -35,14 +37,13 @@ public class GameEngine implements Observable {
 		
 		//sauvegarde de la derniere config utilisateur
 		this.savePrefs();
-		
 		//Creation des joueurs
 		ArrayList<Player> players = new ArrayList<Player>();
 				
 		//Creation des boards
 		for(int i=0; i<Integer.parseInt(this.gameParams.get("players")); ++i){
 			players.add(new Player(this.gameParams.get("pseudo"+(i+1))));
-			this.boards.add(new Board(players.get(i), this.gameParams.get("difficulte"), "Theme1"));
+			this.boards.add(new Board(dico, players.get(i), this.gameParams.get("difficulte"), "Theme1"));
 			this.boards.get(i).start();
 		}
 		
