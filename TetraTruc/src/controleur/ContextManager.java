@@ -18,29 +18,29 @@ public class ContextManager {
 	}
 	
 	public void doKeyAction(int action){
-		if(gameEngine.getBoard() == null) return;
+		if(gameEngine.getBoard(0) == null) return;
 		switch (action){
 			case 37 : 
-				gameEngine.getBoard().getGrid().moveLeft();
+				gameEngine.getBoard(0).getGrid().moveLeft();
 			break;
 			
 			case 39 : 
-				gameEngine.getBoard().getGrid().moveRight();
+				gameEngine.getBoard(0).getGrid().moveRight();
 			break;
 			
 			case 38 : 
-				gameEngine.getBoard().getGrid().rotate();
+				gameEngine.getBoard(0).getGrid().rotate();
 			break;
 			
 			case 40 : 
-				gameEngine.getBoard().getGrid().moveDown();
+				gameEngine.getBoard(0).getGrid().moveDown();
                 // on ajoute des points au joueur
                 //gameEngine.getBoard().getPlayer().setScore(1);
-				gameEngine.getBoard().incrementScore(1);
-                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
+				gameEngine.getBoard(0).incrementScore(1);
+                System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard(0).getPlayer().getScore());
 			break;
 			case 32 : 
-				gameEngine.getBoard().getGrid().dropBottom();
+				gameEngine.getBoard(0).getGrid().dropBottom();
 			break;
 		}
 	}
@@ -81,8 +81,8 @@ public class ContextManager {
 		gameEngine.setState("GAME");
 		gameEngine.initGame();
 		
-		gameEngine.getBoard().addObserver(graphicEngine.getGamePanel());
-		gameEngine.getBoard().getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
+		gameEngine.getBoard(0).addObserver(graphicEngine.getGamePanel());
+		gameEngine.getBoard(0).getGrid().addObserver(graphicEngine.getGamePanel().getGrid2D());
 	}
 	
 	public void setExitState(){
