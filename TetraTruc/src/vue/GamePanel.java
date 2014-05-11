@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,19 +42,22 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
 		
-		// création et placement des boutons 
-		this.pauseButton = new GameButton2D("pause");
-		this.saveButton = new GameButton2D("sauvegarder");
-		this.exitButton = new GameButton2D("quitter");
+		// création et placement des boutons 		
+		setLayout(null);
+		this.pauseButton = new GameButton2D("PAUSE");
+		this.saveButton = new GameButton2D("ENREGISTRER");
+		this.exitButton = new GameButton2D("QUITTER");
 		
-		pauseButton.setBounds(12,12, 400,200);
-		saveButton.setBounds(100,200, 400,200);
-		exitButton.setBounds(200,200, 400,200);
+		this.pauseButton.setBounds(285, 310, 85, 25);
+		this.saveButton.setBounds(285, 340, 85, 25);
+		this.exitButton.setBounds(285, 370, 85, 25);
 		
-		panel.add(pauseButton);
-		panel.add(saveButton);
-		panel.add(exitButton);	
-			
+
+		
+        add(this.pauseButton);
+        add(this.saveButton);
+        add(this.exitButton);
+        
 
 		this.drawBackground();
 		this.addMouseListener(this);
