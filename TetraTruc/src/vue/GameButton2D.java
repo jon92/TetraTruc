@@ -24,7 +24,7 @@ public class GameButton2D extends JButton{
 	public void paintComponent (Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
 		
-		Color colorButton = new Color(0,10,80);
+		Color colorButton = new Color(16,77,91);
 		
 		RenderingHints renderHints =
             new RenderingHints(RenderingHints.KEY_ANTIALIASING,
@@ -80,7 +80,6 @@ public class GameButton2D extends JButton{
 	                setSize(300,500);
 	                setDefaultCloseOperation(EXIT_ON_CLOSE);
 	                setVisible(true);
-	 
 	            }
 	        };
 	    }
