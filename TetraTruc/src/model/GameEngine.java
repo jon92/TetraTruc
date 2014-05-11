@@ -50,6 +50,10 @@ public class GameEngine implements Observable {
 		//Lancement du jeu
 	}
 	
+	public ArrayList<Board> getBoards(){
+		return this.boards;
+	}
+	
 	public Board getBoard(int i){
 		return this.boards.get(i);
 	}
