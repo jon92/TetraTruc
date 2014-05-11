@@ -14,10 +14,12 @@ public class ContextManager {
 	private GameEngine gameEngine = GameEngine.getSingleton();
 	private GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 	private static ContextManager managerSingleton = new ContextManager();
+	private static GameButtonListener gameButtonListener;
 	
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
+		gameButtonListener = new GameButtonListener();
 	}
 	
 	public void doKeyAction(int action){
@@ -52,6 +54,10 @@ public class ContextManager {
 	
 	public MenuListener getMenuListener(){
 		return menuListener;
+	}
+	
+	public GameButtonListener getGameButtonListener(){
+		return gameButtonListener;
 	}
 	
 	public KeyboardListener getKeyListener(){
