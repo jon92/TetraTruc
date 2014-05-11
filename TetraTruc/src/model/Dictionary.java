@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+import controleur.ContextManager;
+
 public enum Dictionary {
     
 	FR("media/lang/dictionary_FR.txt", "Français", 22739, 
@@ -98,28 +100,25 @@ public enum Dictionary {
             return this.containsWord(word, (middle + 1), end);  
         }
     }
-    
-    public boolean validateSelection(boolean bool){
-    	if(bool)
-    		return true;
-    	return false;
-    }
 	
 	public boolean foundAnAnagram(int line){
 		String word = new String();
-		System.out.println("Mode Anagramme activé !");
-		// Attendre que le joueur ait validé en appuyant sur Entrée
-		while(!validateSelection()){
-			// Récupérer les lettres cliquées
-			// Vérifier qu'elles sont bien sur la bonne ligne pour les prendre en compte ou non
-			System.out.println("Boucle");
-			// Si le mot existe, TRUE, sinon FALSE
-			if(containsWord(word, 0, nbLines))
-				return true;
-			return false;
-		}
 		
-		return false;
+		
+		System.out.println("Mode Anagramme activé !");
+		
+		// Attendre que le joueur ait validé en appuyant sur Entrée
+		
+		// Récupérer les lettres cliquées
+			
+		// Vérifier qu'elles sont bien sur la bonne ligne pour les prendre en compte ou non
+		System.out.println("Boucle");
+		
+		// Si le mot existe, TRUE, sinon FALSE
+		if(containsWord(word, 0, nbLines))
+			return true;
+		else
+			return false;
 	}
     
     

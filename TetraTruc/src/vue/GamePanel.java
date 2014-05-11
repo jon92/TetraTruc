@@ -3,6 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private GameButton2D pauseButton;
 	private GameButton2D saveButton;
 	private GameButton2D exitButton;
+	private String selectedLetters;
 	
 	public GamePanel(JPanel panel, int width, int height, int i){
 		this.id = i;
@@ -45,6 +47,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.pseudo = "";
 		this.theme = new ThemeDefault();
 		this.grid = new Grid2D(20, 10, 400, 200, theme, this.id);
+		this.selectedLetters = "";
 		
 		// création et placement des boutons 		
 		setLayout(null);
@@ -72,33 +75,20 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		
 	}
 	
-	public GameButton2D getPauseButton(){
-		return pauseButton;
-	}
+	// Getters / Setters
+	public GameButton2D getPauseButton(){ return pauseButton; }
+	public GameButton2D getExitButton(){ return exitButton; }
+	public GameButton2D getSaveButton(){ return saveButton; }
 	
-	public GameButton2D getExitButton(){
-		return exitButton;
-	}
+	public JPanel getPanel(){ return this.panel; }
+	public void setPanel(JPanel panel){ this.panel = panel; }
 	
-	public GameButton2D getSaveButton(){
-		return saveButton;
-	}
+	public Grid2D getGrid2D(){ return this.grid; }
+	public void setBackground(BufferedImage bg){ this.background = bg; }
 	
-	public JPanel getPanel(){
-		return this.panel;
-	}
+	public String getSelectedLetters(){ return selectedLetters; }
+	public void resetSelectedLetters(){ selectedLetters = new String(); }
 	
-	public void setPanel(JPanel panel){
-		this.panel = panel;
-	}
-	
-	public Grid2D getGrid2D(){
-		return this.grid;
-	}
-	
-	public void setBackground(BufferedImage bg){
-		this.background = bg;
-	}
 	
 	private void drawBackground(){
 		BufferedImage img = null;
@@ -156,14 +146,12 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 			return;
 		}	
 			
-			
 		String letter = grid.getBrick(line, col).getLetter();
 		// Test si la case est vide
 		if(letter == null)
 			return;
-		
-		System.out.println(letter);
-
+		else
+			selectedLetters = new String(selectedLetters + letter);
 	}
 
 	@Override

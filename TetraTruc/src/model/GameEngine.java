@@ -109,7 +109,7 @@ public class GameEngine implements Observable {
 				this.state = GameState.GAME;
 				break;
 				
-			case "PAUSE":
+			case "PAUSE" :
 				this.state = GameState.PAUSE;				
 				break;
 				

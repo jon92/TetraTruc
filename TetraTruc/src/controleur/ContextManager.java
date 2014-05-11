@@ -69,11 +69,14 @@ public class ContextManager {
 			
 		}else if(action == bottom){
 			
+			gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
 			gameEngine.getBoard(config).getGrid().dropBottom();
 			
 		}else if(action == 10){
 			
-			gameEngine.getBoard(config).getGrid().getDico().validateSelection(true);
+			String selectedLetters = graphicEngine.getGamePanel(config).getSelectedLetters();
+			graphicEngine.getGamePanel(config).resetSelectedLetters();
+			gameEngine.getBoard(config).getGrid().getDico();
 			
 		}
 	}
@@ -146,8 +149,8 @@ public class ContextManager {
 				this.gameEngine.getBoard(i).pause();
 			}
 			this.gameEngine.setState("PAUSE");
+			return;
 		}
-		
 		else if (this.gameEngine.getState() == GameState.PAUSE ){
 			System.out.println("Fin de la pause");
 		
@@ -156,9 +159,8 @@ public class ContextManager {
 			}
 			
 			this.gameEngine.setState("GAME");
+			return;
 		}
-	
-	
 	}
 	
 	// Sauvegarder
@@ -166,6 +168,11 @@ public class ContextManager {
 		System.out.println("Sauvegarde");
 		NoAvailablePrint error = new NoAvailablePrint();
 		error.alertNoAvailable();
+	}
+	
+	public void sendLetter(String letter){
+		// A MODIFIER : il faut savoir quel joueur est actuellement en mode anagramme
+		//gameEngine.getBoard(0).getGrid().getDico().
 	}
 	
 }

@@ -1,5 +1,7 @@
 package model;
 
+import controleur.ContextManager;
+
 public class Grid implements GridObservable {
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
@@ -234,7 +236,10 @@ public class Grid implements GridObservable {
 			
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
-				if(dico.foundAnAnagram(currLine)){
+				// Interruption du jeu
+				ContextManager.getSingleton().setPauseState();
+				
+				if(dico.containsWord(word, 0, dico.getNbLines())){
 					removeLine(currLine);
 					nbFullLines++;
 				}
