@@ -70,38 +70,13 @@ public class Grid2D implements GridObserver{
 	
 	// Constructeur personnalise
 	public Grid2D(int h, int w, int pxlH, int pxlW, Theme t, int id){
+		this(); //appel du constructeur de base
 		this.id = id;
 		this.height = h;
 		this.width = w;
 		this.pxlHeight = pxlH;
 		this.pxlWidth = pxlW;
-		this.squareSize = this.pxlHeight / this.height;
-		this.originGridLeft = 46;
-		this.originGridTop = 82;
-		this.originNextShapeLeft = 329;
-		this.originNextShapeTop = 106;
-		this.squareNumberW = this.pxlWidth / this.squareSize;
-		this.squareNumberH = this.pxlHeight / this.squareSize;
-		
 		this.theme = t;
-		this.coords = null;
-		this.shapes = null;
-		this.nextShapes = null;
-		
-		//Initialisation des briques de la grille
-		this.grid = new Brick2D[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
-		for(int i=0; i<height; ++i){
-			for(int j=0; j<width; ++j){
-				this.grid[i][j] = new Brick2D(this.squareSize);
-			}
-		}
-		
-		//Initialisation des briques de la piece suivante
-		this.nextBricks = new Brick2D[4];
-		for(int i=0; i<4; ++i)
-			this.nextBricks[i] = new Brick2D(this.squareSize);
-		
-		clearGrid();	// Initialisation de la grille vide
 	}
 	
 	// Getters / Setters

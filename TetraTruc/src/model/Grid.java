@@ -27,19 +27,9 @@ public class Grid implements GridObservable {
 	
 	// Constructeur personnalise
 	public Grid(int h, int w){
+		this(); // appel du constructeur de base
 		this.height = h;
 		this.width = w;
-		this.grid = new Shape[height][width];
-		this.curShape = new Shape();
-		this.nextShape = new Shape();
-		
-		for(int i=0; i<height; ++i){
-			for(int j=0; j<width; ++j){
-				this.grid[i][j] = new Shape();
-			}
-		}
-		
-		clearGrid();	// Initialisation de la grille vide
 	}
 	
 	
