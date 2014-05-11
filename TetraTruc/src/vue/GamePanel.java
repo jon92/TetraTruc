@@ -26,6 +26,9 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private int level;
 	private String pseudo;
 	private Theme theme;
+	private GameButton2D pauseButton;
+	private GameButton2D saveButton;
+	private GameButton2D exitButton;
 	
 	public GamePanel(JPanel panel, int width, int height){
 		this.panel = panel;
@@ -39,8 +42,35 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.theme = new ThemeDefault();
 		this.grid = new Grid2D(20, 10, 400, 200, theme);
 		
+		
+		// création et placement des boutons 
+		this.pauseButton = new GameButton2D("pause");
+		this.saveButton = new GameButton2D("sauvegarder");
+		this.exitButton = new GameButton2D("quitter");
+		
+		pauseButton.setBounds(12,12, 400,200);
+		saveButton.setBounds(100,200, 400,200);
+		exitButton.setBounds(200,200, 400,200);
+		
+		panel.add(pauseButton);
+		panel.add(saveButton);
+		panel.add(exitButton);	
+			
+
 		this.drawBackground();
 		this.addMouseListener(this);
+		
+	}
+	
+	public GameButton2D getPauseButton(){
+		return pauseButton;
+	}
+	
+	public GameButton2D getExitButton(){
+		return exitButton;
+	}
+	public GameButton2D getSaveButton(){
+		return saveButton;
 	}
 	
 	public JPanel getPanel(){
