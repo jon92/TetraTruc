@@ -14,6 +14,8 @@ public class GameEngine implements Observable {
 		MULTI_MENU,
 		OPTIONS_MENU,
 		GAME,
+		PAUSE,
+		SAVE,
 		EXIT;
 	}
 	private GameState state;
@@ -105,6 +107,14 @@ public class GameEngine implements Observable {
 				
 			case "GAME" :
 				this.state = GameState.GAME;
+				break;
+				
+			case "PAUSE":
+				this.state = GameState.PAUSE;				
+				break;
+				
+			case "SAVE" : 
+				this.state = GameState.SAVE;
 				break;
 				
 			case "EXIT_MENU" :
