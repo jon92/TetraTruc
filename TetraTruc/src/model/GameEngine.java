@@ -22,9 +22,11 @@ public class GameEngine implements Observable {
 	//Contient les parametres de jeu (pseudo, difficulte...)
 	private HashMap<String, String> gameParams;
 	private Board board;
+	private Dictionary dico;
 	
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
+		this.dico = Dictionary.FR;
 	}
 	
 	public static GameEngine getSingleton(){
