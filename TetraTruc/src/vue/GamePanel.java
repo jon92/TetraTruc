@@ -2,8 +2,8 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -13,7 +13,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import controleur.ContextManager;
+
 import model.BoardObserver;
+import model.GameEngine;
 
 public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
@@ -27,6 +30,10 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private int level;
 	private String pseudo;
 	private Theme theme;
+	private GameButton2D pauseButton;
+	private GameButton2D saveButton;
+	private GameButton2D exitButton;
+	private String selectedLetters;
 	
 	public GamePanel(JPanel panel, int width, int height, int i){
 		this.id = i;
@@ -40,26 +47,48 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.pseudo = "";
 		this.theme = new ThemeDefault();
 		this.grid = new Grid2D(20, 10, 400, 200, theme, this.id);
+		this.selectedLetters = "";
 		
+		// création et placement des boutons 		
+		setLayout(null);
+		this.pauseButton = new GameButton2D("PAUSE");
+		this.saveButton = new GameButton2D("ENREGISTRER");
+		this.exitButton = new GameButton2D("QUITTER");
+		
+		this.pauseButton.setBounds(285, 310, 85, 25);
+		this.saveButton.setBounds(285, 340, 85, 25);
+		this.exitButton.setBounds(285, 370, 85, 25);
+		
+
+		
+        add(this.pauseButton);
+        add(this.saveButton);
+        add(this.exitButton);
+        
+        this.pauseButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener()); 
+        this.saveButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
+        this.exitButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
+        
+
 		this.drawBackground();
 		this.addMouseListener(this);
+		
 	}
 	
-	public JPanel getPanel(){
-		return this.panel;
-	}
+	// Getters / Setters
+	public GameButton2D getPauseButton(){ return pauseButton; }
+	public GameButton2D getExitButton(){ return exitButton; }
+	public GameButton2D getSaveButton(){ return saveButton; }
 	
-	public void setPanel(JPanel panel){
-		this.panel = panel;
-	}
+	public JPanel getPanel(){ return this.panel; }
+	public void setPanel(JPanel panel){ this.panel = panel; }
 	
-	public Grid2D getGrid2D(){
-		return this.grid;
-	}
+	public Grid2D getGrid2D(){ return this.grid; }
+	public void setBackground(BufferedImage bg){ this.background = bg; }
 	
-	public void setBackground(BufferedImage bg){
-		this.background = bg;
-	}
+	public String getSelectedLetters(){ return selectedLetters; }
+	public void resetSelectedLetters(){ selectedLetters = new String(); }
+	
 	
 	private void drawBackground(){
 		BufferedImage img = null;
@@ -113,15 +142,16 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
 		
 		// Test si on clique en dehors de la grille
-		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth())
+		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
 			return;
-		
+		}	
+			
 		String letter = grid.getBrick(line, col).getLetter();
 		// Test si la case est vide
 		if(letter == null)
 			return;
-		
-		System.out.println(letter);
+		else
+			selectedLetters = new String(selectedLetters + letter);
 	}
 
 	@Override

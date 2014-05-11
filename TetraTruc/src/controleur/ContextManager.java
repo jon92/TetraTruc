@@ -3,8 +3,12 @@ package controleur;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import vue.GraphicEngine;
+import vue.NoAvailablePrint;
 import model.GameEngine;
+import model.GameEngine.GameState;
 
 public class ContextManager {
 	private static MenuListener menuListener;
@@ -12,11 +16,14 @@ public class ContextManager {
 	private GameEngine gameEngine = GameEngine.getSingleton();
 	private GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 	private static ContextManager managerSingleton = new ContextManager();
+	private static GameButtonListener gameButtonListener;
 	private ArrayList<ArrayList<Integer>> configs = new ArrayList<ArrayList<Integer>>();
 	
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
+		gameButtonListener = new GameButtonListener();
+
 		ArrayList<Integer> config1 = new ArrayList<Integer>();
 		config1.add(37);
 		config1.add(39);
@@ -62,17 +69,24 @@ public class ContextManager {
 			
 		}else if(action == bottom){
 			
+			gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
 			gameEngine.getBoard(config).getGrid().dropBottom();
 			
 		}else if(action == 10){
 			
-			gameEngine.getBoard(config).getGrid().getDico().validateSelection(true);
+			String selectedLetters = graphicEngine.getGamePanel(config).getSelectedLetters();
+			graphicEngine.getGamePanel(config).resetSelectedLetters();
+			gameEngine.getBoard(config).getGrid().getDico();
 			
 		}
 	}
 	
 	public MenuListener getMenuListener(){
 		return menuListener;
+	}
+	
+	public GameButtonListener getGameButtonListener(){
+		return gameButtonListener;
 	}
 	
 	public KeyboardListener getKeyListener(){
@@ -96,6 +110,10 @@ public class ContextManager {
 	public void setOptionsState(){
 		System.out.println("Options actives");
 		gameEngine.setState("OPTIONS_MENU");
+		
+		NoAvailablePrint error = new NoAvailablePrint();
+		error.alertNoAvailable();
+		
 	}
 	
 	public void setGameState(){
@@ -113,9 +131,48 @@ public class ContextManager {
 		}
 	}
 	
+	// Etat quitter
 	public void setExitState(){
 		System.out.println("Quitter le jeu");
 		gameEngine.setState("EXIT");
+		System.exit(0);
+	}
+	
+	// Etat pause
+	public void setPauseState(){
+		
+		if (this.gameEngine.getState() == GameState.GAME ){
+		
+			System.out.println("Pause");
+	
+			for (int i = 0; i<this.gameEngine.getBoards().size(); ++ i ){
+				this.gameEngine.getBoard(i).pause();
+			}
+			this.gameEngine.setState("PAUSE");
+			return;
+		}
+		else if (this.gameEngine.getState() == GameState.PAUSE ){
+			System.out.println("Fin de la pause");
+		
+			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
+				this.gameEngine.getBoard(i).restart();
+			}
+			
+			this.gameEngine.setState("GAME");
+			return;
+		}
+	}
+	
+	// Sauvegarder
+	public void setSaveState(){
+		System.out.println("Sauvegarde");
+		NoAvailablePrint error = new NoAvailablePrint();
+		error.alertNoAvailable();
+	}
+	
+	public void sendLetter(String letter){
+		// A MODIFIER : il faut savoir quel joueur est actuellement en mode anagramme
+		//gameEngine.getBoard(0).getGrid().getDico().
 	}
 	
 }
