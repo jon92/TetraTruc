@@ -237,12 +237,12 @@ public class Grid implements GridObservable {
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
 				// Interruption du jeu
-				ContextManager.getSingleton().setPauseState();
+				//ContextManager.getSingleton().setPauseState();
 				
-				if(dico.containsWord(word, 0, dico.getNbLines())){
+				//if(dico.containsWord(word, 0, dico.getNbLines())){
 					removeLine(currLine);
 					nbFullLines++;
-				}
+				//}
 			}
 			lineIsFull = true;
 		}
