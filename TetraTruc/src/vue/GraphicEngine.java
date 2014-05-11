@@ -24,7 +24,7 @@ public class GraphicEngine implements Observer {
 	}*/
 	
 	public void init(){
-		//Création de la fenêtre de jeu
+		//CrÃ©ation de la fenÃªtre de jeu
 		this.window = new Window();
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
@@ -37,6 +37,10 @@ public class GraphicEngine implements Observer {
 	
 	public GamePanel getGamePanel(){
 		return this.gamePanel;
+	}
+	
+	public Window getWindow(){
+		return this.window;
 	}
 	
 	public HashMap<String, String> getGameParams(){
