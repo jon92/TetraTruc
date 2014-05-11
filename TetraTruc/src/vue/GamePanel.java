@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.BoardObserver;
+import model.GameEngine;
 
 public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
@@ -58,6 +59,10 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
         add(this.saveButton);
         add(this.exitButton);
         
+        this.pauseButton.addMouseListener(this);
+        this.saveButton.addMouseListener(this);
+        this.exitButton.addMouseListener(this);
+        
 
 		this.drawBackground();
 		this.addMouseListener(this);
@@ -71,6 +76,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	public GameButton2D getExitButton(){
 		return exitButton;
 	}
+	
 	public GameButton2D getSaveButton(){
 		return saveButton;
 	}
@@ -144,15 +150,36 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
 		
 		// Test si on clique en dehors de la grille
-		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth())
+		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
+			
+			// on teste si on a cliqué sur un bouton
+			if (e.getSource() == this.pauseButton){
+				System.out.println("PAUUUUUUUUUUUUUUUUUSE !");
+				GameEngine.getSingleton().setState("EXIT");
+		 		System.exit(0);
+			}
+			else if (e.getSource() == this.saveButton){
+				System.out.println("SAUVEGAAAAAAAARDE ! ");
+			}
+			else if (e.getSource() == this.exitButton){
+				System.out.println("QUITTEEEEEEEEEEEEER ! ");
+//		 		//GameEngine.getSingleton().setState("EXIT");
+		 		System.exit(0);
+			}
 			return;
-		
-		String letter = grid.getBrick(line, col).getLetter();
-		// Test si la case est vide
-		if(letter == null)
-			return;
-		
-		System.out.println(letter);
+		}	
+			
+		// sinon, on est dans la grille
+		else{
+			
+			String letter = grid.getBrick(line, col).getLetter();
+			// Test si la case est vide
+			if(letter == null)
+				return;
+			
+			System.out.println(letter);
+			
+		}
 	}
 
 	@Override
