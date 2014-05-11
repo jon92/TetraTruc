@@ -121,4 +121,40 @@ public enum Dictionary {
     	return false;
     }
     
+    
+    public Vector<String> findAllAnagrams(Vector<String> allAnagrams, String word, String letters){
+    	
+    	if( containsWord(word, 0, nbLines) ){
+    		allAnagrams.add(word);
+    	}
+    	
+    	if( letters.length() == 0 ){
+    		return allAnagrams;
+    	}
+    	
+    	for(int i=0; i<letters.length(); ++i){
+    		String anagram = new String( word.concat(letters.substring(i, i+1)) );
+    		if(this.beginningExists(anagram)){
+    			if(i==0){
+    				System.out.println("1111111111");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(1, letters.length())));
+    			}
+    			else if(i==letters.length()-1){
+    				System.out.println("33333333333");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i)));
+    			}
+    			else{
+    				System.out.println("2222222222");
+    				System.out.println(anagram);
+    				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i).concat(letters.substring(i+1, letters.length()))));
+    			}
+    			System.out.println("Coucou !");
+    		}	
+    	}
+    	
+    	return allAnagrams;
+    }
+    
 }
