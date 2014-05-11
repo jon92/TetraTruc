@@ -99,6 +99,11 @@ public enum Dictionary {
         }
     }
     
+    public boolean validateSelection(boolean bool){
+    	if(bool)
+    		return true;
+    	return false;
+    }
 	
 	public boolean foundAnAnagram(int line){
 		String word = new String();

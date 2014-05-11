@@ -22,15 +22,15 @@ public class ContextManager {
 		switch (action){
 			case 37 : 
 				gameEngine.getBoard().getGrid().moveLeft();
-			break;
+				break;
 			
 			case 39 : 
 				gameEngine.getBoard().getGrid().moveRight();
-			break;
+				break;
 			
 			case 38 : 
 				gameEngine.getBoard().getGrid().rotate();
-			break;
+				break;
 			
 			case 40 : 
 				gameEngine.getBoard().getGrid().moveDown();
@@ -38,10 +38,20 @@ public class ContextManager {
                 //gameEngine.getBoard().getPlayer().setScore(1);
 				gameEngine.getBoard().incrementScore(1);
                 System.out.println("score + 1 descente rapide : "+ gameEngine.getBoard().getPlayer().getScore());
-			break;
+                break;
+			
 			case 32 : 
 				gameEngine.getBoard().getGrid().dropBottom();
-			break;
+				break;
+			
+			case 10 :
+				gameEngine.getBoard().getGrid().getDico().validateSelection(true);
+				break;
+				
+			/*default :
+				System.out.println(action);
+				break;
+			*/
 		}
 	}
 	
