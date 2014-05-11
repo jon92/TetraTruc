@@ -18,7 +18,7 @@ public class ContextManager {
 	private static ContextManager managerSingleton = new ContextManager();
 	private static GameButtonListener gameButtonListener;
 	private ArrayList<ArrayList<Integer>> configs = new ArrayList<ArrayList<Integer>>();
-	
+	private AnagramThread anagramThread = new AnagramThread();
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
@@ -74,9 +74,11 @@ public class ContextManager {
 			
 		}else if(action == 10){
 			
-			String selectedLetters = graphicEngine.getGamePanel(config).getSelectedLetters();
-			graphicEngine.getGamePanel(config).resetSelectedLetters();
-			gameEngine.getBoard(config).getGrid().getDico();
+			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
+			graphicEngine.getGamePanel(0).resetSelectedLetters();
+			gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
+			gameEngine.getBoard(0).getGrid().checkAnagramWord();
+			//gameEngine.getBoard(config).getGrid().getDico();
 			
 		}
 	}
@@ -128,6 +130,13 @@ public class ContextManager {
 		for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
 			gameEngine.getBoard(i).addObserver(graphicEngine.getGamePanel(i));
 			gameEngine.getBoard(i).getGrid().addObserver(graphicEngine.getGamePanel(i).getGrid2D());
+		}
+	}
+	
+	public void setAnagramState(){
+		if (!anagramThread.isAlive()){
+			graphicEngine.getGamePanel(0).setAnagram(true);
+			anagramThread.start();
 		}
 	}
 	

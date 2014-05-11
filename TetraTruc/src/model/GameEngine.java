@@ -47,7 +47,13 @@ public class GameEngine implements Observable {
 			players.add(new Player(this.gameParams.get("pseudo"+(i+1))));
 			this.boards.add(new Board(dico, players.get(i), this.gameParams.get("difficulte"), "Theme1"));
 			this.boards.get(i).start();
+			
+			if(Integer.parseInt(this.gameParams.get("players"))>1){
+				this.boards.get(i).getGrid().setAnagramAvailable(false);
+			}
 		}
+		
+
 		
 		//Lancement du jeu
 	}

@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private GameButton2D saveButton;
 	private GameButton2D exitButton;
 	private String selectedLetters;
+	private boolean anagram;
 	
 	public GamePanel(JPanel panel, int width, int height, int i){
 		this.id = i;
@@ -48,6 +49,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.theme = new ThemeDefault();
 		this.grid = new Grid2D(20, 10, 400, 200, theme, this.id);
 		this.selectedLetters = "";
+		this.anagram = false;
 		
 		// création et placement des boutons 		
 		setLayout(null);
@@ -79,6 +81,10 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	public GameButton2D getPauseButton(){ return pauseButton; }
 	public GameButton2D getExitButton(){ return exitButton; }
 	public GameButton2D getSaveButton(){ return saveButton; }
+	
+	public void setAnagram(boolean b){
+		this.anagram =b;
+	}
 	
 	public JPanel getPanel(){ return this.panel; }
 	public void setPanel(JPanel panel){ this.panel = panel; }
@@ -138,20 +144,23 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int line = (e.getY()-grid.getOriginGridTop()) / grid.getSquareSize();
-		int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
-		
-		// Test si on clique en dehors de la grille
-		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
-			return;
-		}	
+		if(this.anagram == true){
+			int line = (e.getY()-grid.getOriginGridTop()) / grid.getSquareSize();
+			int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
 			
-		String letter = grid.getBrick(line, col).getLetter();
-		// Test si la case est vide
-		if(letter == null)
-			return;
-		else
-			selectedLetters = new String(selectedLetters + letter);
+			// Test si on clique en dehors de la grille
+			if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
+				return;
+			}	
+		
+			String letter = grid.getBrick(line, col).getLetter();
+			System.out.println(letter);
+			// Test si la case est vide
+			if(letter == null)
+				return;
+			else
+				selectedLetters = new String(selectedLetters + letter);
+		}
 	}
 
 	@Override

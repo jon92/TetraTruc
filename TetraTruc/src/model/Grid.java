@@ -10,6 +10,8 @@ public class Grid implements GridObservable {
 	private int curX, curY;			// Emplacement de la piece en train de tomber
 	private GridObserver observer;	// Observateur pour la vue
 	private Dictionary dico;		// Dictionnaire pour les fonctions worddle et anagramme
+	private String anagramWord;
+	private boolean anagramAvailable;
 	
 	// Constructeur par defaut
 	public Grid(){
@@ -18,6 +20,7 @@ public class Grid implements GridObservable {
 		this.curShape = new Shape();
 		this.nextShape = new Shape();
 		this.grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
+		this.anagramAvailable = true;
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
@@ -47,6 +50,8 @@ public class Grid implements GridObservable {
 	public int getWidth(){ return width; }
 	public Dictionary getDico(){ return dico; }
 	public Shape shapeAt(int line, int col){ return grid[line][col]; }
+	public void setAnagramWord(String word){ this.anagramWord=word; }
+	public void setAnagramAvailable(boolean b){ this.anagramAvailable = b;}
 	
 	
 	
@@ -160,7 +165,7 @@ public class Grid implements GridObservable {
 			return 0;
 		}
 		else{	// Sinon, c'est qu'elle posee
-			int fullLines = removeFullLines();
+			int fullLines = removeFullLines(false);
 			newShape();
 			updateObserver();	// Notifier la vue
 			return fullLines;
@@ -212,7 +217,7 @@ public class Grid implements GridObservable {
 	}
 	
 	// Supprime toutes les lignes pleines
-	public int removeFullLines(){
+	public int removeFullLines( boolean anagramChecked ){
 		boolean lineIsFull = true;
 		int nbFullLines = 0;
 		// Parcourir toutes les lignes
@@ -227,12 +232,17 @@ public class Grid implements GridObservable {
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
 				// Interruption du jeu
-				ContextManager.getSingleton().setPauseState();
+				if(!anagramChecked && this.anagramAvailable){
+					ContextManager.getSingleton().setPauseState();
+					ContextManager.getSingleton().setAnagramState();
+				}
 				
-				if(dico.containsWord(word, 0, dico.getNbLines())){
+				if(anagramChecked == true || (!this.anagramAvailable)){
+					clearCurShape();
 					removeLine(currLine);
 					nbFullLines++;
 				}
+
 			}
 			lineIsFull = true;
 		}
@@ -284,6 +294,15 @@ public class Grid implements GridObservable {
 		
 		observer.update(coords, shapes, letters, nextShape, nextLetters);	
 
+	}
+	
+	public void checkAnagramWord(){
+		if(dico.containsWord(this.anagramWord, 0, dico.getNbLines())){
+			removeFullLines(true);
+			ContextManager.getSingleton().setPauseState();
+		}else{
+			ContextManager.getSingleton().setPauseState();
+		}
 	}
 
 	@Override

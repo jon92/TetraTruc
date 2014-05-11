@@ -12,11 +12,13 @@ public class Board extends Thread implements ActionListener, BoardObservable {
 	private Timer timer;
 	private Level level;
 	private BoardObserver observer;
+	private boolean pause;
 	
 	// Constructeur
 	public Board(Dictionary dico, Player player, String difficulty, String chosenTheme){
 		// joueur
 		this.player = player;
+		this.pause = false;
 		
 		// niveau de difficulte
 		if(difficulty != null){
@@ -45,16 +47,18 @@ public class Board extends Thread implements ActionListener, BoardObservable {
 	public Grid getGrid(){ return this.grid; }	
 	
 	// Lancement/Arret du jeu
-	public void pause(){ timer.stop(); }
+	public void pause(){ pause = true; }
 	public void run(){ grid.newShape(); timer.start(); }
-	public void restart(){ timer.start(); }
+	public void restart(){ pause = false; }
 	
 	// Methode appelee par le timer : fait descendre la piece automatiquement
 	public void actionPerformed(ActionEvent e) {
-		level.incrNbLinesRemoved(grid.moveDown());
-		level.up();
+		if(!pause){
+			level.incrNbLinesRemoved(grid.moveDown());
+			level.up();
 		timer.setDelay(level.getSpeed());
 		this.updateObserver();
+		}
 	}
 	
 	public void incrementScore(int value){

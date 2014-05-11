@@ -1,4 +1,3 @@
-
 package model;
 
 import java.io.BufferedReader;
@@ -12,7 +11,7 @@ public class Word {
     private int size;
     private static Dictionary dico = Dictionary.FR;		// A modifier selon quel dico on chois
     
-    // Constructeur par dÃ©faut
+    // Constructeur par défaut
     Word(){
         this.size = 0;
         this.word = "";
@@ -31,8 +30,8 @@ public class Word {
     
     
     
-    // trouver un mot avec des lettres mÃ©langÃ©es (anagramme)
-    // ParamÃ¨tres : String contenant les lettres mÃ©langÃ©es, "", un Word vide 
+    // trouver un mot avec des lettres mélangées (anagramme)
+    // Paramètres : String contenant les lettres mélangées, "", un Word vide 
     public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
         if(s1.length() == 0)    {
             //System.out.println("LONGEST WORD FINAL "+ longestWord.word);
@@ -47,7 +46,7 @@ public class Word {
             boolean s1IsInDictionary = wordIsInDictionary(w1, 0, dico.getNbLines());
             boolean s2IsInDictionary = wordIsInDictionary(w2, 0, dico.getNbLines());
 
-            // on vÃ©rifie qu'il est dans le dictionnaire et qu'il est plus long
+            // on vérifie qu'il est dans le dictionnaire et qu'il est plus long
             if (s1IsInDictionary && s1.length() > longestWord.size){
                 longestWord.word = s1;
                 longestWord.size = s1.length();
