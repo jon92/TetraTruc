@@ -232,6 +232,7 @@ public class Grid implements GridObservable {
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
 				// Interruption du jeu
+				
 				if(!anagramChecked && this.anagramAvailable){
 					ContextManager.getSingleton().setPauseState();
 					ContextManager.getSingleton().setAnagramState();
@@ -242,7 +243,6 @@ public class Grid implements GridObservable {
 					removeLine(currLine);
 					nbFullLines++;
 				}
-
 			}
 			lineIsFull = true;
 		}

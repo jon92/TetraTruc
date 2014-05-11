@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,9 +10,9 @@ public class Word {
     private String word;
     private int size;
     private static Dictionary dico = Dictionary.FR;		// A modifier selon quel dico on chois
-    
+    */
     // Constructeur par défaut
-    Word(){
+   /* Word(){
         this.size = 0;
         this.word = "";
     }
@@ -21,18 +21,18 @@ public class Word {
         this.word = word;
         this.size = this.word.length();
     }
-    
+    */
     // Getters / Setters
-    public int getSize(){ return size; }
+  /*  public int getSize(){ return size; }
     public String getWord(){ return word; }        
 
 
-    
+    */
     
     
     // trouver un mot avec des lettres mélangées (anagramme)
     // Paramètres : String contenant les lettres mélangées, "", un Word vide 
-    public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
+    /*public static Word findWordWithSwitchedLetters(String s1, String s2, Word longestWord)  {
         if(s1.length() == 0)    {
             //System.out.println("LONGEST WORD FINAL "+ longestWord.word);
             return longestWord;
@@ -65,14 +65,14 @@ public class Word {
     }
 
     
-    
+    */
     
     // [TEST]
-    public static void main(String[] args) throws FileNotFoundException {        
-        Word word = new Word ("atta");
+   /* public static void main(String[] args) throws FileNotFoundException {        
+        Word word = new Word ("atta");*/
         //boolean check = findWordInDictionary(word, 0, dico.getNbLines());
         //System.out.println("check "+ check);
-        Word word2 = new Word ("");
+     /*   Word word2 = new Word ("");
         String[] str = {"r", "b", "a", "d", "a", "c", "a", "r", "b", "a"} ;
         
         Word st1 = new Word("abracadabra");
@@ -85,4 +85,4 @@ public class Word {
         System.out.println(longestWord.word);
     }
             
-}
+}*/
