@@ -180,4 +180,22 @@ public enum Dictionary {
     	return allAnagrams;
     }
     
+    public static void main(String[] args) {
+		Dictionary dico = Dictionary.FR;
+		if(dico.beginningExists("feru")){
+			System.out.println("Ca existe");
+		}
+		else{
+			System.out.println("Ca existe pas");
+		}
+		
+		Vector<String> anagrams = new Vector<String>();
+		anagrams = dico.findAllAnagrams(anagrams, "", "etre");
+		System.out.println("_____________________________________________________");
+		for(int i=0; i<anagrams.size(); ++i){
+			System.out.println(anagrams.get(i));
+		}
+		System.out.println("Fini !");
+	}
+    
 }
