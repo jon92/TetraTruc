@@ -109,7 +109,7 @@ public enum Dictionary {
     	// On parcourt tout le dictionnaire
     	for(int dicoLine=0; dicoLine<=nbLines; ++dicoLine){
     		// Si on trouve dans le dictionnaire un mot qui commence par le mot qu'on est en train de tester, on peut passer à la lettre suivante
-    		while( letterToCheck.equalsIgnoreCase(content.get(dicoLine).substring(begin, end)) ){
+    		while( begin < content.get(dicoLine).length() && letterToCheck.equalsIgnoreCase(content.get(dicoLine).substring(begin, end)) ){
     			begin++;
     			end++;
     			if(begin >= word.length()){
