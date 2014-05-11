@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import vue.GraphicEngine;
 import vue.NoAvailablePrint;
 import model.GameEngine;
+import model.GameEngine.GameState;
 
 public class ContextManager {
 	private static MenuListener menuListener;
@@ -137,24 +138,26 @@ public class ContextManager {
 	// Etat pause
 	public void setPauseState(){
 		
-		if (this.graphicEngine.getGamePanel(0).getIsOnPause() == false ){
+		if (this.gameEngine.getState() == GameState.GAME ){
 		
 			System.out.println("Pause");
 	
-			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
+			for (int i = 0; i<this.gameEngine.getBoards().size(); ++ i ){
 				this.gameEngine.getBoard(i).pause();
 			}
+			this.gameEngine.setState("PAUSE");
 		}
 		
-		else{
+		else if (this.gameEngine.getState() == GameState.PAUSE ){
 			System.out.println("Fin de la pause");
 		
 			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
 				this.gameEngine.getBoard(i).restart();
 			}
+			
+			this.gameEngine.setState("GAME");
 		}
-		
-		this.graphicEngine.getGamePanel(0).changeIsOnPause();
+	
 	
 	}
 	
