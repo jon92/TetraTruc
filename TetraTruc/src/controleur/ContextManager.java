@@ -106,4 +106,16 @@ public class ContextManager {
 		System.exit(0);
 	}
 	
+	public void setPauseState(){
+		System.out.println("Pause");
+		NoAvailablePrint error = new NoAvailablePrint();
+		error.alertNoAvailable();
+	}
+	
+	public void setSaveState(){
+		System.out.println("Sauvegarde");
+		NoAvailablePrint error = new NoAvailablePrint();
+		error.alertNoAvailable();
+	}
+	
 }
