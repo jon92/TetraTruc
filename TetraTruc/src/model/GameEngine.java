@@ -44,7 +44,7 @@ public class GameEngine implements Observable {
 	
 // /!\ A modifier!			
 		//Creation d'une board 
-		this.board = new Board(player, this.gameParams.get("difficulte"), "Theme1");
+		this.board = new Board(dico, player, this.gameParams.get("difficulte"), "Theme1");
 		this.board.start();
 		
 		//Lancement du jeu

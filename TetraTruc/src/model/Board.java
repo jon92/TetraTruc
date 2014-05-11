@@ -14,7 +14,7 @@ public class Board implements ActionListener, BoardObservable {
 	private BoardObserver observer;
 	
 	// Constructeur
-	public Board(Player player, String difficulty, String chosenTheme){
+	public Board(Dictionary dico, Player player, String difficulty, String chosenTheme){
 		// joueur
 		this.player = player;
 		
@@ -27,7 +27,7 @@ public class Board implements ActionListener, BoardObservable {
 			this.difficulty = 2;
 
 		// grille de jeu
-		this.grid = new Grid();
+		this.grid = new Grid(20, 10, dico);
 
 		// level
 		level = new Level();
