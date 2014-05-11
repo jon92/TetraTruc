@@ -2,13 +2,16 @@ package vue;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 
 public class GameButton2D extends JButton{
 	
@@ -19,10 +22,14 @@ public class GameButton2D extends JButton{
 	public GameButton2D(String name){
 		super(name);
 		this.name = name;
+		
+		Border emptyBorder = BorderFactory.createEmptyBorder();
+		this.setBorder(emptyBorder);
 	}
 	
 	public void paintComponent (Graphics g){
 		Graphics2D g2d = (Graphics2D)g;
+
 		
 		Color colorButton = new Color(16,77,91);
 		
@@ -56,11 +63,17 @@ public class GameButton2D extends JButton{
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 
         /* paint the text and icon*/
-        super.paintComponent(g);
+        //super.paintComponent(g);
+        g.setColor(Color.WHITE);
+		Font police = new Font("Helvetica",Font.BOLD, 10);		    
+	    g.setFont(police);
+	    
+	    
+	    
+	    
+	    int stringLen = (int) g2d.getFontMetrics().getStringBounds(this.name, g2d).getWidth();  
 		
-	    //int stringLen = (int) g2d.getFontMetrics().getStringBounds(this.name, g2d).getWidth();  
-        
-	    //g2d.drawString(this.name, (int) (this.getWidth()*0.5 - stringLen*0.5), (this.getHeight() / 2) + 5);
+	    g2d.drawString(this.name, (int) (this.getWidth()*0.5 - stringLen*0.5), (this.getHeight() / 2) + 5);
 	}
 	
 	public String getName(){
