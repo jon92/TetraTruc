@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import controleur.ContextManager;
+
 import model.BoardObserver;
 import model.GameEngine;
 
@@ -59,9 +61,9 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
         add(this.saveButton);
         add(this.exitButton);
         
-        this.pauseButton.addMouseListener(this);
-        this.saveButton.addMouseListener(this);
-        this.exitButton.addMouseListener(this);
+        this.pauseButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener()); 
+        this.saveButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
+        this.exitButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
         
 
 		this.drawBackground();
@@ -151,30 +153,9 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		
 		// Test si on clique en dehors de la grille
 		if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
-			
-			// on teste si on a cliqué sur un bouton
-			if (e.getSource() == this.pauseButton){
-				System.out.println("PAUUUUUUUUUUUUUUUUUSE !");
-				NoAvailablePrint error = new NoAvailablePrint();
-				error.alertNoAvailable();
-			}
-			else if (e.getSource() == this.saveButton){
-				System.out.println("SAUVEGAAAAAAAARDE ! ");
-				// on affiche que le menu n'est pas disponible
-				NoAvailablePrint error = new NoAvailablePrint();
-				error.alertNoAvailable();
-				
-			}
-			else if (e.getSource() == this.exitButton){
-				System.out.println("QUITTEEEEEEEEEEEEER ! ");
-//		 		//GameEngine.getSingleton().setState("EXIT");
-		 		System.exit(0);
-			}
 			return;
 		}	
 			
-		// sinon, on est dans la grille
-		else{
 			
 			String letter = grid.getBrick(line, col).getLetter();
 			// Test si la case est vide
@@ -182,8 +163,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 				return;
 			
 			System.out.println(letter);
-			
-		}
+
 	}
 
 	@Override
