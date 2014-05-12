@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
 
 import controleur.ContextManager;
 
@@ -54,16 +57,19 @@ public class SoloMenu extends Menu2D {
 		
 		//Champs pseudo
 		this.pseudo = new JLabel("Pseudo");
+		this.pseudo.setForeground(Color.WHITE);
 		this.pseudo.setFont (this.pseudo.getFont ().deriveFont (24.0f));
 		this.pseudo.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 230, 200, 30);
 		this.pseudo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF = new JTextField();
-		this.pseudoJTF.setForeground(Color.BLUE);
+		this.pseudoJTF.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF.setForeground(Color.BLACK);
 		this.pseudoJTF.setBounds((int)(width*0.5-80), (int)(height*0.5-180), 140, 40);
 		//pseudoJTF.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	    
 		//Choix de la difficulté
 		JLabel level = new JLabel("Difficulté");
+		level.setForeground(Color.WHITE);
 		level.setFont (level.getFont ().deriveFont (24.0f));
 		level.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 80, 200, 30);
 		level.setHorizontalAlignment(SwingConstants.CENTER);

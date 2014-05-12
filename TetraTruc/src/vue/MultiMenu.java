@@ -2,6 +2,7 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -58,20 +59,24 @@ public class MultiMenu extends Menu2D {
 		
 		//Champs pseudo1
 		this.pseudo1 = new JLabel("Pseudo Joueur 1 ");
+		this.pseudo1.setForeground(Color.WHITE);
 		this.pseudo1.setFont (this.pseudo1.getFont ().deriveFont (20.0f));
 		this.pseudo1.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 230, 200, 30);
 		this.pseudo1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF1 = new JTextField();
-		this.pseudoJTF1.setForeground(Color.BLUE);
+		this.pseudoJTF1.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF1.setForeground(Color.BLACK);
 		this.pseudoJTF1.setBounds((int)(width*0.5-80), (int)(height*0.5-190), 140, 40);
 		
 		//Champs pseudo2
 		this.pseudo2 = new JLabel("Pseudo Joueur 2 ");
+		this.pseudo2.setForeground(Color.WHITE);
 		this.pseudo2.setFont (this.pseudo2.getFont ().deriveFont (20.0f));
 		this.pseudo2.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 100, 200, 30);
 		this.pseudo2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF2 = new JTextField();
-		this.pseudoJTF2.setForeground(Color.BLUE);
+		this.pseudoJTF2.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF2.setForeground(Color.BLACK);
 		this.pseudoJTF2.setBounds((int)(width*0.5-80), (int)(height*0.5-60), 140, 40);
 			
 		
