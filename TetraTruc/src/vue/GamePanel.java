@@ -93,7 +93,15 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	public void setBackground(BufferedImage bg){ this.background = bg; }
 	
 	public String getSelectedLetters(){ return selectedLetters; }
-	public void resetSelectedLetters(){ selectedLetters = new String(); }
+	
+	public void resetSelectedLetters(){ 
+		selectedLetters = new String(); 
+		for(int i=0; i<grid.getHeight(); ++i){
+			for(int j=0; j<grid.getWidth(); ++j){
+				grid.getBrick(i, j).setClicked(false);
+			}
+		}
+	}
 	
 	
 	private void drawBackground(){
@@ -133,7 +141,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		g.setColor(new Color(16, 77, 91));
 		g.drawString(Integer.toString(this.level), 169, 525);
 		
-		//Dessin des lettres cliquées
+		//Dessin des lettres cliquï¿½es
 		police = new Font("Helvetica",Font.PLAIN, 30);
 		g.setFont(police);
 		g.setColor(Color.WHITE);
@@ -163,6 +171,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 			grid.getBrick(line, col).setClicked(true);
 			GraphicEngine.getSingleton().getGamePanel(0).repaint();
 			System.out.println(letter);
+			//System.out.println(grid.getBrick(line, col).getColor());
 			// Test si la case est vide
 			if(letter == null)
 				return;
