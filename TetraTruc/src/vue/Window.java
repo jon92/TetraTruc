@@ -11,8 +11,8 @@ public class Window extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private WindowPanel panel = new WindowPanel();
-	private int width = 414;
-	private int height = 600;
+	private int width = 401;
+	private int height = 590;
 	
 	public Window(){
 		this.setTitle("TetraTruc");

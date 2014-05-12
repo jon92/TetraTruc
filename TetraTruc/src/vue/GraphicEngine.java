@@ -90,7 +90,7 @@ public class GraphicEngine implements Observer {
 		this.window.repaint();
 		if(this.nbPlayers >1){
 			this.window.dispose();
-			this.window = new Window(807, 600);
+			this.window = new Window(800, 560);
 		}
 		JPanel pan = new JPanel();
 		pan.setPreferredSize(new Dimension(this.window.getWidth()*2, this.window.getHeight()*2));
