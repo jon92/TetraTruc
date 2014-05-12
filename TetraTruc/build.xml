@@ -56,13 +56,13 @@
 		<delete dir="${dist.dir}" />
 	</target>
 	
-	<target name="execute" depends="compile" description="run le programme">
+	<!--<target name="execute" depends="compile" description="run le programme">
 		<java 
 			classname="TetraTruc"
 			classpath="${build.classes}">
 			<arg file="." />
 		</java>
 	</target>
-		
+	-->	
 </project>
 
