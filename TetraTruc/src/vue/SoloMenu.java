@@ -1,8 +1,14 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
+
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -10,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
 
 import controleur.ContextManager;
 
@@ -26,10 +34,18 @@ public class SoloMenu extends Menu2D {
 	private JRadioButton  normal;
 	private JRadioButton  hard;
 	
+	private BufferedImage backgroundImage;
+	private String backgroundName;
+	
+	
 	public SoloMenu(JPanel panel, int width, int height){
 		super(panel);
 		this.width = width;
 		this.height = height;
+		
+		this.backgroundName = GraphicEngine.getSingleton().getTheme().getBackgroundMenu2();
+		
+		this.createBackgroundImage();
 	}
 	
 	public void create(){
@@ -41,16 +57,19 @@ public class SoloMenu extends Menu2D {
 		
 		//Champs pseudo
 		this.pseudo = new JLabel("Pseudo");
+		this.pseudo.setForeground(Color.WHITE);
 		this.pseudo.setFont (this.pseudo.getFont ().deriveFont (24.0f));
 		this.pseudo.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 230, 200, 30);
 		this.pseudo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF = new JTextField();
-		this.pseudoJTF.setForeground(Color.BLUE);
+		this.pseudoJTF.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF.setForeground(Color.BLACK);
 		this.pseudoJTF.setBounds((int)(width*0.5-80), (int)(height*0.5-180), 140, 40);
 		//pseudoJTF.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	    
-		//Choix de la difficulté
-		JLabel level = new JLabel("Difficulté");
+		//Choix de la difficultÃ©
+		JLabel level = new JLabel("DifficultÃ©");
+		level.setForeground(Color.WHITE);
 		level.setFont (level.getFont ().deriveFont (24.0f));
 		level.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 80, 200, 30);
 		level.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,7 +94,7 @@ public class SoloMenu extends Menu2D {
 		super.panel.add(this.normal);
 		super.panel.add(this.hard);
 		
-		//appel des préférences utilisateur
+		//appel des prÃ©fÃ©rences utilisateur
 		if(super.prefs != null){
 			this.pseudoJTF.setText(super.prefs.get("pseudo1"));
 			if(super.prefs.get("mode").equals("solo")){
@@ -84,7 +103,7 @@ public class SoloMenu extends Menu2D {
 		}
 	}
 	
-	//Fonction qui renvoie un tableau contenant les choix de paramètres effectués par le joueur sur ce menu
+	//Fonction qui renvoie un tableau contenant les choix de paramÃ¨tres effectuÃ©s par le joueur sur ce menu
 	public HashMap<String, String> getMenuParams(){
 		super.params = new HashMap<String, String>();
 		super.params.put("mode", "solo");
@@ -108,7 +127,7 @@ public class SoloMenu extends Menu2D {
 		return null;
 	}
 	
-	//Met en place les préférences utilisateur
+	//Met en place les prÃ©fÃ©rences utilisateur
 	private void setupPrefs(){
 		
 		if(super.prefs.get("difficulte").equals("Facile")){
@@ -119,4 +138,35 @@ public class SoloMenu extends Menu2D {
 			this.normal.setSelected(true);
 		}
 	}
+
+
+	public void createBackgroundImage(){
+		if (this.backgroundName != null){
+			BufferedImage img = null;
+			try {
+				img = ImageIO.read(new File(backgroundName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			this.setBackground(img);
+		}
+		else{
+			System.out.println("Pas d'image de fond");
+		}
+	}
+	
+	public BufferedImage getBackgroundImage(){
+		return this.backgroundImage ;
+	}
+	
+	public String getBackgroundName(){
+		return this.backgroundName;
+	}
+	
+	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }
+
+
+
+
 }

@@ -18,6 +18,7 @@ public class GraphicEngine implements Observer {
 	private Menu2D currentMenu;
 	private ArrayList<GamePanel> gamePanels = new ArrayList<GamePanel>();
 	private int nbPlayers;
+	private Theme theme;
 	
 	/*
 	private void GraphicEngine(){
@@ -25,11 +26,19 @@ public class GraphicEngine implements Observer {
 	}*/
 	
 	public void init(){
+		// choix du theme
+		this.theme = new ThemeDefault();
+		
+		
 		//Création de la fenêtre de jeu
 		this.window = new Window();
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
 		nbPlayers = 0;
+		
+		this.window.getPanel().setBackgroundImage(mainMenu.getBackgroundImage());
+		
+		this.window.repaint();		
 	}
 	
 	public static GraphicEngine getSingleton(){
@@ -41,19 +50,27 @@ public class GraphicEngine implements Observer {
 	public GamePanel getGamePanel(int i){ return this.gamePanels.get(i); }
 	public HashMap<String, String> getGameParams(){ return(this.currentMenu.getMenuParams()); }
 	public int getNbPlayers(){ return this.nbPlayers; }
-
+	public Theme getTheme(){ return this.theme; }
+	
 	
 	public void goToMainMenu(){
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
 		this.currentMenu = mainMenu;
+		
+		this.window.getPanel().setBackgroundImage(mainMenu.getBackgroundImage());
+		
 	}
 	public void goToSoloMenu(){
+		this.window.repaint();
 		SoloMenu soloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		soloMenu.loadPrefs("media/conf/prefs.tetra");
 		soloMenu.create();
 		this.currentMenu = soloMenu;
 		this.nbPlayers = 1;
+		
+		this.window.getPanel().setBackgroundImage(soloMenu.getBackgroundImage());
+		
 	}
 	public void goToMultiMenu(){
 		MultiMenu multiMenu = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
@@ -61,6 +78,9 @@ public class GraphicEngine implements Observer {
 		multiMenu.create();
 		this.currentMenu = multiMenu;
 		this.nbPlayers = 2;
+		
+		this.window.getPanel().setBackgroundImage(multiMenu.getBackgroundImage());
+		
 	}
 	public void goToOptionsMenu(){
 	}
@@ -70,7 +90,7 @@ public class GraphicEngine implements Observer {
 		this.window.repaint();
 		if(this.nbPlayers >1){
 			this.window.dispose();
-			this.window = new Window(807, 600);
+			this.window = new Window(800, 560);
 		}
 		JPanel pan = new JPanel();
 		pan.setPreferredSize(new Dimension(this.window.getWidth()*2, this.window.getHeight()*2));

@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.selectedLetters = "";
 		this.anagram = false;
 		
-		// crÃ©ation et placement des boutons 		
+		// création et placement des boutons 		
 		setLayout(null);
 		this.pauseButton = new GameButton2D("PAUSE");
 		this.saveButton = new GameButton2D("ENREGISTRER");
@@ -107,7 +107,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private void drawBackground(){
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File(theme.getBackground()));
+			img = ImageIO.read(new File(theme.getBackgroundGame()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -135,11 +135,11 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		
 		//Dessin du pseudo
 		if(this.pseudo != "")
-			g.drawString(this.pseudo + " !", 296, 32);
+			g.drawString("Yo " + this.pseudo + " !", 296, 32);
 		
 		//Dessin du level
 		g.setColor(new Color(16, 77, 91));
-		g.drawString(Integer.toString(this.level), 169, 525);
+		g.drawString("Niveau "+Integer.toString(this.level), 115, 525);
 		
 		//Dessin des lettres cliquï¿½es
 		police = new Font("Helvetica",Font.PLAIN, 30);

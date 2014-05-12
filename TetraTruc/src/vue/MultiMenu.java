@@ -2,8 +2,13 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,13 +25,20 @@ public class MultiMenu extends Menu2D {
 	private JLabel pseudo1, pseudo2;
 	private JTextField pseudoJTF1, pseudoJTF2;
 	
+	private BufferedImage backgroundImage;
+	private String backgroundName;
+	
 	public MultiMenu(JPanel panel, int width, int height){
 		super(panel);
 		this.width = width;
 		this.height = height;
+		
+		this.backgroundName = GraphicEngine.getSingleton().getTheme().getBackgroundMenu2();
+		
+		this.createBackgroundImage();
 	}
 	
-	//Fonction qui renvoie un tableau contenant les choix de paramètres effectués par le joueur sur ce menu
+	//Fonction qui renvoie un tableau contenant les choix de paramÃ¨tres effectuï¿½s par le joueur sur ce menu
 	public HashMap<String, String> getMenuParams(){
 		super.params = new HashMap<String, String>();
 		super.params.put("mode", "multi");
@@ -47,20 +59,24 @@ public class MultiMenu extends Menu2D {
 		
 		//Champs pseudo1
 		this.pseudo1 = new JLabel("Pseudo Joueur 1 ");
+		this.pseudo1.setForeground(Color.WHITE);
 		this.pseudo1.setFont (this.pseudo1.getFont ().deriveFont (20.0f));
 		this.pseudo1.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 230, 200, 30);
 		this.pseudo1.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF1 = new JTextField();
-		this.pseudoJTF1.setForeground(Color.BLUE);
+		this.pseudoJTF1.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF1.setForeground(Color.BLACK);
 		this.pseudoJTF1.setBounds((int)(width*0.5-80), (int)(height*0.5-190), 140, 40);
 		
 		//Champs pseudo2
 		this.pseudo2 = new JLabel("Pseudo Joueur 2 ");
+		this.pseudo2.setForeground(Color.WHITE);
 		this.pseudo2.setFont (this.pseudo2.getFont ().deriveFont (20.0f));
 		this.pseudo2.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 100, 200, 30);
 		this.pseudo2.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF2 = new JTextField();
-		this.pseudoJTF2.setForeground(Color.BLUE);
+		this.pseudoJTF2.setFont(new Font("Helvetica",Font.BOLD, 15));
+		this.pseudoJTF2.setForeground(Color.BLACK);
 		this.pseudoJTF2.setBounds((int)(width*0.5-80), (int)(height*0.5-60), 140, 40);
 			
 		
@@ -71,7 +87,7 @@ public class MultiMenu extends Menu2D {
 		super.panel.add(this.pseudoJTF2);
 		super.panel.add(this.pseudo2);
 		
-		//appel des préférences utilisateur
+		//appel des prÃ©fÃ©rences utilisateur
 		if(super.prefs != null){
 			if(super.prefs.get("mode") != null){
 				this.pseudoJTF1.setText(super.prefs.get("pseudo1"));
@@ -82,8 +98,36 @@ public class MultiMenu extends Menu2D {
 		}
 	}
 	
-	//Met en place les préférences utilisateur
-		private void setupPrefs(){
-			this.pseudoJTF2.setText(super.prefs.get("pseudo2"));
+	//Met en place les prÃ©fÃ©rences utilisateur
+	private void setupPrefs(){
+		this.pseudoJTF2.setText(super.prefs.get("pseudo2"));
+	}
+
+	public void createBackgroundImage(){
+		if (this.backgroundName != null){
+			BufferedImage img = null;
+			try {
+				img = ImageIO.read(new File(backgroundName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			this.setBackground(img);
 		}
+		else{
+			System.out.println("Pas d'image de fond");
+		}
+	}
+	
+	public BufferedImage getBackgroundImage(){
+		return this.backgroundImage ;
+	}
+	
+	public String getBackgroundName(){
+		return this.backgroundName;
+	}
+	
+	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }
+
+
 }

@@ -2,7 +2,6 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,9 +10,9 @@ import controleur.ContextManager;
 public class Window extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private JPanel panel = new JPanel();
-	private int width = 414;
-	private int height = 600;
+	private WindowPanel panel = new WindowPanel();
+	private int width = 401;
+	private int height = 590;
 	
 	public Window(){
 		this.setTitle("TetraTruc");
@@ -51,12 +50,12 @@ public class Window extends JFrame{
 		this.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	}
 	
-	public JPanel getPanel(){
+	public WindowPanel getPanel(){
 		return this.panel;
 	}
 	
 	public void setPanel(JPanel panel){
-		this.panel = panel;
+		this.panel = (WindowPanel) panel;
 		this.setContentPane(this.panel);
 		this.setVisible(true);
 	}
@@ -68,4 +67,5 @@ public class Window extends JFrame{
 	public int getHeight(){
 		return this.height;
 	}
+
 }
