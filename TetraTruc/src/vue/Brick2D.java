@@ -33,6 +33,7 @@ public class Brick2D extends JPanel {
 	public String getLetter(){ return letter; }
 	public void setLetter(String l){ letter = l; }
 	public void setClicked(boolean b){ this.clicked = b; }
+	public boolean isClicked(){ return clicked; }
 
 	public void draw(Graphics g, int x, int y, int zeroX, int zeroY, float sizeCoeff){
 		

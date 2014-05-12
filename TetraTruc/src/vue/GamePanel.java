@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.selectedLetters = "";
 		this.anagram = false;
 		
-		// cr�ation et placement des boutons 		
+		// cr�ation et placement des boutons 		
 		setLayout(null);
 		this.pauseButton = new GameButton2D("PAUSE");
 		this.saveButton = new GameButton2D("ENREGISTRER");
@@ -163,10 +163,15 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 			int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
 			
 			// Test si on clique en dehors de la grille
-			if(line<0 || line>grid.getHeight() || col<0 || col>grid.getWidth()){
+			if(line<0 || line>=grid.getHeight() || col<0 || col>=grid.getWidth()){
 				return;
-			}	
-		
+			}
+			
+			// Test si on n'a pas déjà cliqué sur la case
+			if(grid.getBrick(line, col).isClicked()){
+				return;
+			}
+			
 			String letter = grid.getBrick(line, col).getLetter();
 			grid.getBrick(line, col).setClicked(true);
 			GraphicEngine.getSingleton().getGamePanel(0).repaint();
