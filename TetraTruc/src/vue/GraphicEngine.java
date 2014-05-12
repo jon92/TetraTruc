@@ -36,6 +36,8 @@ public class GraphicEngine implements Observer {
 		mainMenu.create();
 		nbPlayers = 0;
 		
+		this.window.getPanel().setBackgroundImage(mainMenu.getBackgroundImage());
+		
 		this.window.repaint();		
 	}
 	
@@ -48,7 +50,6 @@ public class GraphicEngine implements Observer {
 	public GamePanel getGamePanel(int i){ return this.gamePanels.get(i); }
 	public HashMap<String, String> getGameParams(){ return(this.currentMenu.getMenuParams()); }
 	public int getNbPlayers(){ return this.nbPlayers; }
-
 	public Theme getTheme(){ return this.theme; }
 	
 	
@@ -56,13 +57,20 @@ public class GraphicEngine implements Observer {
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
 		this.currentMenu = mainMenu;
+		
+		this.window.getPanel().setBackgroundImage(mainMenu.getBackgroundImage());
+		
 	}
 	public void goToSoloMenu(){
+		this.window.repaint();
 		SoloMenu soloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		soloMenu.loadPrefs("media/conf/prefs.tetra");
 		soloMenu.create();
 		this.currentMenu = soloMenu;
 		this.nbPlayers = 1;
+		
+		this.window.getPanel().setBackgroundImage(soloMenu.getBackgroundImage());
+		
 	}
 	public void goToMultiMenu(){
 		MultiMenu multiMenu = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
@@ -70,6 +78,9 @@ public class GraphicEngine implements Observer {
 		multiMenu.create();
 		this.currentMenu = multiMenu;
 		this.nbPlayers = 2;
+		
+		this.window.getPanel().setBackgroundImage(multiMenu.getBackgroundImage());
+		
 	}
 	public void goToOptionsMenu(){
 	}
