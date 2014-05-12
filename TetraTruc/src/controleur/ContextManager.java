@@ -58,6 +58,7 @@ public class ContextManager {
 			
 			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
 			graphicEngine.getGamePanel(0).resetSelectedLetters();
+			graphicEngine.getGamePanel(0).setAnagram(false);
 			gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
 			gameEngine.getBoard(0).getGrid().checkAnagramWord(this.pauseId);
 			anagramThread.interrupt();
