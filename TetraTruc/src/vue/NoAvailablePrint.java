@@ -17,7 +17,7 @@ public class NoAvailablePrint extends JOptionPane{
 	}
 	
 	public void alertNoAvailable(){
-		this.showMessageDialog(this,"Menu non disponible. Désolés! A la place on vous offre des chouquettes!");
+		this.showMessageDialog(this,"Menu non disponible. Desoles! A la place on vous offre des chouquettes!");
 	}
 	
 

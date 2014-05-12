@@ -1,5 +1,4 @@
-mode @ multi
-players @ 2
-pseudo2 @ joueur2
-difficulte @ 
-pseudo1 @ joueur1
+mode @ solo
+players @ 1
+difficulte @ Normal
+pseudo1 @ jon

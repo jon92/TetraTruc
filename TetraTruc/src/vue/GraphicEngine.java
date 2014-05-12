@@ -57,6 +57,7 @@ public class GraphicEngine implements Observer {
 	}
 	public void goToMultiMenu(){
 		MultiMenu multiMenu = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
+		multiMenu.loadPrefs("media/conf/prefs.tetra");
 		multiMenu.create();
 		this.currentMenu = multiMenu;
 		this.nbPlayers = 2;

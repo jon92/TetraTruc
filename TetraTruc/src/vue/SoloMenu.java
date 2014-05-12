@@ -34,7 +34,7 @@ public class SoloMenu extends Menu2D {
 	
 	public void create(){
 		//Positionnement du bouton de mode solo
-		int soloButtonPosX = (int)(width * 0.5) - (int)(this.buttonWidth * 0.5);
+		int soloButtonPosX = (int)(width * 0.5 -10) - (int)(this.buttonWidth * 0.5);
 		int soloButtonPosY = (int)(height * 0.7) - (int)(this.buttonHeight * 0.5);
 		playButton.setBounds(soloButtonPosX, soloButtonPosY, this.buttonWidth, this.buttonHeight);
 		playButton.addActionListener(ContextManager.getSingleton().getMenuListener()); 
@@ -42,25 +42,25 @@ public class SoloMenu extends Menu2D {
 		//Champs pseudo
 		this.pseudo = new JLabel("Pseudo");
 		this.pseudo.setFont (this.pseudo.getFont ().deriveFont (24.0f));
-		this.pseudo.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 230, 200, 30);
+		this.pseudo.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 230, 200, 30);
 		this.pseudo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.pseudoJTF = new JTextField();
 		this.pseudoJTF.setForeground(Color.BLUE);
-		this.pseudoJTF.setBounds((int)(width*0.5-70), (int)(height*0.5-180), 140, 40);
+		this.pseudoJTF.setBounds((int)(width*0.5-80), (int)(height*0.5-180), 140, 40);
 		//pseudoJTF.addKeyListener(ContextManager.getSingleton().getKeyListener());
 	    
 		//Choix de la difficulté
 		JLabel level = new JLabel("Difficulté");
 		level.setFont (level.getFont ().deriveFont (24.0f));
-		level.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 80, 200, 30);
+		level.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 80, 200, 30);
 		level.setHorizontalAlignment(SwingConstants.CENTER);
 		this.bg = new ButtonGroup();
 		this.easy = new JRadioButton ("Facile");
 		this.normal = new JRadioButton ("Normal");
 		this.hard = new JRadioButton ("Difficile");
-		this.easy.setBounds((int)(width*0.5) - 100, (int)(height*0.5) - 30, 200, 30);
-		this.normal.setBounds((int)(width*0.5) - 100, (int)(height*0.5), 200, 30);
-		this.hard.setBounds((int)(width*0.5) - 100, (int)(height*0.5) + 30, 200, 30);
+		this.easy.setBounds((int)(width*0.5) - 110, (int)(height*0.5) - 30, 200, 30);
+		this.normal.setBounds((int)(width*0.5) - 110, (int)(height*0.5), 200, 30);
+		this.hard.setBounds((int)(width*0.5) - 110, (int)(height*0.5) + 30, 200, 30);
 		this.bg.add(easy);
 		this.bg.add(normal);
 		this.bg.add(hard);
@@ -77,6 +77,7 @@ public class SoloMenu extends Menu2D {
 		
 		//appel des préférences utilisateur
 		if(super.prefs != null){
+			this.pseudoJTF.setText(super.prefs.get("pseudo1"));
 			if(super.prefs.get("mode").equals("solo")){
 				this.setupPrefs();
 			}
@@ -109,7 +110,6 @@ public class SoloMenu extends Menu2D {
 	
 	//Met en place les préférences utilisateur
 	private void setupPrefs(){
-		this.pseudoJTF.setText(super.prefs.get("pseudo"));
 		
 		if(super.prefs.get("difficulte").equals("Facile")){
 			this.easy.setSelected(true);
