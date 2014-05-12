@@ -1,0 +1,90 @@
+Pour jouer à TetraTruc, rien de plus simple !
+
+En lançant le jeu, vous arrivez sur un menu qui vous propose 4 options :
+
+    - Mode solo
+
+    - Multijoueur
+
+    - Options
+
+    - Quitter
+
+Si vous voulez jouer seul, cliquez sur Mode solo
+
+Si vous voulez jouer à deux, choisissez Multijoueur.
+
+Si vous avez ouvert le logiciel par erreur, cliquez sur Quitter.
+
+Le Bouton Options aurait dû vous permettre de choisir le thème, la musique … Malheureusement, nous n’avons pas eu le temps de le développer!
+
+Si vous avez choisi mode solo, on vous propose maintenant d’entrer votre pseudo et de choisir le niveau de difficulté du jeu. Une fois ceci fait, cliquez sur Jouer
+
+Si vous avez choisi le mode Multijoueur, on vous demande d’entrer deux pseudos, puis de cliquer sur Jouer.
+
+Vous êtes maintenant face au jeu.
+
+Des formes tombent du haut de la grille, sur lesquelles sont écrites des lettres. Vous devez les positionner afin qu’elles forment une ligne. Une fois la ligne formée, vous devez trouver le plus long anagramme possible pour détruire la ligne.
+
+Vous pouvez également passer en mode worddle. Les pièces arrêtent de tomber, et vous devez trouver un mot grâce aux lettres, en ne cliquant que sur les pièces adjacentes. Si le mot existe, les pièces sont détruites.
+
+Touches :
+
+    Pour le Mode Solo :
+
+        Rotation : Flèche du haut
+
+        Décaler à gauche : Flèche de gauche
+
+        Décaler à droite : Flèche de droite
+
+        Descendre d’une case : Flèche du bas
+
+        Descendre tout en bas : Barre d’espace
+
+        Worddle : W
+
+    Pour le Multijoueur :
+
+        Plateau de gauche :
+
+            Rotation : Flèche du haut
+
+            Décaler à gauche : Flèche de gauche
+
+            Décaler à droite : Flèche de droite
+
+            Descendre d’une case : Flèche du bas
+
+            Descendre tout en bas : Barre d’espace
+
+            Worddle : Non disponible
+
+        Plateau de droite
+
+            Rotation : Z
+
+            Décaler à gauche : Q
+
+            Décaler à droite : S
+
+            Descendre d’une case : D
+
+            Descendre tout en bas : Maj
+
+            Worddle : Non disponible
+
+Vous pouvez voir à droite de votre plateau 3 boutons: Pause, Enregistrer et Quitter
+
+    Pause : mettre le jeu en pause. Pour continuer le jeu, cliquez une deuxième fois sur le bouton
+
+    Enregistrer : menu non disponible
+
+    Quitter : ferme le jeu
+
+
+Nous vous souhaitons un agréable moment sur TetraTruc ! 
+
+
+
+
