@@ -12,6 +12,7 @@ public class Grid implements GridObservable {
 	private Dictionary dico;		// Dictionnaire pour les fonctions worddle et anagramme
 	private String anagramWord;
 	private boolean anagramAvailable;
+	private String[] unvalidatedLines;
 	
 	// Constructeur par defaut
 	public Grid(){
@@ -21,6 +22,7 @@ public class Grid implements GridObservable {
 		this.nextShape = new Shape();
 		this.grid = new Shape[height][width]; 	// Pour obtenir une case, grid[ligne][colonne]
 		this.anagramAvailable = true;
+		this.unvalidatedLines = new String[20];
 		
 		for(int i=0; i<height; ++i){
 			for(int j=0; j<width; ++j){
@@ -232,16 +234,17 @@ public class Grid implements GridObservable {
 			// Si la ligne est pleine, on la supprime
 			if(lineIsFull){
 				// Interruption du jeu
-				
-				if(!anagramChecked && this.anagramAvailable){
-					ContextManager.getSingleton().setPauseState();
-					ContextManager.getSingleton().setAnagramState();
-				}
-				
-				if(anagramChecked == true || (!this.anagramAvailable)){
-					clearCurShape();
-					removeLine(currLine);
-					nbFullLines++;
+				if(this.unvalidatedLines[currLine] == null){
+					if(!anagramChecked && this.anagramAvailable){
+						ContextManager.getSingleton().setPauseState(currLine);
+						ContextManager.getSingleton().setAnagramState();
+					}
+					
+					if(anagramChecked == true || (!this.anagramAvailable)){
+						clearCurShape();
+						removeLine(currLine);
+						nbFullLines++;
+					}
 				}
 			}
 			lineIsFull = true;
@@ -296,12 +299,13 @@ public class Grid implements GridObservable {
 
 	}
 	
-	public void checkAnagramWord(){
+	public void checkAnagramWord(int id){
 		if(dico.containsWord(this.anagramWord, 0, dico.getNbLines())){
 			removeFullLines(true);
-			ContextManager.getSingleton().setPauseState();
+			ContextManager.getSingleton().setPauseState(-2);
 		}else{
-			ContextManager.getSingleton().setPauseState();
+			this.unvalidatedLines[id] = this.anagramWord;
+			ContextManager.getSingleton().setPauseState(-2);
 		}
 	}
 

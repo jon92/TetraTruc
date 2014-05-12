@@ -132,6 +132,12 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		//Dessin du level
 		g.setColor(new Color(16, 77, 91));
 		g.drawString(Integer.toString(this.level), 169, 525);
+		
+		//Dessin des lettres cliquées
+		police = new Font("Helvetica",Font.PLAIN, 30);
+		g.setFont(police);
+		g.setColor(Color.WHITE);
+		g.drawString(this.getSelectedLetters(), 100, 300);
 	}
 
 	@Override
@@ -154,6 +160,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 			}	
 		
 			String letter = grid.getBrick(line, col).getLetter();
+			grid.getBrick(line, col).setClicked(true);
+			GraphicEngine.getSingleton().getGamePanel(0).repaint();
 			System.out.println(letter);
 			// Test si la case est vide
 			if(letter == null)

@@ -19,10 +19,13 @@ public class ContextManager {
 	private static GameButtonListener gameButtonListener;
 	private ArrayList<ArrayList<Integer>> configs = new ArrayList<ArrayList<Integer>>();
 	private AnagramThread anagramThread = new AnagramThread();
+	private int pauseId;
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
 		gameButtonListener = new GameButtonListener();
+		
+		this.pauseId = -1;
 
 		ArrayList<Integer> config1 = new ArrayList<Integer>();
 		config1.add(37);
@@ -50,6 +53,19 @@ public class ContextManager {
 		int down = this.configs.get(config).get(3);
 		int bottom = this.configs.get(config).get(4);
 		
+		if(action == 10){
+			
+			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
+			graphicEngine.getGamePanel(0).resetSelectedLetters();
+			gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
+			gameEngine.getBoard(0).getGrid().checkAnagramWord(this.pauseId);
+			anagramThread.interrupt();
+			this.pauseId = -1;
+		}
+		
+		if(this.gameEngine.getState() == GameState.PAUSE)
+			return;
+		
 		if(action == left){
 			
 			gameEngine.getBoard(config).getGrid().moveLeft();
@@ -71,14 +87,6 @@ public class ContextManager {
 			
 			gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
 			gameEngine.getBoard(config).getGrid().dropBottom();
-			
-		}else if(action == 10){
-			
-			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
-			graphicEngine.getGamePanel(0).resetSelectedLetters();
-			gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
-			gameEngine.getBoard(0).getGrid().checkAnagramWord();
-			//gameEngine.getBoard(config).getGrid().getDico();
 			
 		}
 	}
@@ -148,7 +156,13 @@ public class ContextManager {
 	}
 	
 	// Etat pause
-	public void setPauseState(){
+	public void setPauseState(int id){
+		System.out.println("id + " + id);
+		System.out.println("pauseid " + pauseId);
+		if(id != pauseId && pauseId != -1 && id != -2)
+			return;
+					
+		this.pauseId = id;
 		
 		if (this.gameEngine.getState() == GameState.GAME ){
 		
@@ -177,11 +191,6 @@ public class ContextManager {
 		System.out.println("Sauvegarde");
 		NoAvailablePrint error = new NoAvailablePrint();
 		error.alertNoAvailable();
-	}
-	
-	public void sendLetter(String letter){
-		// A MODIFIER : il faut savoir quel joueur est actuellement en mode anagramme
-		//gameEngine.getBoard(0).getGrid().getDico().
 	}
 	
 }
