@@ -8,14 +8,23 @@ import model.Tetrominoe;
 
 // classe 'globale', les thèmes héritent de lui
 public abstract class Theme {
-	protected String background = ""; // nom de l'image de fond
+	protected String backgroundGame = ""; // nom de l'image de fond
+	protected String backgroundMenu1 = ""; // nom de l'image de fond
+	protected String backgroundMenu2 = ""; // nom de l'image de fond
 	protected HashMap<Tetrominoe, Color> shapeColor; // map qui lie le Tetrominoe à sa couleur
 	
 	protected String music = "";
 	
-	public String getBackground(){
-		return background;
+	public String getBackgroundGame(){
+		return backgroundGame;
 	}
+	public String getBackgroundMenu1(){
+		return backgroundMenu1;
+	}
+	public String getBackgroundMenu2(){
+		return backgroundMenu2;
+	}
+	
 	
 	public String getMusic(){
 		return music;
