@@ -149,12 +149,13 @@ public class ContextManager {
 	
 	// Etat pause
 	public void setPauseState(){
+		HashMap<String, String> params = graphicEngine.getGameParams();
 		
 		if (this.gameEngine.getState() == GameState.GAME ){
 		
 			System.out.println("Pause");
 	
-			for (int i = 0; i<this.gameEngine.getBoards().size(); ++ i ){
+			for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
 				this.gameEngine.getBoard(i).pause();
 			}
 			this.gameEngine.setState("PAUSE");
@@ -163,7 +164,7 @@ public class ContextManager {
 		else if (this.gameEngine.getState() == GameState.PAUSE ){
 			System.out.println("Fin de la pause");
 		
-			for (int i = 0; i <this.gameEngine.getBoards().size(); ++ i ){
+			for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
 				this.gameEngine.getBoard(i).restart();
 			}
 			
