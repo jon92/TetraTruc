@@ -38,10 +38,9 @@ public class Brick2D extends JPanel {
 		
 		//efface la brique dessinée au tour d'avant
 		g.clearRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff), (int)(zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
-		
+				
 		g.setColor(color);
 			
-		
 		if(color != null){
 			g.fillRect((int)(zeroX + (y-1)*pxlWidth*sizeCoeff),(int)( zeroY + (x-1)*pxlHeight*sizeCoeff), (int)(pxlWidth*sizeCoeff), (int)(pxlHeight*sizeCoeff));
 		}else{
@@ -50,6 +49,11 @@ public class Brick2D extends JPanel {
 		}
 
 		g.setColor(Color.WHITE);
+		if(this.clicked && color != Color.RED)
+			g.setColor(Color.RED);
+		else if(this.clicked && color == Color.RED)
+			g.setColor(Color.ORANGE);
+		
 		if(letter != null){
             Font police = new Font("Helvetica",Font.BOLD, (int)(15*sizeCoeff));
             g.setFont(police);
