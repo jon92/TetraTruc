@@ -17,7 +17,7 @@ public class Window extends JFrame{
 	public Window(){
 		this.setTitle("TetraTruc");
 		this.setSize(this.width, this.height);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
 		panel.setLayout(null);
