@@ -12,7 +12,7 @@ public class WindowPanel extends JPanel {
 
 	public void paintComponent (Graphics g){
 		super.paintComponents(g);
-		System.out.println(background);
+		System.out.println("WindowPanel background : " + background);
 		g.drawImage(background, 0, 0, null);
 			
 	}
