@@ -34,9 +34,10 @@
 	</target>
 	
 	<target name="javadoc">
-		<mkdir dir="${build.javadocs}"/>
-		<javadoc useexternalfile="yes"
-			destdir="${build.javadocs}"
+		<mkdir dir="${build.javadoc}"/>
+		<javadoc useexternalfile="yes" 
+			sourcepath="${src}"
+			destdir="${build.javadoc}"
 			doctitle="Javadoc for ${name}" />
 	</target>
 	
