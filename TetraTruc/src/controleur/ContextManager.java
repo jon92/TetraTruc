@@ -46,7 +46,7 @@ public class ContextManager {
 
 	public void doKeyAction(int action, int config){
 		if(gameEngine.getBoard(0) == null) return;
-		if(gameEngine.getBoard(config) == null && action!=10) return;
+		if(gameEngine.getBoard(config) == null && action!=10 && action!=87) return;
 		
 		int left = this.configs.get(config).get(0);
 		int right = this.configs.get(config).get(1);
@@ -54,13 +54,33 @@ public class ContextManager {
 		int down = this.configs.get(config).get(3);
 		int bottom = this.configs.get(config).get(4);
 		
+		// Touche W : passage en mode Worddle
+		if(action == 87){
+			this.setPauseState(0);
+			this.setWorddleState();
+		}
+		
+		// Touche Entrée : validation d'un mot
 		if(action == 10 && graphicEngine.getGamePanel(0).getSelectedLetters().length()>0 ){
-			
 			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
 			graphicEngine.getGamePanel(0).resetSelectedLetters();
-			graphicEngine.getGamePanel(0).setAnagram(false);
-			gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
-			gameEngine.getBoard(0).getGrid().checkAnagramWord(this.pauseId);
+			
+			// Anagramme
+			if(graphicEngine.getGamePanel(0).isAnagramActivated()){
+				graphicEngine.getGamePanel(0).setAnagram(false);
+				gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
+				gameEngine.getBoard(0).getGrid().checkAnagramWord(this.pauseId);
+			}
+			
+			// Worddle
+			if(graphicEngine.getGamePanel(0).isWorddleActivated()){
+				graphicEngine.getGamePanel(0).setWorddle(false);
+				gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
+				gameEngine.getBoard(0).getGrid().checkWorddleWord(this.pauseId, graphicEngine.getGamePanel(0).getCoordsLetters());
+				graphicEngine.getGamePanel(0).resetCoordsLetters();
+				graphicEngine.getGamePanel(0).resetPreviousLetter();
+			}
+			
 			anagramThread.interrupt();
 			this.pauseId = -1;
 			
@@ -149,6 +169,13 @@ public class ContextManager {
 	public void setAnagramState(){
 		if (!anagramThread.isAlive()){
 			graphicEngine.getGamePanel(0).setAnagram(true);
+			anagramThread.start();
+		}
+	}
+	
+	public void setWorddleState(){
+		if (!anagramThread.isAlive()){
+			graphicEngine.getGamePanel(0).setWorddle(true);
 			anagramThread.start();
 		}
 	}
