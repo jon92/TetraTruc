@@ -46,7 +46,7 @@ public class ContextManager {
 
 	public void doKeyAction(int action, int config){
 		if(gameEngine.getBoard(0) == null) return;
-		if(gameEngine.getBoard(config) == null) return;
+		if(gameEngine.getBoard(config) == null && action!=10) return;
 		
 		int left = this.configs.get(config).get(0);
 		int right = this.configs.get(config).get(1);
@@ -54,7 +54,7 @@ public class ContextManager {
 		int down = this.configs.get(config).get(3);
 		int bottom = this.configs.get(config).get(4);
 		
-		if(action == 10){
+		if(action == 10 && graphicEngine.getGamePanel(0).getSelectedLetters().length()>0 ){
 			
 			String selectedLetters = graphicEngine.getGamePanel(0).getSelectedLetters();
 			graphicEngine.getGamePanel(0).resetSelectedLetters();
