@@ -17,7 +17,7 @@ public class GameButtonListener implements MouseListener {
 	    	case "PAUSE" :
 	    	case "pause" :
 	    	case "Pause" : 
-	    		ContextManager.getSingleton().setPauseState();
+	    		ContextManager.getSingleton().setPauseState(-1);
 	    		break;
 	    	
 	    	case "ENREGISTRER" :
