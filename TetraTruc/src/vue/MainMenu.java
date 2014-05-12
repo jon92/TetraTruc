@@ -22,7 +22,7 @@ public class MainMenu extends Menu2D {
 	public void create(){
 		//Positionnement du bouton de mode solo
 		int soloButtonPosX = (int)(width * 0.5) - (int)(this.buttonWidth * 0.5);
-		int soloButtonPosY = (int)(height * 0.5) - (int)(this.buttonHeight * 0.5) - 100;
+		int soloButtonPosY = (int)(height * 0.5) - (int)(this.buttonHeight * 0.5);
 		soloButton.setBounds(soloButtonPosX, soloButtonPosY, this.buttonWidth, this.buttonHeight);
 		soloButton.addActionListener(ContextManager.getSingleton().getMenuListener()); 
 		
