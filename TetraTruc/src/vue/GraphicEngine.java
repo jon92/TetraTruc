@@ -18,6 +18,7 @@ public class GraphicEngine implements Observer {
 	private Menu2D currentMenu;
 	private ArrayList<GamePanel> gamePanels = new ArrayList<GamePanel>();
 	private int nbPlayers;
+	private Theme theme;
 	
 	/*
 	private void GraphicEngine(){
@@ -25,6 +26,10 @@ public class GraphicEngine implements Observer {
 	}*/
 	
 	public void init(){
+		// choix du theme
+		this.theme = new ThemeDefault();
+		
+		
 		//Création de la fenêtre de jeu
 		this.window = new Window();
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
@@ -44,6 +49,8 @@ public class GraphicEngine implements Observer {
 	public HashMap<String, String> getGameParams(){ return(this.currentMenu.getMenuParams()); }
 	public int getNbPlayers(){ return this.nbPlayers; }
 
+	public Theme getTheme(){ return this.theme; }
+	
 	
 	public void goToMainMenu(){
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
