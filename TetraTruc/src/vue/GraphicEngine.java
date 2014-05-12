@@ -30,6 +30,8 @@ public class GraphicEngine implements Observer {
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
 		nbPlayers = 0;
+		
+		this.window.repaint();		
 	}
 	
 	public static GraphicEngine getSingleton(){
