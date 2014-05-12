@@ -2,8 +2,12 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,13 +24,20 @@ public class MultiMenu extends Menu2D {
 	private JLabel pseudo1, pseudo2;
 	private JTextField pseudoJTF1, pseudoJTF2;
 	
+	private BufferedImage backgroundImage;
+	private String backgroundName;
+	
 	public MultiMenu(JPanel panel, int width, int height){
 		super(panel);
 		this.width = width;
 		this.height = height;
+		
+		this.backgroundName = GraphicEngine.getSingleton().getTheme().getBackgroundMenu2();
+		
+		this.createBackgroundImage();
 	}
 	
-	//Fonction qui renvoie un tableau contenant les choix de paramètres effectués par le joueur sur ce menu
+	//Fonction qui renvoie un tableau contenant les choix de paramÃ¨tres effectuï¿½s par le joueur sur ce menu
 	public HashMap<String, String> getMenuParams(){
 		super.params = new HashMap<String, String>();
 		super.params.put("mode", "multi");
@@ -71,7 +82,7 @@ public class MultiMenu extends Menu2D {
 		super.panel.add(this.pseudoJTF2);
 		super.panel.add(this.pseudo2);
 		
-		//appel des préférences utilisateur
+		//appel des prÃ©fÃ©rences utilisateur
 		if(super.prefs != null){
 			if(super.prefs.get("mode") != null){
 				this.pseudoJTF1.setText(super.prefs.get("pseudo1"));
@@ -82,8 +93,36 @@ public class MultiMenu extends Menu2D {
 		}
 	}
 	
-	//Met en place les préférences utilisateur
-		private void setupPrefs(){
-			this.pseudoJTF2.setText(super.prefs.get("pseudo2"));
+	//Met en place les prÃ©fÃ©rences utilisateur
+	private void setupPrefs(){
+		this.pseudoJTF2.setText(super.prefs.get("pseudo2"));
+	}
+
+	public void createBackgroundImage(){
+		if (this.backgroundName != null){
+			BufferedImage img = null;
+			try {
+				img = ImageIO.read(new File(backgroundName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			this.setBackground(img);
 		}
+		else{
+			System.out.println("Pas d'image de fond");
+		}
+	}
+	
+	public BufferedImage getBackgroundImage(){
+		return this.backgroundImage ;
+	}
+	
+	public String getBackgroundName(){
+		return this.backgroundName;
+	}
+	
+	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }
+
+
 }
