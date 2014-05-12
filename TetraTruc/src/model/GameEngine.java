@@ -63,7 +63,10 @@ public class GameEngine implements Observable {
 	}
 	
 	public Board getBoard(int i){
-		return this.boards.get(i);
+		if(this.boards.isEmpty() || this.boards.size()<=i)
+			return null;
+		else 
+			return this.boards.get(i);
 	}
 	
 	public GameState getState(){

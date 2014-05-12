@@ -46,6 +46,7 @@ public class ContextManager {
 
 	public void doKeyAction(int action, int config){
 		if(gameEngine.getBoard(0) == null) return;
+		if(gameEngine.getBoard(config) == null) return;
 		
 		int left = this.configs.get(config).get(0);
 		int right = this.configs.get(config).get(1);
@@ -61,6 +62,7 @@ public class ContextManager {
 			gameEngine.getBoard(0).getGrid().checkAnagramWord(this.pauseId);
 			anagramThread.interrupt();
 			this.pauseId = -1;
+			
 		}
 		
 		if(this.gameEngine.getState() == GameState.PAUSE)
@@ -88,6 +90,8 @@ public class ContextManager {
 			gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
 			gameEngine.getBoard(config).getGrid().dropBottom();
 			
+		}else{
+			return;
 		}
 	}
 	
@@ -158,8 +162,8 @@ public class ContextManager {
 	// Etat pause
 	
 	public void setPauseState(int id){
-		System.out.println("id + " + id);
-		System.out.println("pauseid " + pauseId);
+		//System.out.println("id + " + id);
+		//System.out.println("pauseid " + pauseId);
 		if(id != pauseId && pauseId != -1 && id != -2)
 			return;
 					
