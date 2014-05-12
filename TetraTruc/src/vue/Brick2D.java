@@ -49,10 +49,10 @@ public class Brick2D extends JPanel {
 		}
 
 		g.setColor(Color.WHITE);
-		if(this.clicked && color != Color.RED)
+		/*if(this.clicked && color != Color.RED)
 			g.setColor(Color.RED);
 		else if(this.clicked && color == Color.RED)
-			g.setColor(Color.ORANGE);
+			g.setColor(Color.ORANGE);*/
 		
 		if(letter != null){
             Font police = new Font("Helvetica",Font.BOLD, (int)(15*sizeCoeff));
