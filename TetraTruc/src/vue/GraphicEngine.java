@@ -115,6 +115,7 @@ public class GraphicEngine implements Observer {
 		for(int i=0; i<this.nbPlayers; ++i){;
 			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight(), i));
 			this.window.getContentPane().add(this.gamePanels.get(i));
+			this.gamePanels.get(i).setGameOver(false);
 		}
 		
 		this.window.repaint();
