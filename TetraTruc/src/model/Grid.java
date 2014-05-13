@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Vector;
+
 import controleur.ContextManager;
 
 public class Grid implements GridObservable {
@@ -202,19 +204,22 @@ public class Grid implements GridObservable {
 		}
 	}
 	
-	// Supprime une ligne et fait tomber toutes les lignes superieures
-	private void removeLine(int line){
+	// Supprime une brique et fait tomber toutes les lignes superieures
+	private void removeBrick(int line, int col){
 		// Parcourir toutes les lignes superieures
 		for(int currLine=line; currLine>0; --currLine){
-			// Parcourir la ligne
-			for(int i=0; i<width; ++i){
-				grid[currLine][i] = grid[currLine-1][i];
-			}
+			grid[currLine][col] = grid[currLine-1][col];
 		}
 		
 		// Traitement spécifique à la premiere ligne
-		for(int i=0; i<width; ++i){
-			grid[0][i] = new Shape();
+		grid[0][col] = new Shape();
+	}
+	
+	// Supprime une ligne et fait tomber toutes les lignes superieures
+	private void removeLine(int line){
+		// Parcourir toute la ligne
+		for(int currCol=0; currCol<width; ++currCol){
+			removeBrick(line, currCol);
 		}
 	}
 	
@@ -302,6 +307,20 @@ public class Grid implements GridObservable {
 	public void checkAnagramWord(int id){
 		if(dico.containsWord(this.anagramWord, 0, dico.getNbLines())){
 			removeFullLines(true);
+			ContextManager.getSingleton().setPauseState(-2);
+		}else{
+			this.unvalidatedLines[id] = this.anagramWord;
+			ContextManager.getSingleton().setPauseState(-2);
+		}
+	}
+	
+	public void checkWorddleWord(int id, Vector<Integer> coords){
+		if(dico.containsWord(this.anagramWord, 0, dico.getNbLines())){
+			clearCurShape();	// Enleve la curShape de la grille pour éviter les mauvaises interactions le temps de supprimer les briques
+			for(int i=0; i<coords.size(); i+=2){
+				removeBrick(coords.get(i), coords.get(i+1));
+			}
+			putCurShape();
 			ContextManager.getSingleton().setPauseState(-2);
 		}else{
 			this.unvalidatedLines[id] = this.anagramWord;

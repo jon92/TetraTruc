@@ -103,7 +103,8 @@ public class Grid2D implements GridObserver{
 			for(int i=0; i<this.coords.length; ++i){
 				int x = this.coords[i].getX();
 				int y = this.coords[i].getY();
-				grid[x-1][y-1].draw(g, theme.getColorByShape(shapes[i]), x, y, originGridLeft, originGridTop, 1);	// Modifie la couleur de la brique	
+				grid[x-1][y-1].setColor(theme.getColorByShape(shapes[i]));
+				grid[x-1][y-1].draw(g, x, y, originGridLeft, originGridTop, 1);	// Modifie la couleur de la brique	
 			}
 		}
 		
@@ -177,8 +178,9 @@ public class Grid2D implements GridObserver{
 		
 		// Dessin des briques de la nextShape
 		for(int i=0; i<4; ++i){
-			if(this.nextShapes != null)
-				nextBricks[i].draw(g, theme.getColorByShape(nextShapes[i]), nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), originNextShapeLeft + offsetX, originNextShapeTop + offsetY, 0.8f);	// Modifie la couleur de la brique
+			if(this.nextShapes != null){
+				nextBricks[i].draw(g, nextShapes[i].getPoint(i).getX(), nextShapes[i].getPoint(i).getY(), originNextShapeLeft + offsetX, originNextShapeTop + offsetY, 0.8f);	// Modifie la couleur de la brique
+			}
 		}
 	}
 	
@@ -197,6 +199,7 @@ public class Grid2D implements GridObserver{
 		//Lettres de la nextShape
 		this.nextShapes = nextShapes;
 		for(int i=0; i<4; ++i){
+			nextBricks[i].setColor(theme.getColorByShape(nextShapes[i]));
 			nextBricks[i].setLetter(nextLetters[i]);
 		}
 
