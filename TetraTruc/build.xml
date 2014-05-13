@@ -6,11 +6,11 @@
 	<property name="name" value="TetraTruc" />
 	<property name="src" value="src"/>
 	<property name="build.dir" value="build"/>
-	<property name="build.classes" value="${build.dir}/classes"/>
-	<property name="build.javadoc" value="${build.dir}/javadoc"/>
+	<property name="build.classes" value="${build.dir}"/>
+	<property name="build.javadoc" value="javadoc"/>
 	<property name="dist.dir" value="dist"/>	
 	<property name="dist.jar" value="dist/${name}.jar"/>	
-	<property name="application.manifest" value="MANIFEST.MF"/>	
+	<property name="application.manifest" value="MANIFEST.MF"/>
 	
 	
 	<target name="init">
@@ -28,9 +28,9 @@
 			includes="**/*.class" 
 			manifest="${application.manifest}"
 		/>
-		<signjar jar="${build.jar}"
+		<!--<signjar jar="${build.jar}"
 				alias="myalias" storepass="secret"
-		/>
+		/>-->
 	</target>
 	
 	<target name="javadoc">
