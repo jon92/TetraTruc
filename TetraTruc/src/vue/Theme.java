@@ -11,6 +11,7 @@ public abstract class Theme {
 	protected String backgroundGame; // nom de l'image de fond
 	protected String backgroundMenu1; // nom de l'image de fond
 	protected String backgroundMenu2; // nom de l'image de fond
+	protected String gameover;
 	protected HashMap<Tetrominoe, Color> shapeColor; // map qui lie le Tetrominoe à sa couleur
 	
 	protected String music = "";
@@ -23,6 +24,9 @@ public abstract class Theme {
 	}
 	public String getBackgroundMenu2(){
 		return backgroundMenu2;
+	}
+	public String getGameover(){
+		return gameover;
 	}
 	
 	

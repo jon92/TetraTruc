@@ -13,6 +13,7 @@ public class ThemeDefault extends Theme{
 		this.backgroundGame = "media/img/BG_Game.jpg";
 		this.backgroundMenu1 = "media/img/BG_Menu.jpg";
 		this.backgroundMenu2 = "media/img/BG_MenuSolo.jpg";
+		this.gameover = "media/img/GameOver.png";
 		
 		
 		this.music = "";

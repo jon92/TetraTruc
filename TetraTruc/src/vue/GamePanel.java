@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private Grid2D grid;
 	private int width, height;
 	private BufferedImage background;
+	private BufferedImage gameoverImg;
 	private int score;
 	private int level;
 	private String pseudo;
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private String selectedLetters;
 	private boolean anagram;
 	private boolean worddle;
+	private boolean gameover;
 	private int[] worddlePreviousLetter;
 	private Vector<Integer> worddleCoordsLetter;
 	
@@ -48,6 +50,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.width = width;	
 		this.height = height;
 		this.background = null;
+		this.gameoverImg = null;
 		this.score = 0;
 		this.level = 1;
 		this.pseudo = "";
@@ -56,6 +59,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.selectedLetters = "";
 		this.anagram = false;
 		this.worddle = false;
+		this.gameover = false;
 		this.worddlePreviousLetter = new int[2];
 		this.resetPreviousLetter();
 		this.resetCoordsLetters();
@@ -82,7 +86,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
         this.exitButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
         
 
-		this.drawBackground();
+		this.loadBackground();
+		this.loadGameover();
 		this.addMouseListener(this);
 		
 	}
@@ -97,6 +102,8 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
 	public void setWorddle(boolean b){ this.worddle=b; }
 	public boolean isWorddleActivated(){ return worddle; }
+	
+	public void setGameOver(boolean b){ this.gameover=b; }
 	
 	public JPanel getPanel(){ return this.panel; }
 	public void setPanel(JPanel panel){ this.panel = panel; }
@@ -132,7 +139,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	public Vector<Integer> getCoordsLetters(){ return worddleCoordsLetter; }
 	
 	
-	private void drawBackground(){
+	private void loadBackground(){
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File(theme.getBackgroundGame()));
@@ -142,6 +149,18 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		
 		this.setBackground(img);
 	}
+	
+	private void loadGameover(){
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File(theme.getGameover()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.gameoverImg = img;
+	}
+	
 
 	public void paintComponent(Graphics g){
 		g.drawImage(this.background, 0, 0, null);
@@ -174,6 +193,10 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		g.setFont(police);
 		g.setColor(Color.WHITE);
 		g.drawString(this.getSelectedLetters(), 100, 300);
+		
+		//Dessin du gameover
+		if(this.gameover)
+			g.drawImage(gameoverImg, 0, 0, null);
 	}
 
 	@Override
@@ -186,7 +209,6 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 		// Mode Anagramme
 		if(this.anagram == true){
 			System.out.println("Mode anagramme activé");

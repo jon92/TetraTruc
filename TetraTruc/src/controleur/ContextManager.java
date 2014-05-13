@@ -233,7 +233,7 @@ public class ContextManager {
 	// Game Over
 	public void setGameOverState(){
 		this.setPauseState(0);
-		System.out.println("Game Over");
+		GraphicEngine.getSingleton().getGamePanel(0).setGameOver(true);
 	}
 	
 }
