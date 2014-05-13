@@ -45,7 +45,7 @@ public class GameEngine implements Observable {
 		//Creation des boards
 		for(int i=0; i<Integer.parseInt(this.gameParams.get("players")); ++i){
 			players.add(new Player(this.gameParams.get("pseudo"+(i+1))));
-			this.boards.add(new Board(dico, players.get(i), this.gameParams.get("difficulte"), "Theme1"));
+			this.boards.add(new Board(i, dico, players.get(i), this.gameParams.get("difficulte"), "Theme1"));
 			this.boards.get(i).start();
 			
 			if(Integer.parseInt(this.gameParams.get("players"))>1){

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Board extends Thread implements ActionListener, BoardObservable {
+	private int id;
 	private final Player player;
 	private final int difficulty;
 	private Grid grid;
@@ -15,7 +16,9 @@ public class Board extends Thread implements ActionListener, BoardObservable {
 	private boolean pause;
 	
 	// Constructeur
-	public Board(Dictionary dico, Player player, String difficulty, String chosenTheme){
+	public Board(int id, Dictionary dico, Player player, String difficulty, String chosenTheme){
+		this.id = id;
+		
 		// joueur
 		this.player = player;
 		this.pause = false;
@@ -33,7 +36,7 @@ public class Board extends Thread implements ActionListener, BoardObservable {
 		}
 		
 		// grille de jeu
-		this.grid = new Grid(20, 10, dico);
+		this.grid = new Grid(id, 20, 10, dico);
 
 		// level
 		level = new Level();

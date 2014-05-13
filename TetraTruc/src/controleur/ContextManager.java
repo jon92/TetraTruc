@@ -231,9 +231,9 @@ public class ContextManager {
 	}
 	
 	// Game Over
-	public void setGameOverState(){
+	public void setGameOverState(int id){
 		this.setPauseState(0);
-		GraphicEngine.getSingleton().getGamePanel(0).setGameOver(true);
+		GraphicEngine.getSingleton().getGamePanel(id).setGameOver(true);
 	}
 	
 }

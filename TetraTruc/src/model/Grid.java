@@ -5,6 +5,7 @@ import java.util.Vector;
 import controleur.ContextManager;
 
 public class Grid implements GridObservable {
+	private int id;
 	private int height, width;		// Dimensions de la grille
 	private Shape[][] grid;
 	private Shape curShape;			// Piece en train de tomber
@@ -36,11 +37,12 @@ public class Grid implements GridObservable {
 	}
 	
 	// Constructeur personnalise
-	public Grid(int h, int w, Dictionary dico){
+	public Grid(int id, int h, int w, Dictionary dico){
 		this(); // appel du constructeur de base
 		this.height = h;
 		this.width = w;
 		this.dico = dico;
+		this.id = id;
 	}
 	
 	
@@ -70,7 +72,7 @@ public class Grid implements GridObservable {
 		this.curY = -curShape.minY();
 
 		if(!canMoveTo(curX, curY+1))
-			ContextManager.getSingleton().setGameOverState();
+			ContextManager.getSingleton().setGameOverState(id);
 		
 		putCurShape();
 	}
