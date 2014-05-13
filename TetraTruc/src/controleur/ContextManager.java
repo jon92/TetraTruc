@@ -20,6 +20,7 @@ public class ContextManager {
 	private ArrayList<ArrayList<Integer>> configs = new ArrayList<ArrayList<Integer>>();
 	private AnagramThread anagramThread = new AnagramThread();
 	private int pauseId;
+	
 	private ContextManager(){
 		menuListener = new MenuListener();
 		keyListener = new KeyboardListener();
@@ -227,6 +228,12 @@ public class ContextManager {
 		System.out.println("Sauvegarde");
 		NoAvailablePrint error = new NoAvailablePrint();
 		error.alertNoAvailable();
+	}
+	
+	// Game Over
+	public void setGameOverState(){
+		this.setPauseState(0);
+		System.out.println("Game Over");
 	}
 	
 }

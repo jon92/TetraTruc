@@ -68,6 +68,10 @@ public class Grid implements GridObservable {
 		this.nextShape.randomShape();
 		this.curX = this.width/2 - 1;
 		this.curY = -curShape.minY();
+
+		if(!canMoveTo(curX, curY+1))
+			ContextManager.getSingleton().setGameOverState();
+		
 		putCurShape();
 	}
 	
