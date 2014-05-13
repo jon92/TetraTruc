@@ -48,6 +48,7 @@ public class Board extends Thread implements ActionListener, BoardObservable {
 	// Getters / Setters
 	public Player getPlayer(){ return this.player; }	
 	public Grid getGrid(){ return this.grid; }	
+	public Timer getTimer(){ return this.timer;}
 	
 	// Lancement/Arret du jeu
 	public void pause(){ pause = true; }

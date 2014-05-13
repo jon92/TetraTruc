@@ -79,23 +79,6 @@ public class GameButton2D extends JButton{
 	public String getName(){
 		return this.name;
 	}
-	
-	
-	// [TEST]
-	 public static void main(String[] args) {
-	        new JFrame(){
-	            {
-	                //setLayout(new FlowLayout());
-	                //setLayout(null);
-	                GameButton2D b = new GameButton2D("coucou");
-	                b.setBounds(12,12, 400,200);
-	                add(b);
-	                setSize(300,500);
-	                setDefaultCloseOperation(EXIT_ON_CLOSE);
-	                setVisible(true);
-	            }
-	        };
-	    }
 	 
 
 }

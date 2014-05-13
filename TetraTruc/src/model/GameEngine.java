@@ -24,7 +24,7 @@ public class GameEngine implements Observable {
 	//Contient les parametres de jeu (pseudo, difficulte...)
 	private HashMap<String, String> gameParams;
 	private Dictionary dico;
-	private ArrayList<Board> boards = new ArrayList<Board>();
+	private ArrayList<Board> boards;
 	
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
@@ -43,6 +43,7 @@ public class GameEngine implements Observable {
 		ArrayList<Player> players = new ArrayList<Player>();
 				
 		//Creation des boards
+		this.boards = new ArrayList<Board>();
 		for(int i=0; i<Integer.parseInt(this.gameParams.get("players")); ++i){
 			players.add(new Player(this.gameParams.get("pseudo"+(i+1))));
 			this.boards.add(new Board(i, dico, players.get(i), this.gameParams.get("difficulte"), "Theme1"));
@@ -56,6 +57,15 @@ public class GameEngine implements Observable {
 
 		
 		//Lancement du jeu
+	}
+	
+	public void resetGame(){
+		for(int i=0; i<Integer.parseInt(this.gameParams.get("players")); ++i){
+				this.boards.get(i).interrupt();
+				this.boards.get(i).getTimer().stop();
+		}
+		this.boards = null;
+		System.gc();
 	}
 	
 	public ArrayList<Board> getBoards(){
@@ -143,8 +153,9 @@ public class GameEngine implements Observable {
 
 	@Override
 	public void updateObserver() {
-		for(Observer obs : this.observers )
+		for(Observer obs : this.observers ){
 		      obs.update(this.state.toString());
+		}
 	}
 
 	@Override

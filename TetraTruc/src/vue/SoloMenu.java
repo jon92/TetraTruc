@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -17,7 +18,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
+//import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
+
 
 import controleur.ContextManager;
 
@@ -144,7 +146,7 @@ public class SoloMenu extends Menu2D {
 		if (this.backgroundName != null){
 			BufferedImage img = null;
 			try {
-				img = ImageIO.read(new File(backgroundName));
+				img = ImageIO.read(new FileInputStream(new File(backgroundName)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

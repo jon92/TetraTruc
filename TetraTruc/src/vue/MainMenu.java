@@ -2,6 +2,7 @@ package vue;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -36,7 +37,7 @@ public class MainMenu extends Menu2D {
 		if (this.backgroundName != null){
 			BufferedImage img = null;
 			try {
-				img = ImageIO.read(new File(backgroundName));
+				img = ImageIO.read(new FileInputStream(new File(backgroundName)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

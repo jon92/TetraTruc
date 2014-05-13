@@ -134,6 +134,12 @@ public class ContextManager {
 		return managerSingleton;
 	}
 	
+	public void setMainMenuState(){
+		System.out.println("Main Menu actif");
+		gameEngine.resetGame();
+		gameEngine.setState("MAIN_MENU");
+	}
+	
 	public void setSoloState(){
 		System.out.println("Menu Solo actif");
 		gameEngine.setState("SOLO_MENU");

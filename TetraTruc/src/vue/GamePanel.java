@@ -16,13 +16,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import controleur.ContextManager;
-
 import model.BoardObserver;
 import model.GameEngine;
 
 public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private int id;
 	private JPanel panel;
 	private Grid2D grid;
@@ -33,6 +32,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private int level;
 	private String pseudo;
 	private Theme theme;
+	private GameButton2D menuButton;
 	private GameButton2D pauseButton;
 	private GameButton2D saveButton;
 	private GameButton2D exitButton;
@@ -69,20 +69,24 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		setLayout(null);
 		this.pauseButton = new GameButton2D("PAUSE");
 		this.saveButton = new GameButton2D("ENREGISTRER");
+		this.menuButton = new GameButton2D("RETOUR MENU");
 		this.exitButton = new GameButton2D("QUITTER");
 		
 		this.pauseButton.setBounds(285, 310, 85, 25);
 		this.saveButton.setBounds(285, 340, 85, 25);
-		this.exitButton.setBounds(285, 370, 85, 25);
+		this.menuButton.setBounds(285, 370, 85, 25);
+		this.exitButton.setBounds(285, 400, 85, 25);
 		
 
 		
         add(this.pauseButton);
         add(this.saveButton);
+        add(this.menuButton);
         add(this.exitButton);
         
         this.pauseButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener()); 
         this.saveButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
+        this.menuButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener()); 
         this.exitButton.addMouseListener(ContextManager.getSingleton().getGameButtonListener());
         
 
@@ -93,6 +97,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	}
 	
 	// Getters / Setters
+	public int getId(){ return this.id; }
 	public GameButton2D getPauseButton(){ return pauseButton; }
 	public GameButton2D getExitButton(){ return exitButton; }
 	public GameButton2D getSaveButton(){ return saveButton; }
@@ -204,6 +209,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.score = score;
 		this.level = level;
 		this.pseudo = pseudo;
+		
 		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
 	}
 

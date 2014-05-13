@@ -11,7 +11,7 @@ public class GameButtonListener implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		GameButton2D source = (GameButton2D) e.getSource();
-		
+	
 		switch(source.getName()){
 	    
 	    	case "PAUSE" :
@@ -27,6 +27,12 @@ public class GameButtonListener implements MouseListener {
 	    	case "Sauvegarder" :
 	    	case "sauvegarder" :
 	    		ContextManager.getSingleton().setSaveState();
+	    		break;
+	    		
+	    	case "RETOUR MENU" :
+	    	case "Retour Menu" :
+	    	case "retour menu" :
+	    		ContextManager.getSingleton().setMainMenuState();
 	    		break;
 	 
 	    	case "QUITTER" :

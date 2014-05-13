@@ -54,12 +54,26 @@ public class GraphicEngine implements Observer {
 	
 	
 	public void goToMainMenu(){
+		
+		int scMenu = 1;
+		if(this.currentMenu.getMenuParams().get("mode") == "multi"){
+			this.window.dispose();
+			this.window = new Window();
+			scMenu = 0;
+		}
+		this.window.getContentPane().removeAll();
+		this.window.repaint();
+		
 		MainMenu mainMenu = new MainMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
 		mainMenu.create();
 		this.currentMenu = mainMenu;
 		
 		this.window.getPanel().setBackgroundImage(mainMenu.getBackgroundImage());
+		if(scMenu !=0)
+			this.window.getContentPane().add(mainMenu.getPanel());
 		
+		this.window.repaint();
+		this.window.setVisible(true);
 	}
 	public void goToSoloMenu(){
 		this.window.repaint();
@@ -98,7 +112,7 @@ public class GraphicEngine implements Observer {
 		GridLayout gl = new GridLayout(1,2);
 		this.window.setLayout(gl);
 		
-		for(int i=0; i<this.nbPlayers; ++i){
+		for(int i=0; i<this.nbPlayers; ++i){;
 			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight(), i));
 			this.window.getContentPane().add(this.gamePanels.get(i));
 		}
@@ -112,6 +126,7 @@ public class GraphicEngine implements Observer {
 		switch(param){
 			case "MAIN_MENU" :
 				this.goToMainMenu();
+				//this.goToGame();
 			break;
 			
 			case "SOLO_MENU" :
