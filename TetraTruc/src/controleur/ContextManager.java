@@ -56,8 +56,10 @@ public class ContextManager {
 		
 		// Touche W : passage en mode Worddle
 		if(action == 87){
-			this.setPauseState(0);
-			this.setWorddleState();
+			if(!graphicEngine.getGamePanel(0).isWorddleActivated()){
+				this.setPauseState(0);
+				this.setWorddleState();
+			}
 		}
 		
 		// Touche Entrée : validation d'un mot
@@ -73,7 +75,7 @@ public class ContextManager {
 			}
 			
 			// Worddle
-			if(graphicEngine.getGamePanel(0).isWorddleActivated()){
+			else if(graphicEngine.getGamePanel(0).isWorddleActivated()){
 				graphicEngine.getGamePanel(0).setWorddle(false);
 				gameEngine.getBoard(0).getGrid().setAnagramWord(selectedLetters);
 				gameEngine.getBoard(0).getGrid().checkWorddleWord(this.pauseId, graphicEngine.getGamePanel(0).getCoordsLetters());

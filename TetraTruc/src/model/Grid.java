@@ -316,9 +316,11 @@ public class Grid implements GridObservable {
 	
 	public void checkWorddleWord(int id, Vector<Integer> coords){
 		if(dico.containsWord(this.anagramWord, 0, dico.getNbLines())){
+			clearCurShape();	// Enleve la curShape de la grille pour éviter les mauvaises interactions le temps de supprimer les briques
 			for(int i=0; i<coords.size(); i+=2){
 				removeBrick(coords.get(i), coords.get(i+1));
 			}
+			putCurShape();
 			ContextManager.getSingleton().setPauseState(-2);
 		}else{
 			this.unvalidatedLines[id] = this.anagramWord;
