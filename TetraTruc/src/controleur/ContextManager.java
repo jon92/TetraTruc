@@ -85,7 +85,6 @@ public class ContextManager {
 			
 			anagramThread.interrupt();
 			this.pauseId = -1;
-			
 		}
 		
 		if(this.gameEngine.getState() == GameState.PAUSE)
@@ -169,15 +168,15 @@ public class ContextManager {
 	}
 	
 	public void setAnagramState(){
+		graphicEngine.getGamePanel(0).setAnagram(true);
 		if (!anagramThread.isAlive()){
-			graphicEngine.getGamePanel(0).setAnagram(true);
 			anagramThread.start();
 		}
 	}
 	
 	public void setWorddleState(){
+		graphicEngine.getGamePanel(0).setWorddle(true);
 		if (!anagramThread.isAlive()){
-			graphicEngine.getGamePanel(0).setWorddle(true);
 			anagramThread.start();
 		}
 	}
