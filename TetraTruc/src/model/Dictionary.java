@@ -11,7 +11,7 @@ import controleur.ContextManager;
 
 public enum Dictionary {
     
-	FR("media/lang/dictionary_FR.txt", "Français", 22739, 
+	FR("media/lang/dictionary_FR.txt", "Français", 336529, 
             "eeeeeeeeeeeeeessssssssaaaaaaaaiiiiiiiitttttttnnnnnnnrrrrrrruuuuuullllloooooddddcccpppmmmvvqqfbghjxyzwk"
         );
 	

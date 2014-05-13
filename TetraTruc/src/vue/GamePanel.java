@@ -210,6 +210,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.level = level;
 		this.pseudo = pseudo;
 		
+		System.out.println(this.grid.getId());
 		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
 	}
 

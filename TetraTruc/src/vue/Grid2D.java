@@ -86,6 +86,7 @@ public class Grid2D implements GridObserver{
 	public int getSquareSize(){ return squareSize; }
 	public int getWidth(){ return width; }
 	public int getHeight(){ return height; }
+	public int getId(){return this.id;}
 
 	// Nettoyage de la grille
 	public void clearGrid(){
