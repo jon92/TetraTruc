@@ -99,28 +99,7 @@ public enum Dictionary {
         else{
             return this.containsWord(word, (middle + 1), end);  
         }
-    }
-	
-	public boolean foundAnAnagram(int line){
-		String word = new String();
-		
-		
-		System.out.println("Mode Anagramme activé !");
-		
-		// Attendre que le joueur ait validé en appuyant sur Entrée
-		
-		// Récupérer les lettres cliquées
-			
-		// Vérifier qu'elles sont bien sur la bonne ligne pour les prendre en compte ou non
-		System.out.println("Boucle");
-		
-		// Si le mot existe, TRUE, sinon FALSE
-		if(containsWord(word, 0, nbLines))
-			return true;
-		else
-			return false;
-	}
-    
+    }    
     
     // Chercher s'il existe un mot commençant par les caractères passés en paramètres
     public boolean beginningExists(String word){
@@ -158,17 +137,14 @@ public enum Dictionary {
     		String anagram = new String( word.concat(letters.substring(i, i+1)) );
     		if(this.beginningExists(anagram)){
     			if(i==0){
-    				System.out.println("1111111111");
     				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(1, letters.length())));
     			}
     			else if(i==letters.length()-1){
-    				System.out.println("33333333333");
     				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i)));
     			}
     			else{
-    				System.out.println("2222222222");
     				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i).concat(letters.substring(i+1, letters.length()))));
     			}
@@ -178,23 +154,4 @@ public enum Dictionary {
     	
     	return allAnagrams;
     }
-    
-    public static void main(String[] args) {
-		Dictionary dico = Dictionary.FR;
-		if(dico.beginningExists("feru")){
-			System.out.println("Ca existe");
-		}
-		else{
-			System.out.println("Ca existe pas");
-		}
-		
-		Vector<String> anagrams = new Vector<String>();
-		anagrams = dico.findAllAnagrams(anagrams, "", "etre");
-		System.out.println("_____________________________________________________");
-		for(int i=0; i<anagrams.size(); ++i){
-			System.out.println(anagrams.get(i));
-		}
-		System.out.println("Fini !");
-	}
-    
 }
