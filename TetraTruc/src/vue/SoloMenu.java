@@ -154,7 +154,7 @@ public class SoloMenu extends Menu2D {
 			this.setBackground(img);
 		}
 		else{
-			System.out.println("Pas d'image de fond");
+			System.err.println("Erreur : Pas d'image de fond");
 		}
 	}
 	

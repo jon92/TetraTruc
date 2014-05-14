@@ -139,24 +139,20 @@ public class ContextManager {
 	}
 	
 	public void setMainMenuState(){
-		System.out.println("Main Menu actif");
 		gameEngine.resetGame();
 		graphicEngine.resetGame();
 		gameEngine.setState("MAIN_MENU");
 	}
 	
 	public void setSoloState(){
-		System.out.println("Menu Solo actif");
 		gameEngine.setState("SOLO_MENU");
 	}
 	
 	public void setMultiState(){
-		System.out.println("Menu Multi actif");
 		gameEngine.setState("MULTI_MENU");
 	}
 	
 	public void setOptionsState(){
-		System.out.println("Options actives");
 		gameEngine.setState("OPTIONS_MENU");
 		
 		NoAvailablePrint error = new NoAvailablePrint();
@@ -165,8 +161,6 @@ public class ContextManager {
 	}
 	
 	public void setGameState(){
-		System.out.println("Jeu lance");
-
 		//Passage des paramètres de jeu choisis par le joueur (pseudo, difficulté...)
 		HashMap<String, String> params = graphicEngine.getGameParams();
 		gameEngine.setGameParams(params);
@@ -195,7 +189,6 @@ public class ContextManager {
 	
 	// Etat quitter
 	public void setExitState(){
-		System.out.println("Quitter le jeu");
 		gameEngine.setState("EXIT");
 		System.exit(0);
 	}
@@ -203,8 +196,6 @@ public class ContextManager {
 	// Etat pause
 	
 	public void setPauseState(int id){
-		//System.out.println("id + " + id);
-		//System.out.println("pauseid " + pauseId);
 		if(id != pauseId && pauseId != -1 && id != -2)
 			return;
 					
@@ -212,19 +203,14 @@ public class ContextManager {
 		HashMap<String, String> params = graphicEngine.getGameParams();
 
 		
-		if (this.gameEngine.getState() == GameState.GAME ){
-		
-			System.out.println("Pause");
-	
+		if (this.gameEngine.getState() == GameState.GAME ){	
 			for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
 				this.gameEngine.getBoard(i).pause();
 			}
 			this.gameEngine.setState("PAUSE");
 			return;
 		}
-		else if (this.gameEngine.getState() == GameState.PAUSE ){
-			System.out.println("Fin de la pause");
-		
+		else if (this.gameEngine.getState() == GameState.PAUSE ){		
 			for(int i =0; i< Integer.parseInt(params.get("players")); ++i){
 				this.gameEngine.getBoard(i).restart();
 			}
@@ -236,7 +222,6 @@ public class ContextManager {
 	
 	// Sauvegarder
 	public void setSaveState(){
-		System.out.println("Sauvegarde");
 		NoAvailablePrint error = new NoAvailablePrint();
 		error.alertNoAvailable();
 	}

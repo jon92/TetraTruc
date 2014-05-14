@@ -51,12 +51,12 @@ public enum Dictionary {
                     fr.close();
                 }
                 catch (IOException exception){
-                    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+                    System.err.println ("Erreur lors de la lecture : " + exception.getMessage());
                 }
             
             }
             catch (FileNotFoundException exception){
-                System.out.println ("Le fichier n'a pas été trouvé");
+                System.err.println ("Erreur : Le fichier n'a pas été trouvé");
             }
         
             return constructContent;
@@ -137,18 +137,14 @@ public enum Dictionary {
     		String anagram = new String( word.concat(letters.substring(i, i+1)) );
     		if(this.beginningExists(anagram)){
     			if(i==0){
-    				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(1, letters.length())));
     			}
     			else if(i==letters.length()-1){
-    				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i)));
     			}
     			else{
-    				System.out.println(anagram);
     				allAnagrams.addAll(findAllAnagrams(allAnagrams, anagram, letters.substring(0, i).concat(letters.substring(i+1, letters.length()))));
     			}
-    			System.out.println("Coucou !");
     		}	
     	}
     	

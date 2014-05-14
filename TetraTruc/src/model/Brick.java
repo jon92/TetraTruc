@@ -35,12 +35,5 @@ public class Brick {
             char tmp = dico.getFreqLetters().charAt(nombreAleatoire);
             this.letter = Character.toString(tmp);                
 	}
-    
-	//[TEST]
-       /* public static void main(String[] args){
-            Brick fr = new Brick();
-            fr.generateRandomLetter(Dictionary.FR);
-            System.out.println(fr.letter);
-        }*/
         
 }

@@ -210,7 +210,6 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.level = level;
 		this.pseudo = pseudo;
 		
-		System.out.println("id "+ this.grid.getId());
 		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
 	}
 
@@ -218,7 +217,6 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// Mode Anagramme
 		if(this.anagram == true){
-			System.out.println("Mode anagramme activé");
 			
 			int line = (e.getY()-grid.getOriginGridTop()) / grid.getSquareSize();
 			int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();
@@ -247,7 +245,6 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		
 		// Mode Worddle
 		if(this.worddle == true){
-			System.out.println("Mode worddle activé");
 			
 			int line = (e.getY()-grid.getOriginGridTop()) / grid.getSquareSize();
 			int col = (e.getX() - grid.getOriginGridLeft()) / grid.getSquareSize();

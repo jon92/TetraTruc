@@ -29,7 +29,6 @@ public class GameEngine implements Observable {
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
 		this.dico = Dictionary.FR;
-		System.out.println(this.dico.getNbLines());
 	}
 	
 	public static GameEngine getSingleton(){
@@ -101,10 +100,6 @@ public class GameEngine implements Observable {
 	
 	public void setGameParams(HashMap<String, String> gameParams){
 		this.gameParams = gameParams;
-		System.out.println("--- Parametres de la partie ---");
-		System.out.println("Mode : " + this.gameParams.get("mode"));
-		System.out.println("Pseudo : " + this.gameParams.get("pseudo"));
-		System.out.println("Difficulte : " + this.gameParams.get("difficulte"));
 	}
 	
 	public void setState(String state){
