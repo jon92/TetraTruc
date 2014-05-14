@@ -112,7 +112,7 @@ public class GraphicEngine implements Observer {
 		GridLayout gl = new GridLayout(1,2);
 		this.window.setLayout(gl);
 		
-		for(int i=0; i<this.nbPlayers; ++i){;
+		for(int i=0; i<this.nbPlayers; ++i){
 			this.gamePanels.add(new GamePanel(this.window.getPanel(), this.window.getWidth(), this.window.getHeight(), i));
 			this.window.getContentPane().add(this.gamePanels.get(i));
 			this.gamePanels.get(i).setGameOver(false);
