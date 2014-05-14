@@ -110,8 +110,8 @@ public class ContextManager {
 			
 		}else if(action == bottom){
 			
-			gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
-			gameEngine.getBoard(config).getGrid().dropBottom();
+			if(gameEngine.getBoard(config).getGrid().dropBottom())
+				gameEngine.getBoard(config).incrementScore( 20-gameEngine.getBoard(config).getGrid().getCurY() +5 );
 			
 		}else{
 			return;

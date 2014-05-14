@@ -194,10 +194,14 @@ public class Grid implements GridObservable {
 	}
 	
 	// Faire tomber la piece directement tout en bas
-	public void dropBottom(){
+	public boolean dropBottom(){
+		if(!canMoveTo(curX, curY+1))
+			return false;
+		
 		while(canMoveTo(curX, curY+1)){
 			moveDown();
 		}
+		return true;
 	}
 	
 	
