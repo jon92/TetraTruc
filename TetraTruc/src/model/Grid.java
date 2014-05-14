@@ -227,6 +227,7 @@ public class Grid implements GridObservable {
 		for(int currCol=0; currCol<width; ++currCol){
 			removeBrick(line, currCol);
 		}
+		ContextManager.getSingleton().incrementScore(8, this.id);
 	}
 	
 	// Supprime toutes les lignes pleines

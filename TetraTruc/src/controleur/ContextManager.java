@@ -118,6 +118,10 @@ public class ContextManager {
 		}
 	}
 	
+	public void incrementScore(int bonus, int id){
+		gameEngine.getBoard(id).incrementScore(bonus);
+	}
+	
 	public MenuListener getMenuListener(){
 		return menuListener;
 	}

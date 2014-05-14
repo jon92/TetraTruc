@@ -29,6 +29,7 @@ public class GameEngine implements Observable {
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
 		this.dico = Dictionary.FR;
+		System.out.println(this.dico.getNbLines());
 	}
 	
 	public static GameEngine getSingleton(){

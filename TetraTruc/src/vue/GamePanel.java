@@ -22,7 +22,7 @@ import model.GameEngine;
 public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	
 	//private static final long serialVersionUID = 1L;
-	private int id;
+	private final int id;
 	private JPanel panel;
 	private Grid2D grid;
 	private int width, height;
@@ -210,7 +210,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.level = level;
 		this.pseudo = pseudo;
 		
-		System.out.println(this.grid.getId());
+		System.out.println("id "+ this.grid.getId());
 		GraphicEngine.getSingleton().getGamePanel(this.id).repaint();
 	}
 
