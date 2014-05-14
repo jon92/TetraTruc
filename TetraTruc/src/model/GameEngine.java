@@ -1,8 +1,13 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -85,8 +90,11 @@ public class GameEngine implements Observable {
 	
 	private void savePrefs(){
 		try {
-			FileWriter file = new FileWriter("media/conf/prefs.tetra");
-			BufferedWriter writer = new BufferedWriter(file);
+			//FileWriter file = new FileWriter("prefs.tetra");
+			//BufferedWriter writer = new BufferedWriter(file);
+			
+			OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("prefs.tetra"));
+			BufferedWriter writer = new BufferedWriter(osw);
 			
 			for(Entry<String, String> entry : this.gameParams.entrySet()) {
 				writer.write(entry.getKey() + " @ " + entry.getValue() + "\n");

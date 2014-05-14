@@ -3,6 +3,7 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -78,7 +79,12 @@ public class GraphicEngine implements Observer {
 	public void goToSoloMenu(){
 		this.window.repaint();
 		SoloMenu soloMenu = new SoloMenu(this.window.getPanel(), this.window.getWidth(), this.window.getHeight());
-		soloMenu.loadPrefs("media/conf/prefs.tetra");
+		try {
+			soloMenu.loadPrefs(getClass().getResource("prefs.tetra"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		soloMenu.create();
 		this.currentMenu = soloMenu;
 		this.nbPlayers = 1;
@@ -88,7 +94,12 @@ public class GraphicEngine implements Observer {
 	}
 	public void goToMultiMenu(){
 		MultiMenu multiMenu = new MultiMenu(this.window.getPanel(), (int)(this.window.getSize().getWidth()), (int)(this.window.getSize().getHeight()));
-		multiMenu.loadPrefs("media/conf/prefs.tetra");
+		try {
+			multiMenu.loadPrefs(getClass().getResource("prefs.tetra"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		multiMenu.create();
 		this.currentMenu = multiMenu;
 		this.nbPlayers = 2;

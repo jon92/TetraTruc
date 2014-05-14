@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.Color;
+import java.net.URL;
 import java.util.HashMap;
 
 import model.Tetrominoe;
@@ -8,25 +9,25 @@ import model.Tetrominoe;
 
 // classe 'globale', les thèmes héritent de lui
 public abstract class Theme {
-	protected String backgroundGame; // nom de l'image de fond
-	protected String backgroundMenu1; // nom de l'image de fond
-	protected String backgroundMenu2; // nom de l'image de fond
-	protected String gameover;
+	protected URL backgroundGame; // nom de l'image de fond
+	protected URL backgroundMenu1; // nom de l'image de fond
+	protected URL backgroundMenu2; // nom de l'image de fond
+	protected URL gameover;
 	protected HashMap<Tetrominoe, Color> shapeColor; // map qui lie le Tetrominoe à sa couleur
 	
 	protected String music = "";
 	
 	public String getBackgroundGame(){
-		return backgroundGame;
+		return backgroundGame.getPath();
 	}
 	public String getBackgroundMenu1(){
-		return backgroundMenu1;
+		return backgroundMenu1.getPath();
 	}
 	public String getBackgroundMenu2(){
-		return backgroundMenu2;
+		return backgroundMenu2.getPath();
 	}
 	public String getGameover(){
-		return gameover;
+		return gameover.getPath();
 	}
 	
 	

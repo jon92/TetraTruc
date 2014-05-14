@@ -5,17 +5,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Vector;
 
 import controleur.ContextManager;
 
 public enum Dictionary {
     
-	FR("media/lang/dictionary_FR.txt", "Français", 336529, 
+	FR("dictionary_FR.txt", "Français", 336529, 
             "eeeeeeeeeeeeeessssssssaaaaaaaaiiiiiiiitttttttnnnnnnnrrrrrrruuuuuullllloooooddddcccpppmmmvvqqfbghjxyzwk"
         );
 	
     private String path;
+    private URL url;
 	private String language;		// Langue du dictionnaire
 	private String freqLetters;		// Fréquence d'apparition des lettres dans la langue du dictionnaire
 	private int nbLines;
@@ -27,16 +30,21 @@ public enum Dictionary {
             // Charger le dictionnaire
             this.language = language;
             this.nbLines = nbLines;
+            
+            this.url = getClass().getResource(path);
+            
             this.content = constructVector();
             this.freqLetters = freqletters;
+
 	}
         
         private Vector<String> constructVector(){
             Vector<String> constructContent = new Vector<String>();
             try{
-                File f = new File (this.getPath());
-                FileReader fr = new FileReader (f);
-                BufferedReader br = new BufferedReader (fr);
+                //File f = new File (url.openStream());
+                //FileReader fr = new FileReader (f);
+                InputStreamReader isr = new InputStreamReader(url.openStream());
+                BufferedReader br = new BufferedReader (isr);
 
                 try{
                     String line = br.readLine();
@@ -48,14 +56,14 @@ public enum Dictionary {
                     }
 
                     br.close();
-                    fr.close();
+                    //fr.close();
                 }
                 catch (IOException exception){
                     System.err.println ("Erreur lors de la lecture : " + exception.getMessage());
                 }
             
             }
-            catch (FileNotFoundException exception){
+            catch (IOException exception){
                 System.err.println ("Erreur : Le fichier n'a pas été trouvé");
             }
         

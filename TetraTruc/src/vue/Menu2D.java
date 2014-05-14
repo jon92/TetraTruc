@@ -1,11 +1,13 @@
 package vue;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import javax.swing.JPanel;
 
@@ -30,11 +32,23 @@ public class Menu2D {
 		return this.params;
 	}
 	
-	public void loadPrefs(String file){
+	public void loadPrefs(URL file) throws IOException{
 		try {
-			InputStream ips=new FileInputStream(file);
-			InputStreamReader ipsr=new InputStreamReader(ips);
-			BufferedReader br=new BufferedReader(ipsr);
+			InputStreamReader isr = null;
+			
+			File testFile = new File("prefs.tetra");
+			if( !testFile.exists() ){
+				isr = new InputStreamReader(file.openStream());
+			}else{
+				isr = new InputStreamReader(new FileInputStream("prefs.tetra"));
+			}
+			
+
+			BufferedReader br = new BufferedReader (isr);
+			
+			//InputStream ips=new FileInputStream(file);
+			//InputStreamReader ipsr=new InputStreamReader(ips);
+			//BufferedReader br=new BufferedReader(ipsr);
 			String ligne;
 			
 			try {

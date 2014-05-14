@@ -8,9 +8,9 @@ import model.Tetrominoe;
 public class Theme2 extends Theme{
 
 	public Theme2(){
-		this.backgroundGame = "";
-		this.backgroundMenu1 = "";
-		this.backgroundMenu2 = "";
+		this.backgroundGame = null;
+		this.backgroundMenu1 = null;
+		this.backgroundMenu2 = null;
 		
 		this.music = "";
 		
