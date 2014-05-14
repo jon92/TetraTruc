@@ -189,7 +189,7 @@ public class ContextManager {
 	
 	// Etat quitter
 	public void setExitState(){
-		gameEngine.setState("EXIT");
+		gameEngine.setState("EXIT_MENU");
 		System.exit(0);
 	}
 	
