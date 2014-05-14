@@ -80,7 +80,7 @@ public class Grid implements GridObservable {
 	// Remplit les cases de la grille concernees par la piece actuelle
 	private void putCurShape(){
 		for(int brick=0; brick<4; ++brick){
-			// Affecte a� la case occupee par la brique la shape courante
+			// Affecte a la case occupee par la brique la shape courante
 			grid[curY + curShape.getBrick(brick).getY()][curX + curShape.getBrick(brick).getX()].setTetrominoe(curShape.getTetrominoe());
 		}
 	}
@@ -150,7 +150,7 @@ public class Grid implements GridObservable {
 			clearCurShape();	// Supprime la piece de son emplacement actuel
 			curX = newX;		// Affecte les nouvelles coordonnees de la piece
 			curY = newY;
-			putCurShape();		// Place la piece a�son nouvel emplacement
+			putCurShape();		// Place la piece a son nouvel emplacement
 			return true;
 		}
 		return false;

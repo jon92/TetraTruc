@@ -64,8 +64,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		this.resetPreviousLetter();
 		this.resetCoordsLetters();
 		
-		
-		// cr�ation et placement des boutons 		
+		// creation et placement des boutons 		
 		setLayout(null);
 		this.pauseButton = new GameButton2D("PAUSE");
 		this.saveButton = new GameButton2D("ENREGISTRER");
@@ -193,7 +192,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 		g.setColor(new Color(16, 77, 91));
 		g.drawString("Niveau "+Integer.toString(this.level), 115, 525);
 		
-		//Dessin des lettres cliqu�es
+		//Dessin des lettres cliquees
 		police = new Font("Helvetica",Font.PLAIN, 30);
 		g.setFont(police);
 		g.setColor(Color.WHITE);

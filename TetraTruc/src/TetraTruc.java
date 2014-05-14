@@ -7,15 +7,15 @@ public class TetraTruc {
 
 	public static void main(String[] args) {
 		
-		//Création du moteur graphique
+		//CrÃ©ation du moteur graphique
 		GraphicEngine graphicEngine = GraphicEngine.getSingleton();
 		graphicEngine.init();
 		
-		//Création du moteur de jeu
+		//CrÃ©ation du moteur de jeu
 		GameEngine gameEngine = GameEngine.getSingleton();
 		gameEngine.addObserver(graphicEngine);
 		
-		//Création du contextManager
+		//CrÃ©ation du contextManager
 		ContextManager contextManager = ContextManager.getSingleton();
 	}
 

@@ -18,9 +18,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-//import com.sun.org.apache.xml.internal.security.utils.HelperNodeList;
-
-
 import controleur.ContextManager;
 
 public class SoloMenu extends Menu2D {

@@ -1,0 +1,68 @@
+<?xml version="1.0"?> 
+  
+<!-- Action par défaut : créer l'archive jar -->
+<project name="structured" default="archive" >	
+	
+	<property name="name" value="TetraTruc" />
+	<property name="src" value="src"/>
+	<property name="build.dir" value="build"/>
+	<property name="build.classes" value="${build.dir}"/>
+	<property name="build.javadoc" value="javadoc"/>
+	<property name="dist.dir" value="dist"/>	
+	<property name="dist.jar" value="dist/${name}.jar"/>	
+	<property name="application.manifest" value="MANIFEST.MF"/>
+	
+	
+	<target name="init">
+		<mkdir dir="${build.classes}"/>
+		<mkdir dir="dist"/>
+	</target>
+		
+  	<target name="compile" depends="init" description="Compile le code source">
+    	<javac srcdir="${src}"  destdir="${build.classes}" encoding="utf8"/>
+  	</target>
+	
+	<target name="archive" depends="compile" description="Creation d'une archive JAR">
+		<jar destfile="${dist.jar}"
+			basedir="${build.dir}"
+			includes="**/*.class" 
+			manifest="${application.manifest}"
+		/>
+		<!--<signjar jar="${build.jar}"
+				alias="myalias" storepass="secret"
+		/>-->
+	</target>
+	
+	<target name="javadoc">
+		<mkdir dir="${build.javadoc}"/>
+		<javadoc useexternalfile="yes" 
+			sourcepath="${src}"
+			destdir="${build.javadoc}"
+			doctitle="Javadoc for ${name}" />
+	</target>
+	
+	<target name="source-dist"
+		description="Creer un zip avec les sources">
+		<zip destfile="${name}-src.zip">
+			<zipfileset dir="${src}" />
+			<zipfileset dir="." includes="README manifest LICENSE" />
+		</zip>
+		<checksum file="${name}-src.zip" algorithm="SHA-512" fileext="asc"/>
+		<echo message="Done!" />
+	</target>
+		
+	<target name="clean" depends="init" description="Supprime les répertoires temporaires">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+	
+	<!--<target name="execute" depends="compile" description="run le programme">
+		<java 
+			classname="TetraTruc"
+			classpath="${build.classes}">
+			<arg file="." />
+		</java>
+	</target>
+	-->	
+</project>
+

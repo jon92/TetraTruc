@@ -13,7 +13,6 @@ public class WindowPanel extends JPanel {
 	public void paintComponent (Graphics g){
 		super.paintComponents(g);
 		g.drawImage(background, 0, 0, null);
-			
 	}
 	
 	public BufferedImage getBackgroundImage(){
