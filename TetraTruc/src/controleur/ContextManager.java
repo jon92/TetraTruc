@@ -141,6 +141,7 @@ public class ContextManager {
 	public void setMainMenuState(){
 		System.out.println("Main Menu actif");
 		gameEngine.resetGame();
+		graphicEngine.resetGame();
 		gameEngine.setState("MAIN_MENU");
 	}
 	

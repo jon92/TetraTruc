@@ -121,6 +121,12 @@ public class GraphicEngine implements Observer {
 		this.window.repaint();
 		this.window.setVisible(true);
 	}
+	
+	public void resetGame(){
+		this.gamePanels = null;
+		System.gc();
+		this.gamePanels = new ArrayList<GamePanel>();
+	}
 
 	@Override
 	public void update(String param) {
