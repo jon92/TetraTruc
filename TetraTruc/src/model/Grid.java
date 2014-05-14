@@ -217,6 +217,8 @@ public class Grid implements GridObservable {
 			grid[currLine][col] = grid[currLine-1][col];
 		}
 		
+		ContextManager.getSingleton().incrementScore(2, this.id);
+		
 		// Traitement spécifique à la premiere ligne
 		grid[0][col] = new Shape();
 	}
@@ -318,6 +320,7 @@ public class Grid implements GridObservable {
 		}else{
 			this.unvalidatedLines[id] = this.anagramWord;
 			ContextManager.getSingleton().setPauseState(-2);
+			ContextManager.getSingleton().incrementScore(-2, this.id);
 		}
 	}
 	
