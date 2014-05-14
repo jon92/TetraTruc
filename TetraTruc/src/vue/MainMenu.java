@@ -1,9 +1,12 @@
 package vue;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,7 +22,7 @@ public class MainMenu extends Menu2D {
 	private Button2D optionsButton = new Button2D("Options");
 	private Button2D exitButton = new Button2D("Quitter");
 	private BufferedImage backgroundImage;
-	private String backgroundName;
+	private URL backgroundName;
 	
 	public MainMenu(JPanel panel, int width, int height){
 		super(panel);
@@ -36,8 +39,9 @@ public class MainMenu extends Menu2D {
 	public void createBackgroundImage(){
 		if (this.backgroundName != null){
 			BufferedImage img = null;
+			
 			try {
-				img = ImageIO.read(new FileInputStream(new File(backgroundName)));
+				img = ImageIO.read(backgroundName.openStream());       //new FileInputStream(new File(backgroundName)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -54,7 +58,7 @@ public class MainMenu extends Menu2D {
 	}
 	
 	public String getBackgroundName(){
-		return this.backgroundName;
+		return this.backgroundName.getPath();
 	}
 	
 	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -34,7 +35,7 @@ public class SoloMenu extends Menu2D {
 	private JRadioButton  hard;
 	
 	private BufferedImage backgroundImage;
-	private String backgroundName;
+	private URL backgroundName;
 	
 	
 	public SoloMenu(JPanel panel, int width, int height){
@@ -143,7 +144,7 @@ public class SoloMenu extends Menu2D {
 		if (this.backgroundName != null){
 			BufferedImage img = null;
 			try {
-				img = ImageIO.read(new FileInputStream(new File(backgroundName)));
+				img = ImageIO.read(backgroundName.openStream());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -160,7 +161,7 @@ public class SoloMenu extends Menu2D {
 	}
 	
 	public String getBackgroundName(){
-		return this.backgroundName;
+		return this.backgroundName.getPath();
 	}
 	
 	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }

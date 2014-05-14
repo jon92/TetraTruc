@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -26,7 +27,7 @@ public class MultiMenu extends Menu2D {
 	private JTextField pseudoJTF1, pseudoJTF2;
 	
 	private BufferedImage backgroundImage;
-	private String backgroundName;
+	private URL backgroundName;
 	
 	public MultiMenu(JPanel panel, int width, int height){
 		super(panel);
@@ -107,7 +108,7 @@ public class MultiMenu extends Menu2D {
 		if (this.backgroundName != null){
 			BufferedImage img = null;
 			try {
-				img = ImageIO.read(new File(backgroundName));
+				img = ImageIO.read(backgroundName.openStream());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -124,7 +125,7 @@ public class MultiMenu extends Menu2D {
 	}
 	
 	public String getBackgroundName(){
-		return this.backgroundName;
+		return this.backgroundName.getPath();
 	}
 	
 	public void setBackground(BufferedImage bg){ this.backgroundImage = bg; }

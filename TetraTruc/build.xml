@@ -6,6 +6,7 @@
 	<property name="name" value="TetraTruc" />
 	<property name="src" value="src"/>
 	<property name="build.dir" value="build"/>
+	<property name="media.dir" value="media" /> 
 	<property name="build.classes" value="${build.dir}"/>
 	<property name="build.javadoc" value="javadoc"/>
 	<property name="dist.dir" value="dist"/>	
@@ -19,18 +20,28 @@
 	</target>
 		
   	<target name="compile" depends="init" description="Compile le code source">
-    	<javac srcdir="${src}"  destdir="${build.classes}" encoding="utf8"/>
+
+  		<javac srcdir="${src}"  destdir="${build.classes}" encoding="utf8"/>
+
+    	<copy todir="${build.classes}/vue" preservelastmodified="true">
+			<fileset dir="${media.dir}/vue" />
+		</copy>
+		<copy todir="${build.classes}/model" preservelastmodified="true">
+			<fileset dir="${media.dir}/model" />
+		</copy>
+		<copy todir="${build.classes}/controleur" preservelastmodified="true">
+			<fileset dir="${media.dir}/controleur" />
+		</copy>
+
   	</target>
 	
 	<target name="archive" depends="compile" description="Creation d'une archive JAR">
 		<jar destfile="${dist.jar}"
 			basedir="${build.dir}"
-			includes="**/*.class" 
+			includes="**/*.*" 
 			manifest="${application.manifest}"
-		/>
-		<!--<signjar jar="${build.jar}"
-				alias="myalias" storepass="secret"
-		/>-->
+		>
+		</jar>		
 	</target>
 	
 	<target name="javadoc">
@@ -56,7 +67,7 @@
 		<delete dir="${dist.dir}" />
 	</target>
 	
-	<!--<target name="execute" depends="compile" description="run le programme">
+	<!--<target name="execute" depends="compile" description="lance le programme">
 		<java 
 			classname="TetraTruc"
 			classpath="${build.classes}">

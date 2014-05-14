@@ -17,17 +17,17 @@ public abstract class Theme {
 	
 	protected String music = "";
 	
-	public String getBackgroundGame(){
-		return backgroundGame.getPath();
+	public URL getBackgroundGame(){
+		return backgroundGame;
 	}
-	public String getBackgroundMenu1(){
-		return backgroundMenu1.getPath();
+	public URL getBackgroundMenu1(){
+		return backgroundMenu1;
 	}
-	public String getBackgroundMenu2(){
-		return backgroundMenu2.getPath();
+	public URL getBackgroundMenu2(){
+		return backgroundMenu2;
 	}
-	public String getGameover(){
-		return gameover.getPath();
+	public URL getGameover(){
+		return gameover;
 	}
 	
 	

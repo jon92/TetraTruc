@@ -146,7 +146,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private void loadBackground(){
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File(theme.getBackgroundGame()));
+			img = ImageIO.read(theme.getBackgroundGame());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -157,7 +157,7 @@ public class GamePanel extends JPanel implements BoardObserver, MouseListener {
 	private void loadGameover(){
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File(theme.getGameover()));
+			img = ImageIO.read(theme.getGameover());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
