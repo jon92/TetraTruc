@@ -120,7 +120,7 @@ public class GameEngine implements Observable {
 				this.state = GameState.MULTI_MENU;
 				break;
 				
-			case "OPTIONS" :
+			case "OPTIONS_MENU" :
 				this.state = GameState.OPTIONS_MENU;
 				break;
 				
