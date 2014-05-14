@@ -118,6 +118,10 @@ public class ContextManager {
 		}
 	}
 	
+	public void incrementScore(int bonus, int id){
+		gameEngine.getBoard(id).incrementScore(bonus);
+	}
+	
 	public MenuListener getMenuListener(){
 		return menuListener;
 	}
@@ -137,6 +141,7 @@ public class ContextManager {
 	public void setMainMenuState(){
 		System.out.println("Main Menu actif");
 		gameEngine.resetGame();
+		graphicEngine.resetGame();
 		gameEngine.setState("MAIN_MENU");
 	}
 	

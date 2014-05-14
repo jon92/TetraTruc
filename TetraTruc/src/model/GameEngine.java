@@ -29,6 +29,7 @@ public class GameEngine implements Observable {
 	private GameEngine(){
 		this.state = GameState.MAIN_MENU;
 		this.dico = Dictionary.FR;
+		System.out.println(this.dico.getNbLines());
 	}
 	
 	public static GameEngine getSingleton(){
@@ -120,7 +121,7 @@ public class GameEngine implements Observable {
 				this.state = GameState.MULTI_MENU;
 				break;
 				
-			case "OPTIONS" :
+			case "OPTIONS_MENU" :
 				this.state = GameState.OPTIONS_MENU;
 				break;
 				
